@@ -52,7 +52,7 @@ class AuthController extends Controller
             'firstName' => 'required|max:255',
             'lastName' => 'required|max:255',
             'email' => 'required|email|max:255|unique:users',
-            'password' => 'required|min:6|regex:^(?=.*\d).{6,}$|confirmed', // regex needs to be revisit
+            'password' => 'required|min:6|confirmed', // regex needs to be revisit
         ]);
     }
 
@@ -65,9 +65,9 @@ class AuthController extends Controller
     protected function create(array $data)
     {
         return User::create([
-            'firstName' => $data['firstName'],
-            'lastName' => $data['lastName'],
-            'email' => $data['email'],
+            'firstName' => strtolower($data['firstName']),
+            'lastName' => strtolower($data['lastName']),
+            'email' => strtolower($data['email']),
             'password' => bcrypt($data['password']),
         ]);
     }
