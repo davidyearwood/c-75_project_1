@@ -23,7 +23,7 @@
                e.preventDefault();
                var quote = stockSymbol.value; 
                var fullPath = uri + (stockSymbol.value + '.json') + query; 
-               fetchData(fullPath, console.log);
+               fetchData(fullPath, cb);
                
             });
             
@@ -56,21 +56,33 @@
             }
             
             function cb(data) {
-                var table = document.createElement('table');
-                var tds = [];
-                var trs = []; 
+                var divElement = document.createElement('div');
+                console.log(data);
+                var h1 = '<h1>' + data.dataset.name + '</h1>';
+                
+                var dataTable = '<table><tr>';
+                
                 for (let i = 0; i < data.dataset.column_names.length; i++) {
-                    
+                    dataTable += '<th>' + data.dataset.column_names[i] + '</th>';     
                 }
                 
+                // Closes the table header row 
+                dataTable += '</tr>';
+                
+                var tableRows = '';
                 for (let i = 0; i < data.dataset.data.length; i++) {
-                    // create trs
-                    for (let j = 0; j < data.dataset.data[i].length; j++ ) {
-                        // add td 
+                    tableRows += '<tr>';        
+                    for (let j = 0; j < data.dataset.data[i].length; j++) {
+                        tableRows += '<td>' + data.dataset.data[i][j] + '</td>'; 
                     }
-                    // append dataset to trs
+                    tableRows += '</tr>';
                 }
                 
+                dataTable += tableRows + '</table>';
+                
+                divElement.innerHTML = h1 + dataTable; 
+                
+                document.body.appendChild(divElement);
             }
             
             function stockCard(serverSelf) {
