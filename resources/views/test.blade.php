@@ -10,6 +10,7 @@
             <form action="" method=""></form>
         </form>
         
+        <div id="stock-container"></div>
         <script type="text/javascript">
             'use strict';
             var today = new Date();
@@ -55,34 +56,38 @@
                 
             }
             
-            function cb(data) {
-                var divElement = document.createElement('div');
-                console.log(data);
-                var h1 = '<h1>' + data.dataset.name + '</h1>';
+           function cb(data) {
+            	var $stockCard = document.createElement('div');
+            	var $stockContainer = document.getElementById('stock-container');
+            	var $symbolName = '<input name="stockSymbol" type="hidden" value="' + data.dataset.dataset_code + '">'
+            	$stockCard.setAttribute('id', 'stock-card');
+            
+            	// creates data heading for table
+            	var $tableHeaders = _createTableHeader(data.dataset.column_names);
+            	var $tableRows = _createTableRows(data.dataset.data);
                 
-                var dataTable = '<table><tr>';
+                // 
+                var formTags = [
+                    '<form action="/test" method="POST" id="stock-card-form">',
+                    '<button type="submit">BUY</button>',
+                    '<input name="stockSymbol" type="hidden" value="' + data.dataset.dataset_code + '">', 
+                    '</form>'
+                ];
                 
-                for (let i = 0; i < data.dataset.column_names.length; i++) {
-                    dataTable += '<th>' + data.dataset.column_names[i] + '</th>';     
+                var $form = formTags.join('');
+            	var $header = '<div class="stock-card-title"> <h1>' + data.dataset.name + '</h1> <h2 class="stock-card-price"><span data-value="' + data.dataset.data[0][1] + '" data-symbol="' + data.dataset.dateset_code + '">' + data.dataset.data[0][1] + '</span> <span class="stock-card-currency-type">USD</span></h2></div>';
+                
+                $stockCard.innerHTML = '<header>' + $header + $form + '</header>' + '<table>' + $tableHeaders + $tableRows + '</table>';
+                
+                
+                if ($stockContainer.firstElementChild) {
+                    $stockContainer.replaceChild($stockCard, $stockContainer.firstElementChild); 
+                } else {
+                    $stockContainer.appendChild($stockCard);
                 }
                 
-                // Closes the table header row 
-                dataTable += '</tr>';
-                
-                var tableRows = '';
-                for (let i = 0; i < data.dataset.data.length; i++) {
-                    tableRows += '<tr>';        
-                    for (let j = 0; j < data.dataset.data[i].length; j++) {
-                        tableRows += '<td>' + data.dataset.data[i][j] + '</td>'; 
-                    }
-                    tableRows += '</tr>';
-                }
-                
-                dataTable += tableRows + '</table>';
-                
-                divElement.innerHTML = h1 + dataTable; 
-                
-                document.body.appendChild(divElement);
+            	console.log(data);
+            
             }
             
             function stockCard(serverSelf) {
@@ -91,8 +96,28 @@
                 form.getAttribute('method', 'GET');
                 form.getAttribute('id', 'purchase-stock-card');
                 form.getAttribute('id', 'purchase-stock-cards');
-                
-                
+            }
+            
+            function _createTableHeader(data) {
+            	var header = '<tr>';
+            	for (let i = 0; i < data.length; i++) {
+            		header += '<th>' + data[i] + '</th>';
+            	}
+            	header += '</tr>';
+            	return header; 
+            }
+            
+            function _createTableRows(data) {
+            	var rows = '';
+            	for (let i = 0; i < data.length; i++) {
+            		rows += '<tr>';
+            		for (let j = 0; j < data[i].length; j++) {
+            			rows += '<td>' + data[i][j] + '</td>';
+            		}
+            		rows += '</tr>'
+            	}
+            
+            	return rows; 
             }
         </script>
     </body>
