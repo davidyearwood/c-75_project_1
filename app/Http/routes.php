@@ -18,6 +18,7 @@ Route::get('/', function () {
 Route::auth();
 
 Route::get('/home', 'HomeController@index');
+Route::post('/test', 'StockController@store');
 Route::get('/test', function() {
     return view('test');
 });

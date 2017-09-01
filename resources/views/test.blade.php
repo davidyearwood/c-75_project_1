@@ -7,7 +7,7 @@
         <form action='/test' method='GET'>
             <input type="text" name="symbol" placeholder='Enter Stock Symbol' id='stock-symbol' />
             <input type="submit" value="Submit" id='submit-btn' />
-            <form action="" method=""></form>
+            <form action="/test" method="POST"></form>
         </form>
         
         <div id="stock-container"></div>
@@ -15,7 +15,7 @@
             'use strict';
             var today = new Date();
             var uri = 'https://www.quandl.com/api/v3/datasets/WIKI/';
-            var query = '?start_date=' + today.getFullYear() + '-' + today.getMonth() + '-' + (today.getDate() - 1);
+            var query = '?start_date=' + today.getFullYear() + '-' + today.getMonth() + '-' + (today.getDate());
             var stockSymbol = document.getElementById('stock-symbol');
             var submitBtn = document.getElementById('submit-btn');
             console.log(stockSymbol);
@@ -24,6 +24,7 @@
                e.preventDefault();
                var quote = stockSymbol.value; 
                var fullPath = uri + (stockSymbol.value + '.json') + query; 
+               console.log(fullPath);
                fetchData(fullPath, cb);
                
             });
@@ -70,6 +71,8 @@
                 var formTags = [
                     '<form action="/test" method="POST" id="stock-card-form">',
                     '<button type="submit">BUY</button>',
+                    '<input type="text">',
+                    '{{ csrf_field() }}',
                     '<input name="stockSymbol" type="hidden" value="' + data.dataset.dataset_code + '">', 
                     '</form>'
                 ];
