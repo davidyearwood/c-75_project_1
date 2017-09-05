@@ -12,7 +12,7 @@ class CreateStocksUsersTable extends Migration
      */
     public function up()
     {
-        Schema::create('stocks_users', function (Blueprint $table) {
+        Schema::create('stock_user', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('stock_id')->unsigned()->nullable();
             $table->foreign('stock_id')->references('id')->on('stocks')->onDelete('cascade');

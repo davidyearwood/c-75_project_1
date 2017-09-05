@@ -71,7 +71,7 @@
                 var formTags = [
                     '<form action="/test" method="POST" id="stock-card-form">',
                     '<button type="submit">BUY</button>',
-                    '<input type="text">',
+                    '<input type="text" name="quantity">',
                     '{{ csrf_field() }}',
                     '<input name="stockSymbol" type="hidden" value="' + data.dataset.dataset_code + '">', 
                     '</form>'

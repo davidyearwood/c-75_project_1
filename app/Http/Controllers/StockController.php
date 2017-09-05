@@ -44,7 +44,18 @@ class StockController extends Controller
         $stock = Stock::where('name', $stockSymbol)->first();
         
         if ($this->hasEnoughCash($user->cash, $stockData->data[0][4])) {
-            echo 'Has enough money to purchase this item';
+            $user->cash = $this->newCashAmount($user->cash, $this->totalCost($request->quantity, $stockData->data[0][4]));
+            $stock = new Stock([
+                'name' => $stockData->name, 
+                'symbol' => strtoupper($stockSymbol),
+                'source' => $uri
+            ]);
+            
+            $user->stocks()->save($stock, 
+                [ 'purchased_price' => $stockData->data[0][4],
+                  'quantity' => $request->quantity]);
+                  
+            $user->save();
         } else {
             echo 'Doesn\'t have enough money to purchase stock(s).';
         }
