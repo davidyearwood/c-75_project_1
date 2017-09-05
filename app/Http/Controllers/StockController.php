@@ -32,20 +32,28 @@ class StockController extends Controller
             'stockSymbol' => 'required|alpha_num',
             'quantity' => 'numeric'
         ]);
+        
         // Information about the user that is login
         $user = Auth::user(); 
         $userId = Auth::id();
-        $stockSymbol = $request->stockSymbol;    
+        $stockSymbol = $request->stockSymbol;
+        
         $uri = 'https://www.quandl.com/api/v3/datasets/WIKI/' . $stockSymbol . '.json';
-        $quandlData = $this->fetchStockData($uri);
+        $stockData = $this->fetchStockData($uri);
+        
         $stock = Stock::where('name', $stockSymbol)->first();
         
+        if ($this->hasEnoughCash($user->cash, $stockData->data[0][4])) {
+            echo 'Has enough money to purchase this item';
+        } else {
+            echo 'Doesn\'t have enough money to purchase stock(s).';
+        }
         if (!$stock) {
             // Add to stock to the database
         }
         
         echo $stockSymbol;
-        var_dump($quandlData);
+        var_dump($stockData->data[0][4]);
  
     }
     
@@ -77,9 +85,9 @@ class StockController extends Controller
      * 
      * 
      */      
-    private function hasEnough($wallet, $cost) 
+    private function hasEnoughCash($wallet, $cost) 
     {
-        return ( $wallet > $cost ? true : false );
+        return ( $wallet >= $cost ? true : false );
     }
     
     private function totalCost($quantity, $price) 
