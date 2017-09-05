@@ -95,4 +95,9 @@ class StockController extends Controller
         return $quantity * $price; 
     }
     
+    private function newCashAmount($wallet, $cost) 
+    {
+        return $wallet - $cost; 
+    }
+    
 }
