@@ -40,28 +40,41 @@ class StockController extends Controller
         
         $uri = 'https://www.quandl.com/api/v3/datasets/WIKI/' . $stockSymbol . '.json';
         $stockData = $this->fetchStockData($uri);
+        $stockPrice = $stockData->data[0][4]; 
         
         $stock = Stock::where('name', $stockSymbol)->first();
-        
-        if ($this->hasEnoughCash($user->cash, $stockData->data[0][4])) {
-            $user->cash = $this->newCashAmount($user->cash, $this->totalCost($request->quantity, $stockData->data[0][4]));
-            $stock = new Stock([
-                'name' => $stockData->name, 
-                'symbol' => strtoupper($stockSymbol),
-                'source' => $uri
-            ]);
+        // Stock doesn't exist
+        if ($stock === null) {
             
-            $user->stocks()->save($stock, 
-                [ 'purchased_price' => $stockData->data[0][4],
-                  'quantity' => $request->quantity]);
-                  
-            $user->save();
+            if($this->hasEnoughCash($user->cash, $stockData->data[0][4])) {
+                // create new stock
+                $stock = new Stock([
+                    'name' => strtolower($stockData->name),
+                    'symbol' => strtoupper($stockSymbol),
+                    'source' => strtolower($uri)
+                ]);    
+                
+                //deduct the money 
+                $user->cash = $this->newCashAmount($user->cash, $this->totalCost($request->quantity, $stockPrice));
+                $stock->save();
+                $user->save();
+                // save to the database
+                $user->stocks()->save($stock, 
+                    [ 'purchased_price' => $stockPrice,
+                      'quantity' => $request->quantity ]);
+                      
+                } else {
+                    return 'Doesn\'t have enough cash to make a purchase'; 
+                }
+                
         } else {
-            echo 'Doesn\'t have enough money to purchase stock(s).';
-        }
-        if (!$stock) {
-            // Add to stock to the database
-        }
+            // check to see if there's enough money for the stock
+            if ($this->hasEnoughCash($user->cash, $stockData->data[0][4])) {
+                $user->cash = $this->newCashAmount($user->cash, $this->totalCost($request->quantity, $stockPrice));
+                $user->save(); 
+                $user->stocks()->save($stock, ['purchased_price' => $stockPrice, 'quantity' => $request->quantity ]);
+            }
+        } 
         
         echo $stockSymbol;
         var_dump($stockData->data[0][4]);
