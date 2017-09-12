@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Stock; 
 use GuzzleHttp\Client; 
+use Illuminate\Support\Facades\Cache;
 
 class StockController extends Controller 
 {
@@ -39,41 +40,21 @@ class StockController extends Controller
         $stockSymbol = $request->stockSymbol;
         
         $uri = 'https://www.quandl.com/api/v3/datasets/WIKI/' . $stockSymbol . '.json';
-        $stockData = $this->fetchStockData($uri);
+        $stockData = $this->fetchStockData($uri, $stockSymbol);
         $stockPrice = $stockData->data[0][4]; 
         
+                
         $stock = Stock::where('name', $stockSymbol)->first();
-        // Stock doesn't exist
-        if ($stock === null) {
+        // Stock does exist
+        if ($stock !== null) {
             
-            if($this->hasEnoughCash($user->cash, $stockData->data[0][4])) {
-                // create new stock
-                $stock = new Stock([
-                    'name' => strtolower($stockData->name),
-                    'symbol' => strtoupper($stockSymbol),
-                    'source' => strtolower($uri)
-                ]);    
-                
-                //deduct the money 
+            if($this->hasEnoughCash($user->cash, $stockPrice)) {
+                $user->stocks()->save($stock, ['purchased_price' => $stockPrice, 'quantity' => $request->quantity]);
+            
                 $user->cash = $this->newCashAmount($user->cash, $this->totalCost($request->quantity, $stockPrice));
-                $stock->save();
                 $user->save();
-                // save to the database
-                $user->stocks()->save($stock, 
-                    [ 'purchased_price' => $stockPrice,
-                      'quantity' => $request->quantity ]);
-                      
-                } else {
-                    return 'Doesn\'t have enough cash to make a purchase'; 
-                }
-                
-        } else {
-            // check to see if there's enough money for the stock
-            if ($this->hasEnoughCash($user->cash, $stockData->data[0][4])) {
-                $user->cash = $this->newCashAmount($user->cash, $this->totalCost($request->quantity, $stockPrice));
-                $user->save(); 
-                $user->stocks()->save($stock, ['purchased_price' => $stockPrice, 'quantity' => $request->quantity ]);
             }
+                
         } 
         
         echo $stockSymbol;
@@ -87,18 +68,21 @@ class StockController extends Controller
      * 
      * 
      */    
-    private function fetchStockData($uri) 
+    private function fetchStockData($uri, $symbol) 
     {
-        $client = new Client(); 
-        $response = $client->request('GET', $uri);
+        $halfDayInMinutes = 720;
         
-        if ($response->getStatusCode() >= 300) {
-            throw new Exception('Unable to fulfil request. Retrived a status code of ' . $response->getStatusCode());
-        }
-            
-        // Convert stream content to json 
-        $body = json_decode($response->getBody()->getContents());
-        $data = $body->dataset; 
+        $data = Cache::remember($symbol, $halfDayInMinutes, function() {
+           $client = new Client(); 
+           $response = $client->request('GET', $uri);
+           $statusCode = $response->getStatusCode(); 
+           
+           if ($statusCode > 100 && $statusCode < 300) {
+               $httpBody = json_decode($response->getBody()->getContents());
+               return $httpBody->dataset; 
+           }
+           
+        });
         
         return $data; 
     }
