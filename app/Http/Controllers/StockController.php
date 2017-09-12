@@ -40,11 +40,10 @@ class StockController extends Controller
         $stockSymbol = $request->stockSymbol;
         
         $uri = 'https://www.quandl.com/api/v3/datasets/WIKI/' . $stockSymbol . '.json';
-        $stockData = $this->fetchStockData($uri, $stockSymbol);
-        $stockPrice = $stockData->data[0][4]; 
+        $stockPrice = $this->fetchStockPrice($uri, $stockSymbol);
         
                 
-        $stock = Stock::where('name', $stockSymbol)->first();
+        $stock = Stock::where('symbol', strtoupper($stockSymbol))->first();
         // Stock does exist
         if ($stock !== null) {
             
@@ -53,13 +52,17 @@ class StockController extends Controller
             
                 $user->cash = $this->newCashAmount($user->cash, $this->totalCost($request->quantity, $stockPrice));
                 $user->save();
+                
+                print($user->cash);
+                print(Cache::get($stockSymbol));
             }
                 
-        } 
+        } else {
+            $stock = new stock(['name' => 'Vacation']);
+
+        }
         
-        echo $stockSymbol;
-        var_dump($stockData->data[0][4]);
- 
+        print($stock);
     }
     
     /**
@@ -68,25 +71,28 @@ class StockController extends Controller
      * 
      * 
      */    
-    private function fetchStockData($uri, $symbol) 
+    private function fetchStockPrice($uri, $symbol) 
     {
         $halfDayInMinutes = 720;
-        
-        $data = Cache::remember($symbol, $halfDayInMinutes, function() {
+        $symbol = strtolower($symbol);
+        $price = Cache::remember($symbol, $halfDayInMinutes, function() use($uri) {
            $client = new Client(); 
            $response = $client->request('GET', $uri);
            $statusCode = $response->getStatusCode(); 
            
            if ($statusCode > 100 && $statusCode < 300) {
                $httpBody = json_decode($response->getBody()->getContents());
-               return $httpBody->dataset; 
+               $d = [ 'original_price' => $httpBody->dataSet->data[0][4], 
+                    'name' => $httpBody->dataSet->name ];
+               return $d; 
            }
            
         });
         
-        return $data; 
+        return $price; 
     }
     
+    private function clearStockCache() {}
     /**
      * Makes an external api request for historic stock data 
      * 
