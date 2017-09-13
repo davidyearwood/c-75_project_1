@@ -15,7 +15,7 @@
             'use strict';
             var today = new Date();
             var uri = 'https://www.quandl.com/api/v3/datasets/WIKI/';
-            var query = '?start_date=' + today.getFullYear() + '-' + today.getMonth() + '-' + (today.getDate());
+            var query = '?start_date=' + today.getFullYear() + '-' + today.getMonth() + '-' + (today.getDate() - 1);
             var stockSymbol = document.getElementById('stock-symbol');
             var submitBtn = document.getElementById('submit-btn');
             console.log(stockSymbol);

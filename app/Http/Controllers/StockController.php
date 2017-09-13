@@ -21,12 +21,9 @@ class StockController extends Controller
         $this->middleware('auth');
     }
     
-    /**
-     * Store a stock symbol 
-     * 
-     * 
-     * 
-     */
+    private function getURI($symbol) {
+        return 'https://www.quandl.com/api/v3/datasets/WIKI' . $symbol . '.json';
+    }
     public function store(Request $request) {
         
         $this->validate($request, [
@@ -39,14 +36,15 @@ class StockController extends Controller
         $userId = Auth::id();
         $stockSymbol = $request->stockSymbol;
         
-        $uri = 'https://www.quandl.com/api/v3/datasets/WIKI/' . $stockSymbol . '.json';
-        $stockPrice = $this->fetchStockPrice($uri, $stockSymbol);
+        $uri = $this->getURI($stockSymbol);
+        $stockData = $this->fetchStock($uri, $stockSymbol);
+        $stockPrice = $stockData->price;
         
-                
+        
         $stock = Stock::where('symbol', strtoupper($stockSymbol))->first();
+        
         // Stock does exist
         if ($stock !== null) {
-            
             if($this->hasEnoughCash($user->cash, $stockPrice)) {
                 $user->stocks()->save($stock, ['purchased_price' => $stockPrice, 'quantity' => $request->quantity]);
             
@@ -58,7 +56,7 @@ class StockController extends Controller
             }
                 
         } else {
-            $stock = new stock(['name' => 'Vacation']);
+            $stock = new stock(['name' => $stockData->name, 'symbol' => $stockSymbol, 'source' => $uri ]);
 
         }
         
@@ -71,24 +69,27 @@ class StockController extends Controller
      * 
      * 
      */    
-    private function fetchStockPrice($uri, $symbol) 
+    private function fetchStock($uri, $symbol) 
     {
         $halfDayInMinutes = 720;
         $symbol = strtolower($symbol);
         $price = Cache::remember($symbol, $halfDayInMinutes, function() use($uri) {
-           $client = new Client(); 
-           $response = $client->request('GET', $uri);
-           $statusCode = $response->getStatusCode(); 
+            $client = new Client(); 
+            $response = $client->request('GET', $uri);
+            $statusCode = $response->getStatusCode(); 
            
-           if ($statusCode > 100 && $statusCode < 300) {
+            if ($statusCode > 100 && $statusCode < 300) {
+             
                $httpBody = json_decode($response->getBody()->getContents());
-               $d = [ 'original_price' => $httpBody->dataSet->data[0][4], 
-                    'name' => $httpBody->dataSet->name ];
+               $d = [ 'price' => $httpBody->dataset->data[0][4], 
+                    'name' => $httpBody->dataset->name ];
+               
                return $d; 
            }
            
         });
         
+        print_r($price);
         return $price; 
     }
     
