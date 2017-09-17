@@ -22,7 +22,7 @@ class StockController extends Controller
     }
     
     private function getURI($symbol) {
-        return 'https://www.quandl.com/api/v3/datasets/WIKI' . $symbol . '.json';
+        return 'https://www.quandl.com/api/v3/datasets/WIKI/' . $symbol . '.json';
     }
     public function store(Request $request) {
         
@@ -36,31 +36,23 @@ class StockController extends Controller
         $userId = Auth::id();
         $stockSymbol = $request->stockSymbol;
         
+        // Get the api's uri and get the api's stock 
         $uri = $this->getURI($stockSymbol);
-        $stockData = $this->fetchStock($uri, $stockSymbol);
-        $stockPrice = $stockData->price;
-        
+        $fetchStock = $this->fetchStock($uri, $stockSymbol);
         
         $stock = Stock::where('symbol', strtoupper($stockSymbol))->first();
         
-        // Stock does exist
-        if ($stock !== null) {
-            if($this->hasEnoughCash($user->cash, $stockPrice)) {
-                $user->stocks()->save($stock, ['purchased_price' => $stockPrice, 'quantity' => $request->quantity]);
-            
-                $user->cash = $this->newCashAmount($user->cash, $this->totalCost($request->quantity, $stockPrice));
-                $user->save();
-                
-                print($user->cash);
-                print(Cache::get($stockSymbol));
-            }
-                
-        } else {
-            $stock = new stock(['name' => $stockData->name, 'symbol' => $stockSymbol, 'source' => $uri ]);
-
-        }
+        if ($this->hasEnoughCash($user->cash, $fetchStock['price'])) {
+            // if stock exist, don't create it else create a new stock
+            $stock = ($stock !== null) ? $stock : new Stock(
+                ['name' => $fetchStock['name'], 'symbol' => $stockSymbol, 'source' => $uri]); 
         
-        print($stock);
+            $user->stocks()->save($stock, ['purchased_price' => $fetchStock['price'], 'quantity' => $request->quantity]);
+            $user->cash = $this->newCashAmount($user->cash, $this->totalCost($request->quantity, $fetchStock['price']));
+            $user->save();
+        } else {
+            // Return to the user that they don't have enough money
+        }
     }
     
     /**
