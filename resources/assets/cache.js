@@ -1,44 +1,43 @@
-(function(window) {
+var Cache = (function(window) {
     'use strict';
     if (!window.localStorage) {
-        // Throw error 
+        throw new LocalStorageException("Your browser doesn't support Local Storage");
+    } else {
+        var myStorage = window.localStorage; 
     }
     
+    function addHours(date, hours) {
+        return new Date(date.getTime() + (hours * 60 * 60 * 1000));
+    }
+    
+    function LocalStorageException(message) {
+        this.name = 'Local Storage Exception';
+        this.message = message; 
+    }
+    
+    function init() {
+        var date = new Date();
+        var now = date.getTime();     
+    }
+
     function has() {}
     function get(key) {
-    
+        if (!has(key)) { throw new Error("There is no key of that name stored in the Cache"); }
+        var value = JSON.parse(myStorage.getItem(key));
         
     }
-    function set() {}
+    function set(key, value) {
+        var value = JSON.stringify({
+            value: value,
+            expiration: addHours(new Date(), 24)  
+        });
+        
+        return myStorage.setItem(key, value);
+    }
+    
+    return {init: init}; 
 })(window);
 
-// Create new cache
-function Cache() {
-    if (!window.localStorage) {
-        throw new Error("Your web browser doesn't support localStorage");
-    }
-    let now = (new Date()).getTime(); 
-    this.expiration = new Date(now + 86400000); // Add one day  
-}
-
-Cache.prototype.get = function(key) {
-    let now = (new Date()).getTme();
-    if (this.isExpire()) {
-        this.set(key);
-        this.get(key); 
-    } else {
-        return window.localStorage.getItem(key);    
-    } 
-};
-
-Cache.prototype.isExpire = function() {
-    return (new Date().getTime()) > this.expiration;    
-};
-
-Cache.prototype.set = function(key, value) {
-    value.expiration = (new Date()).getTime() + 86400000; 
-    return window.localStorage.setItem(key, JSON.stringify(value));
-}
 /* 
 Obtaining A Cache Instance - set time 
 Retrieving Items From The Cache

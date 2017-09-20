@@ -22,3 +22,4 @@ Route::post('/test', 'StockController@store');
 Route::get('/test', function() {
     return view('test');
 });
+Route::get('/stocks', 'StockController@showUserStocks');

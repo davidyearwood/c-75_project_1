@@ -107,4 +107,9 @@ class StockController extends Controller
         return $wallet - $cost; 
     }
     
+    public function showUserStocks() 
+    {
+        $user = Auth::user();
+        return view('stocks', ['stocks' => $user->stocks ]);
+    }
 }
