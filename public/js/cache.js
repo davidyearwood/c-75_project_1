@@ -6,7 +6,8 @@ var Cache = (function(window) {
         var myStorage = window.localStorage; 
     }
     
-    function addHours(date, hours) {
+    // Private function
+    function _addHours(date, hours) {
         return new Date(date.getTime() + (hours * 60 * 60 * 1000));
     }
     
@@ -15,29 +16,42 @@ var Cache = (function(window) {
         this.message = message; 
     }
     
-    function init() {
-        var date = new Date();
-        var now = date.getTime();     
+    function has(key) {
+        return myStorage.getItem(key) !== null;
     }
-
-    function has() {}
+    
     function get(key) {
         if (!has(key)) { throw new Error("There is no key of that name stored in the Cache"); }
         var value = JSON.parse(myStorage.getItem(key));
-        
+        var now = new Date(); 
+        if (new Date(value.expiration).getTime() > now.getTime()) {
+            myStorage.removeItem(key);
+            return false;
+        }
+        return value; 
     }
+    
     function set(key, value) {
+        if (has(key)) { return get(key); }
+        
         var value = JSON.stringify({
             value: value,
-            expiration: addHours(new Date(), 24)  
+            expiration: _addHours(new Date(), 24)  
         });
         
         return myStorage.setItem(key, value);
     }
     
-    return {init: init}; 
+    return { 
+        get: get,
+        set: set,
+        has: has
+    }; 
 })(window);
 
+var CacheCopy = Cache; 
+CacheCopy.set('GOOG', {'orginal_price' : 32.89, 'name': 'GOOG'});
+console.log(CacheCopy.get('GOOG'));
 /* 
 Obtaining A Cache Instance - set time 
 Retrieving Items From The Cache

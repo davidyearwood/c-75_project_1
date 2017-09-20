@@ -23,3 +23,6 @@ Route::get('/test', function() {
     return view('test');
 });
 Route::get('/stocks', 'StockController@showUserStocks');
+Route::get('/cache', function() {
+   return view('cache'); 
+});
