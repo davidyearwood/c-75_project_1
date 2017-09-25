@@ -4,6 +4,18 @@
         
     </head>
     <body>
+        
+        @if($errors->any())
+            <div class="alert alert-danger">
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        
+        @endif
+        
         <form action='/test' method='GET'>
             <input type="text" name="symbol" placeholder='Enter Stock Symbol' id='stock-symbol' />
             <input type="submit" value="Submit" id='submit-btn' />

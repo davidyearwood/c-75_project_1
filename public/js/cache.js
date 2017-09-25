@@ -17,7 +17,7 @@ var Cache = (function(window, Modernizr) {
         return new Date(date.getTime() + (hours * minutes * seconds * miliseconds));
     }
     
-    function isExpired(expirationDate) {
+    function _isExpired(expirationDate) {
         var now = new Date(); 
         return expirationDate > now.getTime();  
     }
@@ -52,9 +52,9 @@ var Cache = (function(window, Modernizr) {
         var now = new Date();
         var expirationDateInMiliseconds = new Date(data.expiration).getTime(); 
         
-        if (isExpired(expirationDateInMiliseconds)) {
+        if (_isExpired(expirationDateInMiliseconds)) {
             myStorage.removeItem(key);
-            throw new LocalStorageKeyExpiredException(key + ' has expired. Re-add key');
+            throw new LocalStorageKeyExpiredException(key + ' has expired.');
         }
         
         return data; 

@@ -20,12 +20,17 @@ class StockController extends Controller
     {
         $this->middleware('auth');
     }
-    
-    private function getURI($symbol) {
+    private function generateApiURL($symbol) { return 'https://www.quandl.com/api/v3/datasets/WIKI/' . $symbol . '.json'; }
+    private function getURI($symbol) 
+    {
         return 'https://www.quandl.com/api/v3/datasets/WIKI/' . $symbol . '.json';
     }
-    public function store(Request $request) {
-        
+    
+
+    public function sell() {}
+    private function doesExist($stock) { return $stock !== null; }
+    public function store(Request $request) 
+    {
         $this->validate($request, [
             'stockSymbol' => 'required|alpha_num',
             'quantity' => 'numeric'
@@ -44,17 +49,24 @@ class StockController extends Controller
         
         if ($this->hasEnoughCash($user->cash, $fetchStock['price'])) {
             // if stock exist, don't create it else create a new stock
-            $stock = ($stock !== null) ? $stock : new Stock(
-                ['name' => $fetchStock['name'], 'symbol' => $stockSymbol, 'source' => $uri]); 
-        
+            if (!$this->doesExist($stock)) {
+                $stock = new Stock(['name' => $fetchStock['name'], 'symbol' => $stockSymbol, 'source' => $uri]); 
+            }
+            
             $user->stocks()->save($stock, ['purchased_price' => $fetchStock['price'], 'quantity' => $request->quantity]);
-            $user->cash = $this->newCashAmount($user->cash, $this->totalCost($request->quantity, $fetchStock['price']));
-            $user->save();
+            $this->deductCash($user, $fetchStock['price']); 
         } else {
             // Return to the user that they don't have enough money
         }
     }
     
+    private function deductCash($user, $amountBeingDeducted) 
+    {
+        $currentAmountOfCash = $user->cash; 
+        $user->cash = $currentAmountOfCash - $amountBeingDeducted; 
+        $user->save();
+        return $user->cash;
+    }
     /**
      * Makes an external api request for historic stock data 
      * 
@@ -100,11 +112,6 @@ class StockController extends Controller
     private function totalCost($quantity, $price) 
     {
         return $quantity * $price; 
-    }
-    
-    private function newCashAmount($wallet, $cost) 
-    {
-        return $wallet - $cost; 
     }
     
     public function showUserStocks() 
