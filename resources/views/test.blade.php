@@ -13,7 +13,12 @@
                     @endforeach
                 </ul>
             </div>
+        @endif
         
+        @if (session('notEnoughCash'))
+            <div class="alert">
+                <p>Not sufficient cash!</p>
+            </div>
         @endif
         
         <form action='/test' method='GET'>

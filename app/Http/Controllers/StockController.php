@@ -33,7 +33,7 @@ class StockController extends Controller
     {
         $this->validate($request, [
             'stockSymbol' => 'required|alpha_num',
-            'quantity' => 'numeric'
+            'quantity' => 'numeric|min:0'
         ]);
         
         // Information about the user that is login
@@ -47,16 +47,16 @@ class StockController extends Controller
         
         $stock = Stock::where('symbol', strtoupper($stockSymbol))->first();
         
-        if ($this->hasEnoughCash($user->cash, $fetchStock['price'])) {
+        if ($this->hasEnoughCash($user->cash, ($fetchStock['price']) * $request->quantity)) {
             // if stock exist, don't create it else create a new stock
             if (!$this->doesExist($stock)) {
                 $stock = new Stock(['name' => $fetchStock['name'], 'symbol' => $stockSymbol, 'source' => $uri]); 
             }
             
             $user->stocks()->save($stock, ['purchased_price' => $fetchStock['price'], 'quantity' => $request->quantity]);
-            $this->deductCash($user, $fetchStock['price']); 
+            print($this->deductCash($user, ($fetchStock['price'] * $request->quantity))); 
         } else {
-            // Return to the user that they don't have enough money
+            return redirect('test')->with('notEnoughCash', 'not enough cash!');
         }
     }
     
