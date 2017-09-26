@@ -20,14 +20,42 @@ class StockController extends Controller
     {
         $this->middleware('auth');
     }
-    private function generateApiURL($symbol) { return 'https://www.quandl.com/api/v3/datasets/WIKI/' . $symbol . '.json'; }
+    private function generateApiURL($symbol) { 
+        return 'https://www.quandl.com/api/v3/datasets/WIKI/' . $symbol . '.json'; 
+        
+    }
     private function getURI($symbol) 
     {
         return 'https://www.quandl.com/api/v3/datasets/WIKI/' . $symbol . '.json';
     }
     
 
-    public function sell() {}
+    public function sell(Request $request) 
+    {
+        $userID = Auth::id();
+        $user = Auth::user();
+        // Get the stock the user is selling
+        $stockToSell = $user->stocks()->wherePivot(
+            'id', '=', $request->id)->wherePivot('user_id', '=', $userID)->first();
+            
+        /*
+        print("<pre>");
+        print_r($stockToSell->pivot->purchased_price);
+        print("<pre />");
+        */
+        
+        // Look up the stock's current price 
+        $uri = $this->getURI($stockToSell->symbol);
+        $stockFromAPI = $this->fetchStock($uri, $stockToSell->name);
+        
+        // Add money to the user's account
+        $user->cash += ($stockFromAPI['price'] * $request->quantity);
+        $user->save();
+        
+        // Remove stock from database 
+        $user->stocks()->detach($stockToSell->id);
+        
+    }
     private function doesExist($stock) { return $stock !== null; }
     public function store(Request $request) 
     {
@@ -54,7 +82,7 @@ class StockController extends Controller
             }
             
             $user->stocks()->save($stock, ['purchased_price' => $fetchStock['price'], 'quantity' => $request->quantity]);
-            print($this->deductCash($user, ($fetchStock['price'] * $request->quantity))); 
+            $this->deductCash($user, ($fetchStock['price'] * $request->quantity)); 
         } else {
             return redirect('test')->with('notEnoughCash', 'not enough cash!');
         }
@@ -77,7 +105,8 @@ class StockController extends Controller
     {
         $halfDayInMinutes = 720;
         $symbol = strtolower($symbol);
-        $price = Cache::remember($symbol, $halfDayInMinutes, function() use($uri) {
+        
+        $data = Cache::remember($symbol, $halfDayInMinutes, function() use($uri) {
             $client = new Client(); 
             $response = $client->request('GET', $uri);
             $statusCode = $response->getStatusCode(); 
@@ -93,8 +122,7 @@ class StockController extends Controller
            
         });
         
-        print_r($price);
-        return $price; 
+        return $data; 
     }
     
     private function clearStockCache() {}
@@ -118,5 +146,19 @@ class StockController extends Controller
     {
         $user = Auth::user();
         return view('stocks', ['stocks' => $user->stocks ]);
+    }
+    // render list of stocks
+    public function displayUserStocks($id) 
+    {
+        if ((int)$id !== (int)Auth::id()) 
+        {
+            abort(404);
+        }
+        
+        $user = Auth::user();
+        $myStocks = $user->stocks; 
+        
+        print("</ul>");
+        return view('stocks', ['stocks' => $myStocks]);
     }
 }

@@ -27,6 +27,6 @@ class User extends Authenticatable
     
     public function stocks() 
     {
-        return $this->belongsToMany('App\Stock')->withTimestamps();
+        return $this->belongsToMany('App\Stock')->withTimestamps()->withPivot('purchased_price', 'quantity', 'id');
     }
 }
