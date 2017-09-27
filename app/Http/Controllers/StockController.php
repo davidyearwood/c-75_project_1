@@ -8,9 +8,11 @@ use Illuminate\Support\Facades\Auth;
 use App\Stock; 
 use GuzzleHttp\Client; 
 use Illuminate\Support\Facades\Cache;
+use App\Custom\FinanceOperations\FinanceOperations;
 
 class StockController extends Controller 
 {
+    use FinanceOperations; 
     /**
      * Create a new controller instance.
      *
@@ -20,10 +22,13 @@ class StockController extends Controller
     {
         $this->middleware('auth');
     }
-    private function generateApiURL($symbol) { 
+    
+    private function generateApiURL($symbol) 
+    { 
         return 'https://www.quandl.com/api/v3/datasets/WIKI/' . $symbol . '.json'; 
         
     }
+    
     private function getURI($symbol) 
     {
         return 'https://www.quandl.com/api/v3/datasets/WIKI/' . $symbol . '.json';
@@ -69,7 +74,7 @@ class StockController extends Controller
         
         $stock = Stock::where('symbol', strtoupper($stockSymbol))->first();
         
-        if ($this->hasEnoughCash($user->cash, ($fetchStock['price']) * $request->quantity)) {
+        if ($this->hasEnough($user->cash, ($fetchStock['price']) * $request->quantity)) {
             // if stock exist, don't create it else create a new stock
             if (!$this->doesExist($stock)) {
                 $stock = new Stock(['name' => $fetchStock['name'], 'symbol' => $stockSymbol, 'source' => $uri]); 
