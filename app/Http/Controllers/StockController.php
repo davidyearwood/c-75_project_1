@@ -32,28 +32,22 @@ class StockController extends Controller
 
     public function sell(Request $request) 
     {
+        $this->validate($request, [
+            'id' => 'numeric|min:0',
+            'quantity' => 'numeric|min:0'
+        ]);
+        
         $userID = Auth::id();
         $user = Auth::user();
-        // Get the stock the user is selling
-        $stockToSell = $user->stocks()->wherePivot(
-            'id', '=', $request->id)->wherePivot('user_id', '=', $userID)->first();
-            
-        /*
-        print("<pre>");
-        print_r($stockToSell->pivot->purchased_price);
-        print("<pre />");
-        */
-        
-        // Look up the stock's current price 
-        $uri = $this->getURI($stockToSell->symbol);
-        $stockFromAPI = $this->fetchStock($uri, $stockToSell->name);
+        $stockBeingSold = $user->stocks()->wherePivot('id', '=', $request->id)->wherePivot('user_id', '=', $userID)->first();
+        $apiURL = $this->getURI($stockBeingSold->symbol);
+        $lastTradedStock = $this->fetchStock($apiURL, $stockBeingSold->name);
         
         // Add money to the user's account
-        $user->cash += ($stockFromAPI['price'] * $request->quantity);
-        $user->save();
-        
+        $user->cash = $this->addCash($user, $this->totalRevenue($request->quantity, $lastTradedStock['price']));
+
         // Remove stock from database 
-        $user->stocks()->detach($stockToSell->id);
+        $user->stocks()->detach($stockBeingSold->id);
         
     }
     private function doesExist($stock) { return $stock !== null; }
@@ -94,6 +88,20 @@ class StockController extends Controller
         $user->cash = $currentAmountOfCash - $amountBeingDeducted; 
         $user->save();
         return $user->cash;
+    }
+    
+    private function addCash($user, $amount) 
+    {
+        $currentAmountOfCash = $user->cash;
+        $user->cash += $amount; 
+        $user->save(); 
+        
+        return $user->cash;
+    }
+    
+    private function totalRevenue($quantity, $price) 
+    {
+        return $price * $quantity;    
     }
     /**
      * Makes an external api request for historic stock data 
