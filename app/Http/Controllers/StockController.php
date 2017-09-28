@@ -25,13 +25,6 @@ class StockController extends Controller
         $this->init(); 
     }
     
-    private function init() 
-    {
-        $this->stockAPI = new QuandlAPI();
-        $this->user =  Auth::user();
-        $this->userId = Auth::id();
-    }
-    
     public function sell(Request $request) 
     {
         $this->validate($request, [
@@ -39,17 +32,15 @@ class StockController extends Controller
             'quantity' => 'numeric|min:0'
         ]);
         
-        $userID = Auth::id();
-        $user = Auth::user();
-        $stockBeingSold = $user->stocks()->wherePivot('id', '=', $request->id)->wherePivot('user_id', '=', $userID)->first();
-        $quandlAPI = new QuandlAPI();
-        $lastTradedStock = $quandlAPI->getStock($stockBeingSold->symbol);
+        $stockBeingSold = $this->user->stocks()->wherePivot('id', '=', $request->id)->wherePivot('user_id', '=', $this->userId)->first();
+        $lastTradedStock = $this->stockAPI->getStock($stockBeingSold->symbol);
         
         // Add money to the user's account
-        $user->cash = $this->addCash($user, $this->totalRevenue($request->quantity, $lastTradedStock['price']));
-
+        $totalRevenueEarned = $this->totalRevenue($request->quantity, $lastTradedStock['price']);
+        $this->addCash($totalRevenueEarned);
+       
         // Remove stock from database 
-        $user->stocks()->detach($stockBeingSold->id);
+        $this->user->stocks()->detach($stockBeingSold->id);
         
     }
 
@@ -61,68 +52,63 @@ class StockController extends Controller
         ]);
         
         // Information about the user that is login
-        $user = Auth::user(); 
-        $userId = Auth::id();
         $stockSymbol = $request->stockSymbol;
-        $quandlAPI = new QuandlAPI(); 
         
         // Get the api's uri and get the api's stock 
-        $uri = $quandlAPI->getURL($stockSymbol);
-        $fetchStock = $quandlAPI->getStock($stockSymbol);
+        $uri = $this->stockAPI->getURL($stockSymbol);
+        $fetchStock = $this->stockAPI->getStock($stockSymbol);
         
         $stock = Stock::where('symbol', strtoupper($stockSymbol))->first();
+        $totalCost = $this->totalRevenue($request->quantity, $fetchStock['price']);
         
-        if ($this->hasEnough($user->cash, ($fetchStock['price']) * $request->quantity)) {
+        if ($this->hasEnough($this->user->cash, totalCost)) {
             // if stock exist, don't create it else create a new stock
             if (!$this->doesExist($stock)) {
                 $stock = new Stock(['name' => $fetchStock['name'], 'symbol' => $stockSymbol, 'source' => $uri]); 
             }
             
-            $user->stocks()->save($stock, ['purchased_price' => $fetchStock['price'], 'quantity' => $request->quantity]);
-            $this->deductCash($user, ($fetchStock['price'] * $request->quantity)); 
+            $this->user->stocks()->save($stock, ['purchased_price' => $fetchStock['price'], 'quantity' => $request->quantity]);
+            $this->deductCash(($fetchStock['price'] * $request->quantity)); 
         } else {
             return redirect('test')->with('notEnoughCash', 'not enough cash!');
         }
     }
     
-    public function showUserStocks() 
-    {
-        $user = Auth::user();
-        return view('stocks', ['stocks' => $user->stocks ]);
-    }
-    
     // render list of stocks
     public function displayUserStocks($id) 
     {
-        if ((int)$id !== (int)Auth::id()) 
-        {
+        if ((int)$id !== (int)$this->userId) {
             abort(404);
         }
         
-        $user = Auth::user();
-        $myStocks = $user->stocks; 
-        
-        return view('stocks', ['stocks' => $myStocks]);
+        return view('stocks', ['stocks' => $this->user->stocks]);
     }
     
-    private function deductCash($user, $amount) 
+    private function deductCash($amount) 
     {
-        $user->cash = $this->withdraw($user->cash, $amount); 
-        $user->save();
+        $this->user->cash = $this->withdraw($this->user->cash, $amount); 
+        $this->user->save();
         
-        return $user->cash;
+        return $this->user->cash;
     }
     
-    private function addCash($user, $amount) 
+    private function addCash($amount) 
     {
-        $user->cash = $this->deposit($user->cash, $amount); 
-        $user->save(); 
+        $this->user->cash = $this->deposit($this->user->cash, $amount); 
+        $this->user->save(); 
         
-        return $user->cash;
+        return $this->user->cash;
     }
 
     private function doesExist($stock) 
     { 
         return $stock !== null; 
+    }
+    
+    private function init() 
+    {
+        $this->stockAPI = new QuandlAPI();
+        $this->user =  Auth::user();
+        $this->userId = Auth::id();
     }
 }
