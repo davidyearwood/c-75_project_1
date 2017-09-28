@@ -10,16 +10,20 @@ trait FinanceOperations
     
     function totalRevenue($quantity, $price) 
     {
-        return ($quantity * $price);
+        return $quantity * $price;
     }
     
+    function totalCost($quantity, $price)
+    {
+        return $quantity * $price;
+    }
     function withdraw($income, $amount) 
     {
-        return ($income - $amount);
+        return $income - $amount;
     }
     
     function deposit($income, $amount) 
     {
-        return ($income + $amount);
+        return $income + $amount;
     }
 }

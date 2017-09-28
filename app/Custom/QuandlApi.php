@@ -10,19 +10,20 @@ class QuandlAPI
     protected $path = 'api/v3/datasets/WIKI/';
     protected $expirationDateInMinutes = 720;
     
-    private function setFile($symbol) 
-    { 
-        return $symbol . 'json';
+    public function __construct() 
+    {
+    
     }
+    
     
     public function getURL($symbol) 
     {
-        return $hostname . $path . $this->setFile($symbol);
+        return $this->hostname . $this->path . $this->setFile($symbol);
     }
     
-    public function getResource($symbol)
+    public function getStock($symbol)
     {
-        $resource = Cache::remember($symbol, $this->expirationDateInMinutes, function(){
+        $resource = Cache::remember($symbol, $this->expirationDateInMinutes, function() use($symbol){
             $client = new Client();
             $response = $client->request('GET', $this->getURL($symbol));
             $statusCode = $response->getStatusCode();
@@ -37,5 +38,10 @@ class QuandlAPI
         });
         
         return $resource; 
+    }
+    
+    private function setFile($symbol) 
+    { 
+        return $symbol . '.json';
     }
 }
