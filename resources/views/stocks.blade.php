@@ -10,6 +10,7 @@
                 <option value="{{ $amount }}">{{ $amount }}</option>
             @endfor
         </select>
+        <input type="hidden" value="{{ $stock->pivot->id }}" name="pid">
         <input type="submit" value="Submit"/>
     </form>
 @endforeach

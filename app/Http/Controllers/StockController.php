@@ -35,15 +35,19 @@ class StockController extends Controller
         $stockBeingSold = $this->user->stocks()->wherePivot('id', '=', $request->id)->wherePivot('user_id', '=', $this->userId)->first();
         $lastTradedStock = $this->stockAPI->getStock($stockBeingSold->symbol);
         
-        // Add money to the user's account
         $totalRevenueEarned = $this->totalRevenue($request->quantity, $lastTradedStock['price']);
         $this->addCash($totalRevenueEarned);
        
-        // Remove stock from database 
-        $this->user->stocks()->detach($stockBeingSold->id);
-        
+        if ($request->quantity == $stockBeingSold->pivot->quantity) {
+            $this->user->stocks()->wherePivot('id', '=', $request->pid)->detach();
+        } elseif ($request->quantity > $stockBeingSold->pivot->quantity) {
+            abort(500);
+        } else {
+            $this->user->stocks()->wherePivot('id', '=', $request->pid)->updateExistingPivot($stockBeingSold->id, ['quantity' => $stockBeingSold->pivot->quantity - $request->quantity]);
+        }
+    
     }
-
+    
     public function store(Request $request) 
     {
         $this->validate($request, [
@@ -61,7 +65,7 @@ class StockController extends Controller
         $stock = Stock::where('symbol', strtoupper($stockSymbol))->first();
         $totalCost = $this->totalRevenue($request->quantity, $fetchStock['price']);
         
-        if ($this->hasEnough($this->user->cash, totalCost)) {
+        if ($this->hasEnough($this->user->cash, $totalCost)) {
             // if stock exist, don't create it else create a new stock
             if (!$this->doesExist($stock)) {
                 $stock = new Stock(['name' => $fetchStock['name'], 'symbol' => $stockSymbol, 'source' => $uri]); 
@@ -82,6 +86,12 @@ class StockController extends Controller
         }
         
         return view('stocks', ['stocks' => $this->user->stocks]);
+    }
+    
+    
+    public function remove($id) 
+    {
+        $this->user->stocks()->detach($id);
     }
     
     private function deductCash($amount) 
