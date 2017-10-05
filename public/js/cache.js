@@ -1,9 +1,9 @@
 var Cache = (function(window, Modernizr) {
     'use strict';
+    var DAY_IN_HOURS = 1; 
+ 
     // Private Variables
-    var DAY_IN_HOURS = 24;
-    
-    if (Modernizr.localStorage) {
+    if (Modernizr.localstorage) {
         var myStorage = window.localStorage; 
     } else {
         throw new LocalStorageDoesntExistException("Your browser doesn't support Local Storage");
@@ -13,30 +13,36 @@ var Cache = (function(window, Modernizr) {
     function _addHoursToDate(date, hours) {
         var miliseconds = 1000; 
         var seconds = 60;
-        var minutes = 60;
-        return new Date(date.getTime() + (hours * minutes * seconds * miliseconds));
+        var minutes = 1;
+        return new Date(date.getTime() + (minutes * seconds * miliseconds));
     }
     
     function _isExpired(expirationDate) {
         var now = new Date(); 
-        return expirationDate > now.getTime();  
+        return now.getTime() > expirationDate;  
     }
     
     // Exception Handlers
     function LocalStorageDoesntExistException(message) {
-        this.name = 'Local Storage Exception';
+        this.name = 'LocalStorageException';
         this.message = message; 
     }
+    LocalStorageDoesntExistException.prototype = Object.create(Error.prototype);
+    LocalStorageDoesntExistException.prototype.name = 'LocalStorageDoesntExistException';
     
     function LocalStorageKeyDoesntExistException(message) {
-        this.name = 'Key doesn \'t exist'; 
+        this.name = 'LocalStorageKeyDoesntExistException'; 
         this.message = message; 
     }
+    LocalStorageKeyDoesntExistException.prototype = Object.create(Error.prototype);
+    LocalStorageKeyDoesntExistException.prototype.name = 'LocalStorageKeyDoesntExistException';
     
     function LocalStorageKeyExpiredException(message) {
-        this.name = 'Key has expired';
         this.message = message; 
+        this.stack = (new Error()).stack; 
     }
+    LocalStorageKeyExpiredException.prototype = Object.create(Error.prototype);
+    LocalStorageKeyExpiredException.prototype.name = 'LocalStorageKeyExpiredException';
     
     function has(key) {
         return myStorage.getItem(key) !== null;
@@ -86,9 +92,6 @@ var Cache = (function(window, Modernizr) {
     }; 
 })(window, Modernizr);
 
-var CacheCopy = Cache; 
-CacheCopy.set('GOOG', {'orginal_price' : 32.89, 'name': 'GOOG'});
-console.log(CacheCopy.get('GOOG'));
 /* 
 Obtaining A Cache Instance - set time 
 Retrieving Items From The Cache

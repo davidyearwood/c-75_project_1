@@ -24,7 +24,11 @@ Route::get('/test', function() {
 });
 Route::get('/stocks', 'StockController@showUserStocks');
 Route::post('/purchase', 'StockController@sell');
-Route::get('user/{id}/stocks', 'StockController@displayUserStocks');
+Route::get('users/{id}/stocks', 'StockController@displayUserStocks');
 Route::get('/cache', function() {
    return view('cache'); 
+});
+
+Route::get('/home/test', function() {
+    return view ('/global/cs75finance');
 });

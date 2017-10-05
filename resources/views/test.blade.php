@@ -35,7 +35,6 @@
             var query = '?start_date=' + today.getFullYear() + '-' + today.getMonth() + '-' + (today.getDate() - 1);
             var stockSymbol = document.getElementById('stock-symbol');
             var submitBtn = document.getElementById('submit-btn');
-            console.log(stockSymbol);
             
             submitBtn.addEventListener('click', function(e) {
                e.preventDefault();
@@ -140,5 +139,6 @@
             	return rows; 
             }
         </script>
+        <script src=""></script>
     </body>
 </html>
