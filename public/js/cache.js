@@ -6,7 +6,7 @@ var Cache = (function(window, Modernizr) {
     if (Modernizr.localstorage) {
         var myStorage = window.localStorage; 
     } else {
-        throw new LocalStorageDoesntExistException("Your browser doesn't support Local Storage");
+        throw new DoesntExistError("Your browser doesn't support Local Storage");
     }
     
     // Private function
@@ -22,28 +22,6 @@ var Cache = (function(window, Modernizr) {
         return now.getTime() > expirationDate;  
     }
     
-    // Exception Handlers
-    function LocalStorageDoesntExistException(message) {
-        this.name = 'LocalStorageException';
-        this.message = message; 
-    }
-    LocalStorageDoesntExistException.prototype = Object.create(Error.prototype);
-    LocalStorageDoesntExistException.prototype.name = 'LocalStorageDoesntExistException';
-    
-    function LocalStorageKeyDoesntExistException(message) {
-        this.name = 'LocalStorageKeyDoesntExistException'; 
-        this.message = message; 
-    }
-    LocalStorageKeyDoesntExistException.prototype = Object.create(Error.prototype);
-    LocalStorageKeyDoesntExistException.prototype.name = 'LocalStorageKeyDoesntExistException';
-    
-    function LocalStorageKeyExpiredException(message) {
-        this.message = message; 
-        this.stack = (new Error()).stack; 
-    }
-    LocalStorageKeyExpiredException.prototype = Object.create(Error.prototype);
-    LocalStorageKeyExpiredException.prototype.name = 'LocalStorageKeyExpiredException';
-    
     function has(key) {
         return myStorage.getItem(key) !== null;
     }
@@ -51,7 +29,7 @@ var Cache = (function(window, Modernizr) {
     function get(key) {
         
         if (!has(key)) { 
-            throw new LocalStorageKeyDoesntExistException('There is no key with the name ' + key + ' in your local storage'); 
+            throw new KeyDoesntExistError('There is no key with the name ' + key + ' in your local storage'); 
         }
         
         var data = JSON.parse(myStorage.getItem(key));
@@ -60,7 +38,7 @@ var Cache = (function(window, Modernizr) {
         
         if (_isExpired(expirationDateInMiliseconds)) {
             myStorage.removeItem(key);
-            throw new LocalStorageKeyExpiredException(key + ' has expired.');
+            throw new KeyExpiredError(key + ' has expired.');
         }
         
         return data; 
@@ -71,7 +49,7 @@ var Cache = (function(window, Modernizr) {
             try {
                 var data = get(key);
             } catch(error) {
-                if (error instanceof LocalStorageKeyExpiredException) {
+                if (error instanceof KeyExpiredError) {
                     set(key, value);
                 }
             }

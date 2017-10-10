@@ -1,28 +1,5 @@
 var Quandl = (function(window) {
     'use strict';
-    // Exception Handlers
-    function LocalStorageDoesntExistException(message) {
-        this.name = 'Local Storage Exception';
-        this.message = message; 
-    }
-    LocalStorageDoesntExistException.prototype = Object.create(Error.prototype);
-    LocalStorageDoesntExistException.prototype.name = 'LocalStorageDoesntExistException';
-    
-    function LocalStorageKeyDoesntExistException(message) {
-        this.name = 'Key doesn \'t exist'; 
-        this.message = message; 
-    }
-    LocalStorageKeyDoesntExistException.prototype = Object.create(Error.prototype);
-    LocalStorageKeyDoesntExistException.prototype.name = 'LocalStorageKeyDoesntExistException';
-    
-    function LocalStorageKeyExpiredException(message) {
-        this.name = 'LocalStorageKeyExpiredException';
-        this.message = message;
-        this.stack = (new Error()).stack;
-    }
-    LocalStorageKeyExpiredException.prototype = Object.create(Error.prototype);
-    LocalStorageKeyExpiredException.prototype.name = 'LocalStorageKeyExpiredException';
-    
     var today = new Date(); 
     var uri = 'https://www.quandl.com/api/v3/datasets/WIKI/';
     var query = '?start_date=' + today.getFullYear() + '-' + today.getMonth() + '-' + (today.getDate() - 1);
@@ -42,7 +19,7 @@ var Quandl = (function(window) {
     
     function fetchData(symbol, cb) {
         symbol = symbol.toUpperCase();
-        var fullPath = _setFullPath(symbol); ;
+        var fullPath = _setFullPath(symbol);
         if (cache.has(symbol)) {
             console.log('I passed the has method');
             try { 

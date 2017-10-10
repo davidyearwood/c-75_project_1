@@ -1,4 +1,4 @@
-var CacheError = (function() {
+
     function DoesntExistError(message) {
         this.name = 'CacheDoesntExistError';
         this.message = message;
@@ -20,10 +20,3 @@ var CacheError = (function() {
     
     KeyExpiredError.prototype = Object.create(Error.prototype);
     
-    return {
-        CacheDoesntExistError: DoesntExistError, 
-        CacheKeyDoesntExistError: KeyDoesntExistError,
-        CacheKeyExpiredError: KeyExpiredError
-    };
-    
-})();

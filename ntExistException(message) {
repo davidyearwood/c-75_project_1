@@ -1,0 +1,31 @@
+[33mae0347e[m[33m ([m[1;36mHEAD -> [m[1;32mcache-error-module[m[33m, [m[1;31mcs75/master[m[33m, [m[1;32mstock-db[m[33m, [m[1;32mmaster[m[33m)[m Need to create a CacheError object, and need to test the fetch method
+[33mb7f721a[m Fix sell functionality
+[33m2a09f88[m clean up most of stockController
+[33m496013e[m Created new class Quandl and trait to handle some responsibilities for stock controller. Need to seperate user cash functionality from the stock controller, and need to refactor stock controller some more to make code more readable
+[33m9fce7fd[m Added helper class and trait
+[33m6fc1d3e[m Updadeted sell method
+[33m4643c40[m Create sell function. Must be able to sell some shares and not all. Stock Controller still need to be refactor
+[33m7c363a8[m Fixed store bug
+[33m211c820[m Refactor stock controller. Still need to cache.js. Working on handling errors and redirects
+[33m6aaea14[m Added new dependency (modernizr)  to cache.js, and refactor code. Still needs to be tested
+[33m7ad8de4[m Tested Cache.js set, has, and get functionality. Have to check to see if the expiration works. Have to add error checking to stock controller. Have to add selling capabilities, and have viewers view their portfolio too.
+[33m2f23bb2[m Worked on Cache.js. Added Get and Set, but still needs to be tested
+[33m129f806[m Fixed store method, needs to be able to return error. Javascript cache isn't completed yet, either
+[33m045c1f3[m Working cache.js, working on the store method (still can't store information). Once these two things are completed, we can move onto redirecting to the proper routes
+[33m6dd8503[m Adding a new layer to fetchStockPrice(), adding another index called name and working on the store function
+[33mdcf65c5[m updated fetchStockData(), enable caching, still needs to be tested
+[33m8524493[m Can't save duplicate records. I receive a SQL Constraint error
+[33m812a455[m Able to store information using the store method. Need to be able to store duplicate stock symbols
+[33mba692de[m Created new function newCashAmount(, ) in the StockController class
+[33m2a4941d[m Created many to many methods for Stock and User model
+[33m4dcde64[m tested has enough cash method and include it inside the store method
+[33m466c60c[m A lot of updates made. StockController was created and created a few functions. Still working on Store functionality
+[33m8913af8[m Added stocks_users table
+[33m2adc958[m Created Stock Table, Model, and migrated over
+[33mcba3ad1[m[33m ([m[1;32mtest-view[m[33m)[m added functionality for displaying data
+[33m2e96f9f[m[33m ([m[1;32mlogin_features[m[33m)[m updated table
+[33m212e489[m Working on callback function that can create a table for the weekly stocks
+[33mcb6b7fb[m Fixed registration problems
+[33m474b8f4[m Updated the AuthController to be able to validate for firstName, lastname, and added new regex for password
+[33m3b8841f[m used laravel's built auth framework to build pages
+[33m819e5c5[m first commit
