@@ -1,0 +1,16 @@
+/* User Account */
+ul.user-account-links {
+  list-style-type: none;
+  padding-left: 0;
+  margin: 0;
+  float: right; }
+  ul.user-account-links li {
+    display: inline-block;
+    margin-right: 7.5px; }
+  ul.user-account-links li:after {
+    content: "|";
+    margin-left: 7.5px; }
+  ul.user-account-links li:last-child:after {
+    content: none; }
+
+/*# sourceMappingURL=stylesheet.css.map */

@@ -9,16 +9,18 @@
         <title>CS75 Finance</title>
 
         <!-- Fonts -->
+        <link rel="stylesheet" href="/css/normalize.css">
+        <link rel="stylesheet" href="/css/stylesheet.css">
         <link href="https://fonts.googleapis.com/css?family=Roboto+Mono:400,700|Roboto:300,400,900" rel="stylesheet">
     </head>
     <body>
-        <nav>
-            <ul class="nav-links">
+        <div class="user-account" id="user-account">
+            <ul class="user-account-links">
                 <li><a href="#">dyearwoodd@gmail.com</a></li>
                 <li><a href="#">Your Profile</a></li>
                 <li><a href="#">Log Out</a></li>
             </ul>
-        </nav>
+        </div>
         
         <div class="container">
             <header>

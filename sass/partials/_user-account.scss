@@ -1,0 +1,21 @@
+$space: 7.5px; 
+
+/* User Account */
+ul.user-account-links {
+    list-style-type: none;
+    padding-left: 0;
+    margin: 0;
+    float: right;
+    
+    li {
+        display: inline-block;
+        margin-right: 7.5px;
+    }
+    li:after {
+        content: "|";
+        margin-left: 7.5px;
+    }
+    li:last-child:after {
+        content: none;
+    }
+}
