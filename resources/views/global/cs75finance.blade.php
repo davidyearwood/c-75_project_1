@@ -11,6 +11,7 @@
         <!-- Fonts -->
         <link rel="stylesheet" href="/css/normalize.css">
         <link rel="stylesheet" href="/css/stylesheet.css">
+        <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,700,900" rel="stylesheet">
         <link href="https://fonts.googleapis.com/css?family=Roboto+Mono:400,700|Roboto:300,400,900" rel="stylesheet">
     </head>
     <body>
@@ -32,17 +33,27 @@
             <aside class="side side--blue">
                 <ul class="financial-info">
                     <li class="header">Your Account</li>
-                    <li><i class="fa fa-money" aria-hidden="true"></i>Cash <span class="cash">$10,000</span></li>
-                    <li>Stock Investment <span class="cash">$4,000</span></li>
-                    <li>Net Value <span class="cash">$14,000</span></li>
+                    <li>
+                        <i class="fa fa-money" aria-hidden="true"></i>
+                        <span class="financial-info__header">Cash</span> 
+                        <span class="financial-info__cash">$10,000</span>
+                    </li>
+                    <li>
+                        <span class="financial-info__header">Stock Investment</span> 
+                        <span class="financial-info__cash">$4,000</span>
+                    </li>
+                    <li>
+                        <span class="financial-info__header">Net Value</span>
+                        <span class="financial-info__cash">$14,000</span>
+                    </li>
                 </ul>
             </aside>
             <div class="main-content main-content--red">
-                <header class="portfolio-title">
-                    <h2>Portfolio</h2>
+                <header>
+                    <h2 class="main-content__title">Portfolio</h2>
                 </header>
-                <table>
-                    <thead>
+                <table class="portfolio">
+                    <thead class="portfolio__header">
                         <tr>
                             <th>Symbol</th>
                             <th>Value</th>
@@ -51,24 +62,24 @@
                             <th>Quantity</th>
                         </tr>
                     </thead>
-                    <tbody>
+                    <tbody class="portfolio__body">
                         <tr>
                             <td>Google Inc.</td>
-                            <td>$489.00</td>
+                            <td class="portfolio__money">$489.00</td>
                             <td>+112</td>
                             <td><a href="#">sell</a></td>
                             <td>5</td>
                         </tr>
                         <tr>
                             <td>Netflix Inc</td>
-                            <td>$89.00</td>
+                            <td class="portfolio__money">$89.00</td>
                             <td>+112</td>
                             <td><a href="#">sell</a></td>
                             <td>5</td>
                         </tr>
                         <tr>
                             <td>Apple</td>
-                            <td>$889.00</td>
+                            <td class="portfolio__money">$889.00</td>
                             <td>+112</td>
                             <td><a href="#">sell</a></td>
                             <td>5</td>

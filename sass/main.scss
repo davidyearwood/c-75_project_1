@@ -3,7 +3,13 @@
 
 $roboto-font-stack: 'Roboto', sans-serif !default;
 
-h1, h2, h3, p, li, a {
+html {
+    font-size: 16px;
+}
+
+
+
+h1, h2, h3, p, li, a, th, td {
     color: #8C8C8C;
     font-family: $roboto-font-stack;
 }
@@ -45,6 +51,7 @@ h1, h2, h3, p, li, a {
         padding-left: 0;
         float: right;
         font-size: 14px;
+        color: #4D4D4D;
     }
     .tabs__links li {
         list-style-type: none;
@@ -54,6 +61,7 @@ h1, h2, h3, p, li, a {
     
     .tabs__links li a {
         text-decoration: none;
+        color: #4D4D4D;
         // transition: padding-bottom 1s;
     }
     
@@ -79,8 +87,40 @@ h1, h2, h3, p, li, a {
 
 .main-content {
     @include grid-column(9);
+    
+    .main-content__title {
+        font-weight: 300;
+        color: #4D4D4D;
+        font-size: 1.999rem;
+    }
 }
 
 .main-content--red {
-    background: #cfb7ae;
+    // background: #cfb7ae;
+}
+
+table.portfolio {
+    width: 100%;
+    border-collapse: collapse;
+}
+.portfolio__header {
+    text-transform: uppercase;
+    font-size: .707rem;
+    
+    tr th {
+        font-weight: 300;
+        letter-spacing: .5px;
+        text-align: left;
+    }
+}
+
+.portfolio__money {
+    font-family: 'Roboto Mono';
+}
+.portfolio__body td, 
+.portfolio__header th {
+    padding: 8px 4px;
+}
+.portfolio__body tr:nth-child(odd) {
+    background: #ccc;
 }
