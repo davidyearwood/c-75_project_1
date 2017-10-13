@@ -1,2 +1,86 @@
 @import "neat/neat";
 @import "partials/user-account";
+
+$roboto-font-stack: 'Roboto', sans-serif !default;
+
+h1, h2, h3, p, li, a {
+    color: #8C8C8C;
+    font-family: $roboto-font-stack;
+}
+
+.container {
+    @include grid-container;
+    width: 90%;
+    max-width: 1200px;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+.user-account {
+    @include grid-column(12);
+    .user-account__links {
+        @include resetList();
+        float: right;
+    }
+    
+    .user-account__links li {
+        display: inline-block;
+        margin-right: 7.5px;
+    }
+    
+    .user-account__links li:after {
+        content: "|";
+        margin-left: 7.5px;
+    }
+    
+    .user-account__links li:last-child:after {
+        content: none;
+    }
+}
+
+.tabs {
+    @include grid-column(12);
+    
+    .tabs__links {
+        padding-left: 0;
+        float: right;
+        font-size: 14px;
+    }
+    .tabs__links li {
+        list-style-type: none;
+        display: inline-block;
+        margin-right: 30px;
+    }
+    
+    .tabs__links li a {
+        text-decoration: none;
+        // transition: padding-bottom 1s;
+    }
+    
+    .tabs__links li a:hover {
+        color: black;
+        padding-bottom: 10px;
+        border-bottom: 3px solid black;
+    }
+    
+    .tabs__links li:last-child {
+        margin-right: 0;
+    }
+}
+
+.side {
+    @include grid-column(3);
+}
+
+.side--blue {
+    background: #aec6cf;
+}
+
+
+.main-content {
+    @include grid-column(9);
+}
+
+.main-content--red {
+    background: #cfb7ae;
+}

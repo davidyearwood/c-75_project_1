@@ -1,16 +1,69 @@
-/* User Account */
-ul.user-account-links {
-  list-style-type: none;
-  padding-left: 0;
-  margin: 0;
-  float: right; }
-  ul.user-account-links li {
+h1, h2, h3, p, li, a {
+  color: #8C8C8C;
+  font-family: "Roboto", sans-serif; }
+
+.container {
+  width: 90%;
+  max-width: 1200px;
+  margin-right: auto;
+  margin-left: auto; }
+  .container::after {
+    clear: both;
+    content: "";
+    display: block; }
+
+.user-account {
+  width: calc(100% - 40px);
+  float: left;
+  margin-left: 20px; }
+  .user-account .user-account__links {
+    list-style-type: none;
+    padding-left: 0;
+    float: right; }
+  .user-account .user-account__links li {
     display: inline-block;
     margin-right: 7.5px; }
-  ul.user-account-links li:after {
+  .user-account .user-account__links li:after {
     content: "|";
     margin-left: 7.5px; }
-  ul.user-account-links li:last-child:after {
+  .user-account .user-account__links li:last-child:after {
     content: none; }
+
+.tabs {
+  width: calc(100% - 40px);
+  float: left;
+  margin-left: 20px; }
+  .tabs .tabs__links {
+    padding-left: 0;
+    float: right;
+    font-size: 14px; }
+  .tabs .tabs__links li {
+    list-style-type: none;
+    display: inline-block;
+    margin-right: 30px; }
+  .tabs .tabs__links li a {
+    text-decoration: none; }
+  .tabs .tabs__links li a:hover {
+    color: black;
+    padding-bottom: 10px;
+    border-bottom: 3px solid black; }
+  .tabs .tabs__links li:last-child {
+    margin-right: 0; }
+
+.side {
+  width: calc(25% - 25px);
+  float: left;
+  margin-left: 20px; }
+
+.side--blue {
+  background: #aec6cf; }
+
+.main-content {
+  width: calc(75% - 35px);
+  float: left;
+  margin-left: 20px; }
+
+.main-content--red {
+  background: #cfb7ae; }
 
 /*# sourceMappingURL=stylesheet.css.map */

@@ -14,23 +14,22 @@
         <link href="https://fonts.googleapis.com/css?family=Roboto+Mono:400,700|Roboto:300,400,900" rel="stylesheet">
     </head>
     <body>
-        <div class="user-account" id="user-account">
-            <ul class="user-account-links">
-                <li><a href="#">dyearwoodd@gmail.com</a></li>
-                <li><a href="#">Your Profile</a></li>
-                <li><a href="#">Log Out</a></li>
-            </ul>
-        </div>
         
         <div class="container">
-            <header>
-                <div class="header-links">
+            <div class="user-account" id="user-account">
+                <ul class="user-account__links">
+                    <li>dyearwoodd@gmail.com</li>
+                    <li><a href="#">Your Profile</a></li>
+                    <li><a href="#">Log Out</a></li>
+                </ul>
+            </div>
+            <nav class="tabs">
+                <ul class="tabs__links">
                     <li><a href="#">Purchase</a></li>
                     <li><a href="#">Portfolio</a></li>
-                </div>
-            </header>
-            
-            <aside>
+                </ul>
+            </nav>
+            <aside class="side side--blue">
                 <ul class="financial-info">
                     <li class="header">Your Account</li>
                     <li><i class="fa fa-money" aria-hidden="true"></i>Cash <span class="cash">$10,000</span></li>
@@ -38,9 +37,7 @@
                     <li>Net Value <span class="cash">$14,000</span></li>
                 </ul>
             </aside>
-            
-
-            <div class="main-content">
+            <div class="main-content main-content--red">
                 <header class="portfolio-title">
                     <h2>Portfolio</h2>
                 </header>
@@ -80,5 +77,6 @@
                 </table>
             </div>
         </div>
+        
     </body>
 </html>
