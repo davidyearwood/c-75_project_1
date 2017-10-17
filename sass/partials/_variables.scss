@@ -1,1 +1,22 @@
-// Font Sizes
+//== Typography
+// augmented fourth = 1.414
+//## Font
+$font-family-sans-serif: "Roboto", "Helvetica Neue", Helvetica, Arial, sans-serif;
+$font-family-monospace:  "Roboto Mono", Menlo, "Courier New", monospace; 
+$font-size-base: 16px; 
+$font-size-h1: ceil(($font-size-base * 3.998)); // ~ 64px
+$font-size-h2: floor(($font-size-base * 2.827)); // ~ 45px 
+$font-size-h3: ceil(($font-size-base * 1.999)); // ~ 32px
+$font-size-h4: ceil(($font-size-base * 1.414)); // ~ 23px 
+$font-size-body: $font-size-base * 1; // 16px
+$font-size-small: floor(($font-size-base * 0.707));
+$headings-font-weight:  600;
+$font-body-color: #333; 
+
+$font-weight-black: 900;
+$font-weight-bold: 700;
+$font-weight-semibold: 500;
+$font-weight-normal: 400;
+$font-weight-light: 300;
+$font-weight-thin: 100;
+

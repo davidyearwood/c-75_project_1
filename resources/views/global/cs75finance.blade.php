@@ -49,7 +49,7 @@
                 </ul>
             </aside>
             <div class="main-content main-content--red">
-                <header>
+                <header class="main-content__header">
                     <h2 class="main-content__title">Portfolio</h2>
                 </header>
                 <table class="portfolio">

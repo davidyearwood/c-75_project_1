@@ -1,17 +1,14 @@
 @import "neat/neat";
+@import "partials/variables";
 @import "partials/user-account";
 
-$roboto-font-stack: 'Roboto', sans-serif !default;
-
 html {
-    font-size: 16px;
+    font-size: $font-size-base;
 }
-
-
 
 h1, h2, h3, p, li, a, th, td {
     color: #8C8C8C;
-    font-family: $roboto-font-stack;
+    font-family: $font-family-sans-serif;
 }
 
 .container {
@@ -32,6 +29,7 @@ h1, h2, h3, p, li, a, th, td {
     .user-account__links li {
         display: inline-block;
         margin-right: 7.5px;
+        font-size: $font-size-body;
     }
     
     .user-account__links li:after {
@@ -50,7 +48,7 @@ h1, h2, h3, p, li, a, th, td {
     .tabs__links {
         padding-left: 0;
         float: right;
-        font-size: 14px;
+        font-size: $font-size-h4;
         color: #4D4D4D;
     }
     .tabs__links li {
@@ -91,10 +89,17 @@ h1, h2, h3, p, li, a, th, td {
 .main-content {
     @include grid-column(9);
     
+    .main-content__header {
+        background: #FDFBFB;
+        padding-top: 3.75px;
+        padding-bottom: 3.75px;
+        padding-left: 15px;
+    }
+    
     .main-content__title {
-        font-weight: 300;
+        font-weight: $font-weight-light;
         color: #4D4D4D;
-        font-size: 1.999rem;
+        font-size: $font-size-h2;
     }
 }
 
@@ -109,10 +114,10 @@ table.portfolio {
 }
 .portfolio__header {
     text-transform: uppercase;
-    font-size: .707rem;
+    font-size: $font-size-small;
     
     tr th {
-        font-weight: 300;
+        font-weight: $font-weight-bold;
         letter-spacing: .5px;
         text-align: right;
     }
@@ -130,15 +135,15 @@ table.portfolio {
     }
 }
 .portfolio__money {
-    font-family: 'Roboto Mono';
+    font-family: $font-family-monospace;
 }
 .portfolio__body td, 
 .portfolio__header th {
-    padding: 8px 4px;
+    padding: 8px 15px;
 }
 
 .portfolio__body tr:nth-child(odd) {
-    background: #ccc;
+    background: #FDFBFB;
 }
 
 ul.financial-info {
@@ -151,6 +156,6 @@ ul.financial-info {
 }
 
 ul.financial-info__header {
-    font-size: 20px;
-    font-weight: bold;
+    font-size: $font-size-h4;
+    font-weight: $font-weight-bold;
 }
