@@ -24,12 +24,20 @@
                     <li><a href="#">Log Out</a></li>
                 </ul>
             </div>
+        </div>   
+        <header class="container">
+            <div class="logo">
+                <img src="http://via.placeholder.com/250x100" alt="">
+            </div>
             <nav class="tabs">
                 <ul class="tabs__links">
                     <li><a href="#">Purchase</a></li>
                     <li><a href="#">Portfolio</a></li>
                 </ul>
             </nav>
+        </header>
+        
+        <div class="container">
             <aside class="side side--blue">
                 <ul class="financial-info">
                     <li class="financial-info__header">Your Account</li>

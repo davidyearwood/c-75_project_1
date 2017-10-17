@@ -1,6 +1,12 @@
 html {
   font-size: 16px; }
 
+body {
+  background: #f4f8fb; }
+
+.container {
+  background: #fff; }
+
 h1, h2, h3, p, li, a, th, td {
   color: #8C8C8C;
   font-family: "Roboto", "Helvetica Neue", Helvetica, Arial, sans-serif; }
@@ -36,8 +42,22 @@ a {
   .user-account .user-account__links li:last-child:after {
     content: none; }
 
-.tabs {
+.global-header {
   width: calc(100% - 40px);
+  float: left;
+  margin-left: 20px; }
+
+.logo {
+  width: calc(33.3333333333% - 26.6666666667px);
+  float: left;
+  margin-left: 20px; }
+
+nav.tabs {
+  position: relative;
+  top: 50px; }
+
+.tabs {
+  width: calc(66.6666666667% - 33.3333333333px);
   float: left;
   margin-left: 20px; }
   .tabs .tabs__links {
@@ -120,7 +140,8 @@ ul.financial-info {
   list-style-type: none; }
   ul.financial-info li {
     padding-top: 15px;
-    padding-bottom: 15px; }
+    padding-bottom: 15px;
+    color: #fff; }
 
 ul.financial-info__header {
   font-size: 23px;
