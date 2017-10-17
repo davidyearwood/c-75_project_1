@@ -11,6 +11,10 @@ h1, h2, h3, p, li, a, th, td {
     font-family: $font-family-sans-serif;
 }
 
+a {
+    color: $link-color;
+}
+
 .container {
     @include grid-container;
     width: 90%;
@@ -48,25 +52,26 @@ h1, h2, h3, p, li, a, th, td {
     .tabs__links {
         padding-left: 0;
         float: right;
-        font-size: $font-size-h4;
-        color: #4D4D4D;
+        font-size: $font-size-body;
+        color: $link-color;
     }
     .tabs__links li {
         list-style-type: none;
         display: inline-block;
-        margin-right: 30px;
+        margin-right: 32px;
     }
     
     .tabs__links li a {
         text-decoration: none;
-        color: #4D4D4D;
+        color: #4d7ca8;
+        font-weight: bold;
         // transition: padding-bottom 1s;
     }
     
     .tabs__links li a:hover {
-        color: black;
+        color: #355575;
         padding-bottom: 10px;
-        border-bottom: 3px solid black;
+        border-bottom: 2.5px solid #355575;
     }
     
     .tabs__links li:last-child {
@@ -76,10 +81,13 @@ h1, h2, h3, p, li, a, th, td {
 
 .side {
     @include grid-column(3);
+    min-height: 600px;
+    height: 100%;
+    //height: 100vh;
 }
 
 .side--blue {
-    background: #aec6cf;
+    background: #6191b8;
 }
 
 .side--green {

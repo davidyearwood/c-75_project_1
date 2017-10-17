@@ -30,7 +30,7 @@
                     <li><a href="#">Portfolio</a></li>
                 </ul>
             </nav>
-            <aside class="side">
+            <aside class="side side--blue">
                 <ul class="financial-info">
                     <li class="financial-info__header">Your Account</li>
                     <li>

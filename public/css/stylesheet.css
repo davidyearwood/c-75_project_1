@@ -5,6 +5,9 @@ h1, h2, h3, p, li, a, th, td {
   color: #8C8C8C;
   font-family: "Roboto", "Helvetica Neue", Helvetica, Arial, sans-serif; }
 
+a {
+  color: #537293; }
+
 .container {
   width: 90%;
   max-width: 1200px;
@@ -40,29 +43,32 @@ h1, h2, h3, p, li, a, th, td {
   .tabs .tabs__links {
     padding-left: 0;
     float: right;
-    font-size: 23px;
-    color: #4D4D4D; }
+    font-size: 16px;
+    color: #537293; }
   .tabs .tabs__links li {
     list-style-type: none;
     display: inline-block;
-    margin-right: 30px; }
+    margin-right: 32px; }
   .tabs .tabs__links li a {
     text-decoration: none;
-    color: #4D4D4D; }
+    color: #4d7ca8;
+    font-weight: bold; }
   .tabs .tabs__links li a:hover {
-    color: black;
+    color: #355575;
     padding-bottom: 10px;
-    border-bottom: 3px solid black; }
+    border-bottom: 2.5px solid #355575; }
   .tabs .tabs__links li:last-child {
     margin-right: 0; }
 
 .side {
   width: calc(25% - 25px);
   float: left;
-  margin-left: 20px; }
+  margin-left: 20px;
+  min-height: 600px;
+  height: 100%; }
 
 .side--blue {
-  background: #aec6cf; }
+  background: #6191b8; }
 
 .side--green {
   background: #8FDEAC; }
