@@ -30,9 +30,9 @@
                     <li><a href="#">Portfolio</a></li>
                 </ul>
             </nav>
-            <aside class="side side--blue">
+            <aside class="side">
                 <ul class="financial-info">
-                    <li class="header">Your Account</li>
+                    <li class="financial-info__header">Your Account</li>
                     <li>
                         <i class="fa fa-money" aria-hidden="true"></i>
                         <span class="financial-info__header">Cash</span> 

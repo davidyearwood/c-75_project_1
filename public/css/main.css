@@ -85,14 +85,7 @@ table.portfolio {
   .portfolio__header tr th {
     font-weight: 300;
     letter-spacing: .5px;
-    text-align: right; }
-  .portfolio__header tr th:first-child {
     text-align: left; }
-
-.portfolio__body tr td {
-  text-align: right; }
-.portfolio__body tr td:first-child {
-  text-align: left; }
 
 .portfolio__money {
   font-family: 'Roboto Mono'; }
@@ -106,12 +99,5 @@ table.portfolio {
 
 ul.financial-info {
   list-style-type: none; }
-  ul.financial-info li {
-    padding-top: 15px;
-    padding-bottom: 15px; }
 
-ul.financial-info__header {
-  font-size: 20px;
-  font-weight: bold; }
-
-/*# sourceMappingURL=stylesheet.css.map */
+/*# sourceMappingURL=main.css.map */

@@ -84,6 +84,9 @@ h1, h2, h3, p, li, a, th, td {
     background: #aec6cf;
 }
 
+.side--green {
+    background: #8FDEAC;
+}
 
 .main-content {
     @include grid-column(9);
@@ -94,6 +97,7 @@ h1, h2, h3, p, li, a, th, td {
         font-size: 1.999rem;
     }
 }
+
 
 .main-content--red {
     // background: #cfb7ae;
@@ -110,10 +114,21 @@ table.portfolio {
     tr th {
         font-weight: 300;
         letter-spacing: .5px;
+        text-align: right;
+    }
+    
+    tr th:first-child {
         text-align: left;
     }
 }
-
+.portfolio__body {
+    tr td {
+        text-align: right;
+    }
+    tr td:first-child {
+        text-align: left;
+    }
+}
 .portfolio__money {
     font-family: 'Roboto Mono';
 }
@@ -121,6 +136,21 @@ table.portfolio {
 .portfolio__header th {
     padding: 8px 4px;
 }
+
 .portfolio__body tr:nth-child(odd) {
     background: #ccc;
+}
+
+ul.financial-info {
+    list-style-type: none;
+    
+    li {
+        padding-top: 15px;
+        padding-bottom: 15px;
+    }
+}
+
+ul.financial-info__header {
+    font-size: 20px;
+    font-weight: bold;
 }
