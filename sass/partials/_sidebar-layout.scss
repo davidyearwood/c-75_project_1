@@ -1,0 +1,41 @@
+$blue: #6191b8;
+$green: #8FDEAC;
+
+$sidebar-layout: (
+    columns: 3,
+    gutter: 20px,
+);
+
+.sidebar-layout {
+    @include grid-container;
+    max-width: 960px;
+    width: 100%;
+    margin-right: auto;
+    margin-left: auto;
+    background-color: white; // Optional 
+    box-shadow: $box-shadow-depth-1;
+    &__header {
+        @include grid-column(3, $sidebar-layout);
+    }
+    
+    &__sidebar {
+        @include grid-column(1, $sidebar-layout);
+    }
+    
+    &__main {
+        @include grid-column(2, $sidebar-layout);
+    }
+}
+
+/**************************************************
+                    Modifiers
+***************************************************/
+.sidebar-layout {
+    &--blue {
+        background: $blue;    
+    }
+    
+    &--green {
+        background: $green;
+    }
+}

@@ -1,17 +1,16 @@
 @import "neat/neat";
 @import "partials/variables";
+@import "partials/sidebar-layout";
 @import "partials/user-account";
 
 html {
     font-size: $font-size-base;
 }
+
 body {
     background: #f4f8fb;
 }
-.container {
-    background: #fff;
-    // box-shadow: $box-shadow-depth-1;
-}
+
 h1, h2, h3, p, li, a, th, td {
     color: #8C8C8C;
     font-family: $font-family-sans-serif;
@@ -20,17 +19,25 @@ h1, h2, h3, p, li, a, th, td {
 a {
     color: $link-color;
 }
-
-.container {
+.sidebar-layout {
     @include grid-container;
-    width: 90%;
-    max-width: 1200px;
+    max-width: 960px;
+    width: 100%;
     margin-right: auto;
     margin-left: auto;
+    background-color: #fff;
 }
 
+.logo-container {
+    @include grid-column(1, $sidebar-layout);
+    &__logo {
+        @include grid-collapse; 
+    }
+    
+}
+
+
 .user-account {
-    @include grid-column(12);
     .user-account__links {
         @include resetList();
         float: right;
@@ -51,67 +58,46 @@ a {
         content: none;
     }
 }
-.global-header {
-    @include grid-column(12);
-    // @include grid-collapse();
-}
-.logo {
-    @include grid-column(4);
-}
+
 nav.tabs {
     position: relative;
     top: 50px;
 }
+
 .tabs {
-    @include grid-column(8);
-    
-    .tabs__links {
+    @include grid-column(2, $sidebar-layout);
+    &__links {
         padding-left: 0;
         float: right;
         font-size: $font-size-body;
         color: $link-color;
     }
-    .tabs__links li {
+    
+    &__links li {
         list-style-type: none;
         display: inline-block;
         margin-right: 32px;
     }
     
-    .tabs__links li a {
+    &__links li a {
         text-decoration: none;
         color: #4d7ca8;
         font-weight: bold;
-        // transition: padding-bottom 1s;
     }
     
-    .tabs__links li a:hover {
+    &__links li a:hover {
         color: #355575;
         padding-bottom: 10px;
         border-bottom: 2.5px solid #355575;
     }
     
-    .tabs__links li:last-child {
+    &__links li:last-child {
         margin-right: 0;
     }
 }
 
-.side {
-    @include grid-column(3);
-    min-height: 600px;
-    height: 100%;
-    //height: 100vh;
-}
-
-.side--blue {
-    background: #6191b8;
-}
-
-.side--green {
-    background: #8FDEAC;
-}
-
 .main-content {
-    @include grid-column(9);
+    @include grid-column(12);
     
     .main-content__header {
         background: #FDFBFB;
@@ -125,11 +111,6 @@ nav.tabs {
         color: #4D4D4D;
         font-size: $font-size-h2;
     }
-}
-
-
-.main-content--red {
-    // background: #cfb7ae;
 }
 
 table.portfolio {
@@ -172,7 +153,6 @@ table.portfolio {
 
 ul.financial-info {
     list-style-type: none;
-    
     li {
         padding-top: 15px;
         padding-bottom: 15px;

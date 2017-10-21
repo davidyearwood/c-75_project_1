@@ -15,30 +15,26 @@
         <link href="https://fonts.googleapis.com/css?family=Roboto+Mono:400,700|Roboto:300,400,900" rel="stylesheet">
     </head>
     <body>
-        
-        <div class="container">
-            <div class="user-account" id="user-account">
+        <div class="sidebar-layout">
+            <div class="sidebar-layout__header user-account" id="user-account">
                 <ul class="user-account__links">
                     <li>dyearwoodd@gmail.com</li>
                     <li><a href="#">Your Profile</a></li>
                     <li><a href="#">Log Out</a></li>
                 </ul>
             </div>
-        </div>   
-        <header class="container">
-            <div class="logo">
-                <img src="http://via.placeholder.com/250x100" alt="">
-            </div>
-            <nav class="tabs">
-                <ul class="tabs__links">
-                    <li><a href="#">Purchase</a></li>
-                    <li><a href="#">Portfolio</a></li>
-                </ul>
-            </nav>
-        </header>
-        
-        <div class="container">
-            <aside class="side side--blue">
+            <header class="sidebar-layout__header">
+                <div class="logo-container">
+                    <img class="logo-container__logo"src="http://via.placeholder.com/250x100" alt="">
+                </div>
+                <nav class="tabs">
+                    <ul class="tabs__links">
+                        <li><a href="#">Purchase</a></li>
+                        <li><a href="#">Portfolio</a></li>
+                    </ul>
+                </nav>
+            </header>
+            <aside class="sidebar-layout__sidebar sidebar-layout--blue">
                 <ul class="financial-info">
                     <li class="financial-info__header">Your Account</li>
                     <li>
@@ -56,7 +52,7 @@
                     </li>
                 </ul>
             </aside>
-            <div class="main-content main-content--red">
+            <div class="sidebar-layout__main">
                 <header class="main-content__header">
                     <h2 class="main-content__title">Portfolio</h2>
                 </header>
@@ -96,6 +92,4 @@
                 </table>
             </div>
         </div>
-        
-    </body>
 </html>
