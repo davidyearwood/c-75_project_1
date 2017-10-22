@@ -88,6 +88,19 @@ class StockController extends Controller
         return view('stocks', ['stocks' => $this->user->stocks]);
     }
     
+    public function getPortfolio() {
+        $data = [
+            'stocks' => $this->user->stocks, 
+            'user' => $this->user, 
+        ];
+        
+        return view('app.portfolio', 
+            [
+                'stocks' => $data['stocks'],
+                'user' => $data['user']
+            ]
+        );
+    }
     
     public function remove($id) 
     {

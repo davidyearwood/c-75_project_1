@@ -43,26 +43,6 @@ h1, h2, h3, p, li, a, th, td {
 a {
   color: #537293; }
 
-.sidebar-layout {
-  max-width: 960px;
-  width: 100%;
-  margin-right: auto;
-  margin-left: auto;
-  background-color: #fff; }
-  .sidebar-layout::after {
-    clear: both;
-    content: "";
-    display: block; }
-
-.logo-container {
-  width: calc(33.3333333333% - 26.6666666667px);
-  float: left;
-  margin-left: 20px; }
-  .logo-container__logo {
-    margin-left: -20px;
-    margin-right: -20px;
-    width: calc(100% + 40px); }
-
 .user-account .user-account__links {
   list-style-type: none;
   padding-left: 0;
@@ -77,17 +57,17 @@ a {
 .user-account .user-account__links li:last-child:after {
   content: none; }
 
-nav.tabs {
-  position: relative;
-  top: 50px; }
+.logo-container {
+  width: calc(33.3333333333% - 26.6666666667px);
+  float: left;
+  margin-left: 20px; }
 
 .tabs {
-  width: calc(66.6666666667% - 33.3333333333px);
+  width: calc(100% - 40px);
   float: left;
   margin-left: 20px; }
   .tabs__links {
     padding-left: 0;
-    float: right;
     font-size: 16px;
     color: #537293; }
   .tabs__links li {

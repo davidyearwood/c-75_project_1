@@ -19,22 +19,6 @@ h1, h2, h3, p, li, a, th, td {
 a {
     color: $link-color;
 }
-.sidebar-layout {
-    @include grid-container;
-    max-width: 960px;
-    width: 100%;
-    margin-right: auto;
-    margin-left: auto;
-    background-color: #fff;
-}
-
-.logo-container {
-    @include grid-column(1, $sidebar-layout);
-    &__logo {
-        @include grid-collapse; 
-    }
-    
-}
 
 
 .user-account {
@@ -59,16 +43,19 @@ a {
     }
 }
 
-nav.tabs {
-    position: relative;
-    top: 50px;
+.logo-container {
+    @include grid-column(1, $sidebar-layout);
+    &__logo {
+       // @include grid-collapse; 
+    }
+    
 }
 
 .tabs {
-    @include grid-column(2, $sidebar-layout);
+    @include grid-column(3, $sidebar-layout);
     &__links {
         padding-left: 0;
-        float: right;
+        //float: right;
         font-size: $font-size-body;
         color: $link-color;
     }

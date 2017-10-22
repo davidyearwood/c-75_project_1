@@ -32,3 +32,6 @@ Route::get('/cache', function() {
 Route::get('/home/test', function() {
     return view ('/global/cs75finance');
 });
+
+// Actual Routes that will be used in Production
+Route::get('/portfolio', 'StockController@getPortfolio');
