@@ -32,18 +32,21 @@ class StockController extends Controller
             'quantity' => 'numeric|min:0'
         ]);
         
-        $stockBeingSold = $this->user->stocks()->wherePivot('id', '=', $request->id)->wherePivot('user_id', '=', $this->userId)->first();
+        $stockBeingSold = $this->user->stocks()->wherePivot('id', '=', $request->id)->first();
         $lastTradedStock = $this->stockAPI->getStock($stockBeingSold->symbol);
         
         $totalRevenueEarned = $this->totalRevenue($request->quantity, $lastTradedStock['price']);
         $this->addCash($totalRevenueEarned);
        
         if ($request->quantity == $stockBeingSold->pivot->quantity) {
-            $this->user->stocks()->wherePivot('id', '=', $request->pid)->detach();
+            $this->user->stocks()->wherePivot('id', '=', $request->id)->detach();
+            return redirect('portfolio');
         } elseif ($request->quantity > $stockBeingSold->pivot->quantity) {
             abort(500);
         } else {
-            $this->user->stocks()->wherePivot('id', '=', $request->pid)->updateExistingPivot($stockBeingSold->id, ['quantity' => $stockBeingSold->pivot->quantity - $request->quantity]);
+            $this->user->stocks()->wherePivot('id', '=', $request->id)->updateExistingPivot($stockBeingSold->id, ['quantity' => $stockBeingSold->pivot->quantity - $request->quantity]);
+            return redirect('portfolio');
+            
         }
     
     }

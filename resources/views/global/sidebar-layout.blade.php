@@ -14,6 +14,7 @@
         <div class="sidebar-layout">
             <div class="sidebar-layout__header user-account" id="user-account">
                 <ul class="user-account__links">
+                    <li>{{ $user->email }}</li>
                     <li><a href="#">Your Profile</a></li>
                     <li><a href="#">Log Out</a></li>
                 </ul>
@@ -26,7 +27,7 @@
                 <nav class="tabs">
                     <ul class="tabs__links">
                         <li><a href="#">Purchase</a></li>
-                        <li><a href="#">Portfolio</a></li>
+                        <li><a href="/portfolio">Portfolio</a></li>
                     </ul>
                 </nav>
             </header>

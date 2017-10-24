@@ -21,12 +21,14 @@
                 <li>Range: 99.2 - 88.5</li>
             </ul>
         </section>
-        <form action="#" method="post" class="stock__form" id="stock__form">
+        <form action="/portfolio" method="post" class="stock__form" id="stock__form">
             <section>
-                <label for="shares">Number of shares being sold:</label>
-                <input type="number" name="shares" data-shares="{{ $stock->pivot->quantity }}" min="1" max="{{ $stock->pivot->quantity }}" required>
+                {{ csrf_field() }}
+                <label for="quantity">Number of shares being sold:</label>
+                <input type="number" name="quantity" data-shares="{{ $stock->pivot->quantity }}" min="1" max="{{ $stock->pivot->quantity }}" value="1" required>
+                <input type="hidden" name="id" value="{{ $stock->pivot->id }}">
             </section>
-            <button type="submit" class="btn">Sell ({{ $stock->symbol }})</button>
+            <button type="submit" class="btn btn--red">Sell ({{ $stock->symbol }})</button>
         </form>
     </article>
 @endsection

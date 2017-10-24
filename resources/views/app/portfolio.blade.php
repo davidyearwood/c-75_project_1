@@ -13,7 +13,6 @@
                     <th>Symbol</th>
                     <th>Purchased Price</th>
                     <th>7-Day Change</th>
-                    <th>Sell</th>
                     <th>Quantity</th>
                     <th>Purchased Date</th>
                     <th>Current Price</th>
@@ -24,12 +23,10 @@
                     <tr>
                         <td>{{ $stock->symbol }}</td>
                         <td class="portfolio__money">{{ $stock->pivot->purchased_price}}</td>
-                        <td>+112</td>
-                        <td><a href="/stocks/{{ $stock->pivot->id }}">sell</a></td>
-                        <td>{{ $stock->pivot->quantity }}</td>
+                        <td>+112</td>                        <td>{{ $stock->pivot->quantity }}</td>
                         <td><?= date('M d, Y', strtotime($stock->pivot->created_at)) ?></td>
                         <td>{{ $stock->current_price }}</td>
-                        <td>{{ $stock->pivot->id }}</td>
+                        <td><a href="/stocks/{{ $stock->pivot->id }}" class="btn btn--red">sell</a></td>
                     </tr>
                 @endforeach
             </tbody>

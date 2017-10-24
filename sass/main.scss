@@ -43,6 +43,10 @@ a {
     }
 }
 
+.collapse {
+    @include grid-container;
+    @include grid-collapse;
+}
 .logo-container {
     @include grid-column(1, $sidebar-layout);
     &__logo {
@@ -52,7 +56,7 @@ a {
 }
 
 .tabs {
-    @include grid-column(3, $sidebar-layout);
+    @include grid-column(2, $sidebar-layout);
     &__links {
         padding-left: 0;
         //float: right;
@@ -131,7 +135,7 @@ table.portfolio {
 }
 .portfolio__body td, 
 .portfolio__header th {
-    padding: 8px 15px;
+    padding: 16px;
 }
 
 .portfolio__body tr:nth-child(odd) {
@@ -205,10 +209,17 @@ ul.financial-info__header {
     border: none;
     padding: 8px 16px;
     cursor: pointer;
-    background: #F44336;
     color: #ffffff;
     margin-bottom: 16px;
+    
     &:hover {
         box-shadow: 0 3px 3px 0 rgba(0,0,0,0.14), 0 1px 7px 0 rgba(0,0,0,0.12), 0 3px 1px -1px rgba(0,0,0,0.2);
     }
+}
+
+.btn--red {
+    background-color: #F44336;
+}
+a.btn {
+    text-decoration: none;
 }

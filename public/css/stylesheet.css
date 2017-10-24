@@ -57,13 +57,22 @@ a {
 .user-account .user-account__links li:last-child:after {
   content: none; }
 
+.collapse {
+  margin-left: -20px;
+  margin-right: -20px;
+  width: calc(100% + 40px); }
+  .collapse::after {
+    clear: both;
+    content: "";
+    display: block; }
+
 .logo-container {
   width: calc(33.3333333333% - 26.6666666667px);
   float: left;
   margin-left: 20px; }
 
 .tabs {
-  width: calc(100% - 40px);
+  width: calc(66.6666666667% - 33.3333333333px);
   float: left;
   margin-left: 20px; }
   .tabs__links {
@@ -123,7 +132,7 @@ table.portfolio {
 
 .portfolio__body td,
 .portfolio__header th {
-  padding: 8px 15px; }
+  padding: 16px; }
 
 .portfolio__body tr:nth-child(odd) {
   background: #FDFBFB; }
@@ -177,10 +186,15 @@ ul.financial-info__header {
   border: none;
   padding: 8px 16px;
   cursor: pointer;
-  background: #F44336;
   color: #ffffff;
   margin-bottom: 16px; }
   .btn:hover {
     box-shadow: 0 3px 3px 0 rgba(0, 0, 0, 0.14), 0 1px 7px 0 rgba(0, 0, 0, 0.12), 0 3px 1px -1px rgba(0, 0, 0, 0.2); }
+
+.btn--red {
+  background-color: #F44336; }
+
+a.btn {
+  text-decoration: none; }
 
 /*# sourceMappingURL=stylesheet.css.map */
