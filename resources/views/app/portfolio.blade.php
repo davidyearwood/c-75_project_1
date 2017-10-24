@@ -16,6 +16,7 @@
                     <th>Sell</th>
                     <th>Quantity</th>
                     <th>Purchased Date</th>
+                    <th>Current Price</th>
                 </tr>
             </thead>
             <tbody class="portfolio__body">
@@ -27,6 +28,7 @@
                         <td><a href="#">sell</a></td>
                         <td>{{ $stock->pivot->quantity }}</td>
                         <td><?= date('M d, Y', strtotime($stock->pivot->created_at)) ?></td>
+                        <td>{{ $stock->current_price }}</td>
                     </tr>
                 @endforeach
             </tbody>

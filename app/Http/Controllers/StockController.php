@@ -97,7 +97,7 @@ class StockController extends Controller
         return view('app.portfolio', 
             [
                 'stocks' => $data['stocks'],
-                'user' => $data['user']
+                'user' => $data['user'], 
             ]
         );
     }

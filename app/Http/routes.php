@@ -29,9 +29,12 @@ Route::get('/cache', function() {
    return view('cache'); 
 });
 
-Route::get('/home/test', function() {
-    return view ('/global/cs75finance');
+Route::get('/components/sell', function() {
+    return view('components.sell-stock');
 });
-
 // Actual Routes that will be used in Production
+Route::get('/search', function() {});
 Route::get('/portfolio', 'StockController@getPortfolio');
+Route::get('/stocks/{id}', function() {});
+
+Route::post('/stocks/{id}', function() {});
