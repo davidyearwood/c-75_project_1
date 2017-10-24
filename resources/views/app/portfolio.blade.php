@@ -1,4 +1,4 @@
-@extends('global.parent')
+@extends('global.sidebar-layout')
 
 @section('title', 'Portfolio')
 
@@ -25,10 +25,11 @@
                         <td>{{ $stock->symbol }}</td>
                         <td class="portfolio__money">{{ $stock->pivot->purchased_price}}</td>
                         <td>+112</td>
-                        <td><a href="#">sell</a></td>
+                        <td><a href="/stocks/{{ $stock->pivot->id }}">sell</a></td>
                         <td>{{ $stock->pivot->quantity }}</td>
                         <td><?= date('M d, Y', strtotime($stock->pivot->created_at)) ?></td>
                         <td>{{ $stock->current_price }}</td>
+                        <td>{{ $stock->pivot->id }}</td>
                     </tr>
                 @endforeach
             </tbody>

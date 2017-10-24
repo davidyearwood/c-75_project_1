@@ -1,4 +1,4 @@
-@extends('global.parent')
+@extends('global.sidebar-layout')
 
 @section('main')
         @parent

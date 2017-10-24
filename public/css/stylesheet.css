@@ -1,5 +1,5 @@
 .sidebar-layout {
-  max-width: 960px;
+  max-width: 1200px;
   width: 100%;
   margin-right: auto;
   margin-left: auto;
@@ -36,7 +36,7 @@ html {
 body {
   background: #f4f8fb; }
 
-h1, h2, h3, p, li, a, th, td {
+h1, h2, h3, p, li, a, th, td, label, button {
   color: #8C8C8C;
   font-family: "Roboto", "Helvetica Neue", Helvetica, Arial, sans-serif; }
 
@@ -138,5 +138,49 @@ ul.financial-info {
 ul.financial-info__header {
   font-size: 23px;
   font-weight: 700; }
+
+/* Selling Stock */
+.stock p,
+.stock h2,
+.stock h3,
+.stock h4,
+.stock ul {
+  margin: 0; }
+
+.stock__header {
+  border-bottom: 1px dotted #ccc;
+  padding-bottom: 8px;
+  margin-bottom: 16px; }
+  .stock__header h2 {
+    font-weight: 700;
+    font-size: 45px; }
+  .stock__header p {
+    font-weight: 500; }
+.stock__current-price {
+  margin-bottom: 16px;
+  padding-bottom: 8px;
+  border-bottom: 1px dotted #ccc; }
+  .stock__current-price h3 {
+    font-size: 32px;
+    color: green; }
+.stock__info {
+  margin-bottom: 32px; }
+  .stock__info ul {
+    list-style-type: none;
+    padding-left: 0; }
+    .stock__info ul li {
+      margin-bottom: 8px; }
+
+.btn {
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+  border-radius: 3px;
+  border: none;
+  padding: 8px 16px;
+  cursor: pointer;
+  background: #F44336;
+  color: #ffffff;
+  margin-bottom: 16px; }
+  .btn:hover {
+    box-shadow: 0 3px 3px 0 rgba(0, 0, 0, 0.14), 0 1px 7px 0 rgba(0, 0, 0, 0.12), 0 3px 1px -1px rgba(0, 0, 0, 0.2); }
 
 /*# sourceMappingURL=stylesheet.css.map */

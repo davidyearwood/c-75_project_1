@@ -88,20 +88,6 @@ class StockController extends Controller
         return view('stocks', ['stocks' => $this->user->stocks]);
     }
     
-    public function getPortfolio() {
-        $data = [
-            'stocks' => $this->user->stocks, 
-            'user' => $this->user, 
-        ];
-        
-        return view('app.portfolio', 
-            [
-                'stocks' => $data['stocks'],
-                'user' => $data['user'], 
-            ]
-        );
-    }
-    
     public function remove($id) 
     {
         $this->user->stocks()->detach($id);
@@ -133,5 +119,30 @@ class StockController extends Controller
         $this->stockAPI = new QuandlAPI();
         $this->user =  Auth::user();
         $this->userId = Auth::id();
+    }
+    
+    public function getPortfolio() {
+        $data = [
+            'stocks' => $this->user->stocks, 
+            'user' => $this->user, 
+        ];
+        
+        return view('app.portfolio', 
+            [
+                'stocks' => $data['stocks'],
+                'user' => $data['user'], 
+            ]
+        );
+    }
+    
+    public function getUserStocks($id) {
+        $stock = $this->user->stocks()
+                    ->wherePivot('id', '=', $id)
+                    ->first();
+                    
+        return view('user-stocks', [
+            'stock' => $stock,  
+            'user' => $this->user
+            ]); 
     }
 }

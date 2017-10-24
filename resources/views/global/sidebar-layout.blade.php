@@ -14,7 +14,6 @@
         <div class="sidebar-layout">
             <div class="sidebar-layout__header user-account" id="user-account">
                 <ul class="user-account__links">
-                    <li>{{ $user->email }}</li>
                     <li><a href="#">Your Profile</a></li>
                     <li><a href="#">Log Out</a></li>
                 </ul>
