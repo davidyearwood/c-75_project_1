@@ -2,7 +2,7 @@ $blue: #6191b8;
 $green: #8FDEAC;
 
 $sidebar-layout: (
-    columns: 3,
+    columns: 4,
     gutter: 20px,
 );
 
@@ -15,7 +15,7 @@ $sidebar-layout: (
     background-color: white; // Optional 
     box-shadow: $box-shadow-depth-1;
     &__header {
-        @include grid-column(3, $sidebar-layout);
+        @include grid-column(4, $sidebar-layout);
     }
     
     &__sidebar {
@@ -23,7 +23,7 @@ $sidebar-layout: (
     }
     
     &__main {
-        @include grid-column(2, $sidebar-layout);
+        @include grid-column(3, $sidebar-layout);
     }
 }
 

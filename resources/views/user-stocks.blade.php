@@ -10,15 +10,15 @@
             <p>You own {{ $stock->pivot->quantity }} shares</p>
         </header>
         <section class="stock__current-price">
-            <h3>${{ $stock->current_price }} <span>+0.07 | 0.11%</span></h3>
+            <h3>${{ $stock->current_data['price'] }} <span>+0.07 | 0.11%</span></h3>
             <p class="stock__last-updated">Last Updated: 08/11/15</p>
         </section>
         <section class="stock__info">
             <ul>
-                <li>Prev Close: 66.55</li>
-                <li>Day's Open: 66.12</li>
-                <li>Volume: 15.02k</li>
-                <li>Range: 99.2 - 88.5</li>
+                <li>Prev Close: ${{ number_format($stock->current_data['close'], 2) }}</li>
+                <li>Day's Open: ${{ number_format($stock->current_data['open'],2) }}</li>
+                <li>Range: ${{ number_format($stock->current_data['high'], 2) }} - ${{ number_format($stock->current_data['low'], 2) }}</li>
+                <li>Volume: {{ number_format($stock->current_data['volume']) }}</li>
             </ul>
         </section>
         <form action="/portfolio" method="post" class="stock__form" id="stock__form">

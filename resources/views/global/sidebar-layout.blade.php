@@ -21,6 +21,7 @@
             </div>
             
             <header class="sidebar-layout__header">
+                <div class="collapse">
                 <figure class="logo-container">
                     <img src="http://via.placeholder.com/250x100" alt="CS75 Finance Logo" class="logo-container__logo">
                 </figure>
@@ -30,24 +31,27 @@
                         <li><a href="/portfolio">Portfolio</a></li>
                     </ul>
                 </nav>
+                </div>
             </header>
-            <aside class="sidebar-layout__sidebar sidebar-layout--blue">
+            <aside class="sidebar-layout__sidebar">
+                <div class="collapse sidebar-layout--blue">
                 <ul class="financial-info">
                     <li class="financial-info__header">Your Account</li>
                     <li>
                         <i class="fa fa-money" aria-hidden="true"></i>
                         <span class="financial-info__header">Cash</span> 
-                        <span class="financial-info__cash">$10,000</span>
+                        <span class="financial-info__cash">${{ number_format($user->cash, 2) }}</span>
                     </li>
                     <li>
                         <span class="financial-info__header">Stock Investment</span> 
-                        <span class="financial-info__cash">$4,000</span>
+                        <span class="financial-info__cash">${{ number_format($user->stock_investment,2) }}</span>
                     </li>
                     <li>
                         <span class="financial-info__header">Net Value</span>
-                        <span class="financial-info__cash">$14,000</span>
+                        <span class="financial-info__cash">${{ number_format($user->net_value,2) }}</span>
                     </li>
                 </ul>
+                </div>
             </aside>
             <main class="sidebar-layout__main">
                 @yield('main')

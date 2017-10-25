@@ -16,7 +16,7 @@ class Stock extends Model
      *
      * @var array
      */
-    protected $appends = ['current_price'];
+    protected $appends = ['current_data'];
     
     public function users() 
     {
@@ -28,12 +28,12 @@ class Stock extends Model
      *
      * @return Float
      */
-    public function getCurrentPriceAttribute() 
+    public function getCurrentDataAttribute() 
     {
         $quandlAPI = new QuandlAPI(); 
         $stockFromQuandlAPI = $quandlAPI->getStock($this->symbol);
-        
-        return $stockFromQuandlAPI['price'];
-        
+    
+        return $stockFromQuandlAPI;
     }
+    
 }

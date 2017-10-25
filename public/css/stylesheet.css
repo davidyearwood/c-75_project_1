@@ -14,11 +14,11 @@
     float: left;
     margin-left: 20px; }
   .sidebar-layout__sidebar {
-    width: calc(33.3333333333% - 26.6666666667px);
+    width: calc(25% - 25px);
     float: left;
     margin-left: 20px; }
   .sidebar-layout__main {
-    width: calc(66.6666666667% - 33.3333333333px);
+    width: calc(75% - 35px);
     float: left;
     margin-left: 20px; }
 
@@ -67,12 +67,12 @@ a {
     display: block; }
 
 .logo-container {
-  width: calc(33.3333333333% - 26.6666666667px);
+  width: calc(25% - 25px);
   float: left;
   margin-left: 20px; }
 
 .tabs {
-  width: calc(66.6666666667% - 33.3333333333px);
+  width: calc(75% - 35px);
   float: left;
   margin-left: 20px; }
   .tabs__links {
@@ -81,12 +81,12 @@ a {
     color: #537293; }
   .tabs__links li {
     list-style-type: none;
-    display: inline-block;
-    margin-right: 32px; }
+    display: inline-block; }
   .tabs__links li a {
     text-decoration: none;
     color: #4d7ca8;
-    font-weight: bold; }
+    font-weight: bold;
+    margin-right: 32px; }
   .tabs__links li a:hover {
     color: #355575;
     padding-bottom: 10px;
@@ -138,6 +138,9 @@ table.portfolio {
   background: #FDFBFB; }
 
 ul.financial-info {
+  width: calc(100% - 40px);
+  float: left;
+  margin-left: 20px;
   list-style-type: none; }
   ul.financial-info li {
     padding-top: 15px;

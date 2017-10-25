@@ -123,17 +123,17 @@ class StockController extends Controller
         $this->user =  Auth::user();
         $this->userId = Auth::id();
     }
-    
+
     public function getPortfolio() {
         $data = [
             'stocks' => $this->user->stocks, 
-            'user' => $this->user, 
+            'user' => $this->user
         ];
         
         return view('app.portfolio', 
             [
                 'stocks' => $data['stocks'],
-                'user' => $data['user'], 
+                'user' => $data['user']
             ]
         );
     }

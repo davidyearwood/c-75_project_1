@@ -25,7 +25,7 @@
                         <td class="portfolio__money">{{ $stock->pivot->purchased_price}}</td>
                         <td>+112</td>                        <td>{{ $stock->pivot->quantity }}</td>
                         <td><?= date('M d, Y', strtotime($stock->pivot->created_at)) ?></td>
-                        <td>{{ $stock->current_price }}</td>
+                        <td>{{ $stock->current_data['price'] }}</td>
                         <td><a href="/stocks/{{ $stock->pivot->id }}" class="btn btn--red">sell</a></td>
                     </tr>
                 @endforeach

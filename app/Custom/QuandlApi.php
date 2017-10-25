@@ -31,7 +31,14 @@ class QuandlAPI
             if ($statusCode > 100 && $statusCode < 300) {
                 $httpBody = json_decode($response->getBody()->getContents());
                 $d = ['price' => $httpBody->dataset->data[0][4],
-                      'name' => $httpBody->dataset->name ];
+                      'name' => $httpBody->dataset->name,
+                      'date' => $httpBody->dataset->data[0][0],
+                      'open' => $httpBody->dataset->data[0][1],
+                      'high' => $httpBody->dataset->data[0][2],
+                      'low' => $httpBody->dataset->data[0][3],
+                      'close' => $httpBody->dataset->data[0][4],
+                      'volume' => $httpBody->dataset->data[0][5]
+                      ];
                       
                 return $d; 
             }

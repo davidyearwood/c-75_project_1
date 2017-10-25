@@ -56,10 +56,9 @@ a {
 }
 
 .tabs {
-    @include grid-column(2, $sidebar-layout);
+    @include grid-column(3, $sidebar-layout);
     &__links {
         padding-left: 0;
-        //float: right;
         font-size: $font-size-body;
         color: $link-color;
     }
@@ -67,13 +66,14 @@ a {
     &__links li {
         list-style-type: none;
         display: inline-block;
-        margin-right: 32px;
+        // float: right;
     }
     
     &__links li a {
         text-decoration: none;
         color: #4d7ca8;
         font-weight: bold;
+        margin-right: 32px;
     }
     
     &__links li a:hover {
@@ -143,6 +143,7 @@ table.portfolio {
 }
 
 ul.financial-info {
+    @include grid-column(12);
     list-style-type: none;
     li {
         padding-top: 15px;
