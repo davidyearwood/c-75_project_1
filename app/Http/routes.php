@@ -33,8 +33,9 @@ Route::get('/components/sell', function() {
     return view('components.sell-stock');
 });
 // Actual Routes that will be used in Production
-Route::get('/search', function() {});
+Route::get('/search', 'StockController@search');
 Route::get('/portfolio', 'StockController@getPortfolio');
 Route::get('/stocks/{id}', 'StockController@getUserStocks');
 
 Route::post('/portfolio', 'StockController@sell');
+Route::post('/search', 'StockController@sell');

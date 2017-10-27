@@ -1,108 +1,19 @@
 @import "neat/neat";
 @import "partials/variables";
+@import "partials/base";
 @import "partials/sidebar-layout";
 @import "partials/user-account";
-
-html {
-    font-size: $font-size-base;
-}
-
-body {
-    background: #f4f8fb;
-}
-
-h1, h2, h3, p, li, a, th, td, label, button {
-    color: #8C8C8C;
-    font-family: $font-family-sans-serif;
-}
-
-a {
-    color: $link-color;
-}
-
-
-.user-account {
-    .user-account__links {
-        @include resetList();
-        float: right;
-    }
-    
-    .user-account__links li {
-        display: inline-block;
-        margin-right: 7.5px;
-        font-size: $font-size-body;
-    }
-    
-    .user-account__links li:after {
-        content: "|";
-        margin-left: 7.5px;
-    }
-    
-    .user-account__links li:last-child:after {
-        content: none;
-    }
-}
+@import "partials/button";
+@import "partials/logo";
+@import "partials/tabs";
 
 .collapse {
     @include grid-container;
     @include grid-collapse;
 }
-.logo-container {
-    @include grid-column(1, $sidebar-layout);
-    &__logo {
-       // @include grid-collapse; 
-    }
-    
-}
 
-.tabs {
-    @include grid-column(3, $sidebar-layout);
-    &__links {
-        padding-left: 0;
-        font-size: $font-size-body;
-        color: $link-color;
-    }
-    
-    &__links li {
-        list-style-type: none;
-        display: inline-block;
-        // float: right;
-    }
-    
-    &__links li a {
-        text-decoration: none;
-        color: #4d7ca8;
-        font-weight: bold;
-        margin-right: 32px;
-    }
-    
-    &__links li a:hover {
-        color: #355575;
-        padding-bottom: 10px;
-        border-bottom: 2.5px solid #355575;
-    }
-    
-    &__links li:last-child {
-        margin-right: 0;
-    }
-}
 
-.main-content {
-    @include grid-column(12);
-    
-    .main-content__header {
-        background: #FDFBFB;
-        padding-top: 3.75px;
-        padding-bottom: 3.75px;
-        padding-left: 15px;
-    }
-    
-    .main-content__title {
-        font-weight: $font-weight-light;
-        color: #4D4D4D;
-        font-size: $font-size-h2;
-    }
-}
+
 
 table.portfolio {
     width: 100%;
@@ -202,25 +113,4 @@ ul.financial-info__header {
         margin-bottom: 32px;
     }
     
-}
-
-.btn {
-    box-shadow: $box-shadow-depth-1;
-    border-radius: 3px;
-    border: none;
-    padding: 8px 16px;
-    cursor: pointer;
-    color: #ffffff;
-    margin-bottom: 16px;
-    
-    &:hover {
-        box-shadow: 0 3px 3px 0 rgba(0,0,0,0.14), 0 1px 7px 0 rgba(0,0,0,0.12), 0 3px 1px -1px rgba(0,0,0,0.2);
-    }
-}
-
-.btn--red {
-    background-color: #F44336;
-}
-a.btn {
-    text-decoration: none;
 }

@@ -44,7 +44,6 @@ class User extends Authenticatable
         foreach($this->stocks as $stock) {
             $sum += ($stock->pivot->quantity * $stock->current_price);
         }
-        
         return $sum;
     }
     

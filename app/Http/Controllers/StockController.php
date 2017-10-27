@@ -24,6 +24,18 @@ class StockController extends Controller
         $this->middleware('auth');
         $this->init(); 
     }
+    public function search(Request $request) 
+    {
+        $source = $request->input('source');
+        
+        if (isset($source)) {
+            $stock = $this->stockAPI->getStock($source);
+        } else {
+            $stock = null; 
+        }
+        
+        return view('search', ['stock' => $stock, 'user' => $this->user, 'source' => $source]);
+    }
     
     public function sell(Request $request) 
     {
@@ -54,12 +66,12 @@ class StockController extends Controller
     public function store(Request $request) 
     {
         $this->validate($request, [
-            'stockSymbol' => 'required|alpha_num',
+            'stock' => 'required|alpha_num',
             'quantity' => 'numeric|min:0'
         ]);
         
         // Information about the user that is login
-        $stockSymbol = $request->stockSymbol;
+        $stockSymbol = $request->stock;
         
         // Get the api's uri and get the api's stock 
         $uri = $this->stockAPI->getURL($stockSymbol);

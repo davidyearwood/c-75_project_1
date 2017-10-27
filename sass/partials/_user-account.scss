@@ -1,6 +1,31 @@
-$space: 7.5px; 
+/* ==========================================================================
+   User Account
+   ========================================================================== */
+   
+   .user-account {}
 
-@mixin resetList() {
-    list-style-type: none;
-    padding-left: 0;
-}
+
+/* 
+   User Account Elements 
+   ========================================================================== */
+   .user-account__links {
+        float: right;
+        list-style-type: none;
+        padding-left: 0;
+       
+        li {
+            display: inline-block;
+            font-size: $font-size-body;
+            margin-right: 7.5px;
+        }
+        
+        li:after {
+            content: "|";
+            margin-left: 7.5px;
+        }
+        
+        li:last-child:after {
+            content: none;
+        }
+   }
+   
