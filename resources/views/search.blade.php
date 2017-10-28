@@ -16,7 +16,7 @@
     @if (isset($stock))
     <article class="stock">
         <header class="stock__header">
-            <h2>Google Inc. ({{ $stock['name'] }})</h2>
+            <h2>{{ preg_split("[Prices,]", $stock['name'])[0] }}</h2>
         </header>
         <section class="stock__current-price">
             <h3>${{ $stock['price'] }} <span>+0.07 | 0.11%</span></h3>

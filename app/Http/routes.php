@@ -37,5 +37,5 @@ Route::get('/search', 'StockController@search');
 Route::get('/portfolio', 'StockController@getPortfolio');
 Route::get('/stocks/{id}', 'StockController@getUserStocks');
 
-Route::post('/portfolio', 'StockController@sell');
+Route::post('/portfolio', 'StockController@store');
 Route::post('/search', 'StockController@sell');

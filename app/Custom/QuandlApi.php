@@ -27,7 +27,7 @@ class QuandlAPI
             $client = new Client();
             $response = $client->request('GET', $this->getURL($symbol));
             $statusCode = $response->getStatusCode();
-            
+            print($statusCode);
             if ($statusCode > 100 && $statusCode < 300) {
                 $httpBody = json_decode($response->getBody()->getContents());
                 $d = ['price' => $httpBody->dataset->data[0][4],
