@@ -9,11 +9,15 @@
     </header>
     
     <form action="/search" method="GET">
-        <input type="text" name="source">
+        <input type="text" name="q" required autofocus>
         <button type="submit">Search</button>
     </form>
     
-    @if (isset($stock))
+    @if (isset($error))
+        <h3>{{ $error['message']}}</h3>
+    @endif 
+    
+    @if (isset($stock['name']))
     <article class="stock">
         <header class="stock__header">
             <h2>{{ preg_split("[Prices,]", $stock['name'])[0] }}</h2>
@@ -30,14 +34,14 @@
                 <li>Volume: {{ number_format($stock['volume']) }}</li>
             </ul>
         </section>
-        <form action="/portfolio" method="post" class="stock__form" id="stock__form">
+        <form action="/search" method="post" class="stock__form" id="stock__form">
             <section>
                 {{ csrf_field() }}
                 <label for="quantity">Number of shares being sold:</label>
                 <input type="number" name="quantity" data-shares="" min="1" max="99" value="1" required>
-                <input type="hidden" name="stock" value="{{ $source }}">
+                <input type="hidden" name="stock" value="{{ strtoupper($stock['symbol']) }}">
             </section>
-            <button type="submit" class="btn btn--red">Buy ({{ $source }})</button>
+            <button type="submit" class="btn btn--red">Buy ({{ strtoupper($stock['symbol']) }})</button>
         </form>
     </article>
     @endif

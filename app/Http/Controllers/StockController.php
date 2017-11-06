@@ -1,68 +1,111 @@
-<?php
-
-namespace App\Http\Controllers;
+<?php namespace App\Http\Controllers;
 
 use App\Stock;
 use App\Http\Requests;
-use App\Custom\Quandl\QuandlApi;
-use App\Custom\FinanceOperations\FinanceOperations;
-
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
+use App\HttpClient\QuandlClient; 
+use App\Finance\FinancialAccount; 
+use App\Finance\FinancialCalculator;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Cache;
 
 class StockController extends Controller 
 {
-    use FinanceOperations; 
-    
-    protected $StockAPI; 
+    protected $quandlClient; 
     protected $user; 
-    protected $userId; 
+    protected $financialAccount;
     
-    public function __construct()
+    public function __construct(FinancialAccount $account, QuandlClient $client)
     {
         $this->middleware('auth');
-        $this->init(); 
-    }
-    public function search(Request $request) 
-    {
-        $source = $request->input('source');
         
-        if (isset($source)) {
-            $stock = $this->stockAPI->getStock($source);
-        } else {
-            $stock = null; 
-        }
-        
-        return view('search', ['stock' => $stock, 'user' => $this->user, 'source' => $source]);
+        /* Dependencies */ 
+        $this->quandlClient = $client;
+        $this->user = Auth::user();
+        $this->financialAccount = $account;
     }
     
-    public function sell(Request $request) 
+    /**
+     * Get the search result for the requested  
+     * stock.
+     * 
+     * @param Request $request
+     * @return Array
+     */
+    private function search(Request $request) 
     {
+        if (!$request->has('q')) {
+            return null; 
+        }
+        
         $this->validate($request, [
-            'id' => 'numeric|min:0',
-            'quantity' => 'numeric|min:0'
+            'q' => 'alpha_num'    
         ]);
         
-        $stockBeingSold = $this->user->stocks()->wherePivot('id', '=', $request->id)->first();
-        $lastTradedStock = $this->stockAPI->getStock($stockBeingSold->symbol);
+        $query = $request->input('q');
         
-        $totalRevenueEarned = $this->totalRevenue($request->quantity, $lastTradedStock['price']);
-        $this->addCash($totalRevenueEarned);
-       
-        if ($request->quantity == $stockBeingSold->pivot->quantity) {
-            $this->user->stocks()->wherePivot('id', '=', $request->id)->detach();
-            return redirect('portfolio');
-        } elseif ($request->quantity > $stockBeingSold->pivot->quantity) {
-            abort(500);
-        } else {
-            $this->user->stocks()->wherePivot('id', '=', $request->id)->updateExistingPivot($stockBeingSold->id, ['quantity' => $stockBeingSold->pivot->quantity - $request->quantity]);
-            return redirect('portfolio');
-            
-        }
-    
+        
+        $stock = $this->quandlClient->getStock($query);
+
+        $stock['symbol'] = $query;  
+        
+        return $stock;
     }
     
+    /**
+     * Sells stock, and updates user database 
+     * 
+     * @param Request $request
+     * @return Boolean
+     */
+    private function sell(Request $request) 
+    {
+        $rules = [
+            'id' => 'numeric|min:1',
+            'quantity' => 'numeric|min:0'
+        ];
+        
+        $this->validate($request, $rules);
+        
+        $stock = [
+            'db' => $this->user->stocks()->wherePivot('id', '=', $request->id),
+        ];
+        
+        $stock['quandl'] = $this->quandlClient->getStock($stock['db']->first()->symbol);
+        
+        $revenueEarned = FinancialCalculator::salesRevenue($request->quantity, $stock['quandl']['price']);
+        $maxQuantity = $stock['db']->first()->pivot->quantity; 
+        
+        if ($request->quantity == $maxQuantity) {
+            $this->financialAccount->deposit($revenueEarned);
+            $stock['db']->detach(); // not sure this will work 
+            return true; 
+        } elseif ($request->quantity <= $maxQuantity) {
+            $this->financialAccount->deposit($revenueEarned);
+            $stock['db']->updateExistingPivot($stock['db']->first()->id, ['quantity' => $stock['db']->first()->pivot->quantity - $request->quantity]);
+            return true;
+        } else {
+            return false; 
+        }
+    }
+    
+    /**
+     * Renders the view for the search result. 
+     * 
+     * @param Request
+     * @return View
+     */
+    public function showSearchResult(Request $request) 
+    {
+        $searchResult = $this->search($request);
+        
+        print_r($searchResult);
+        return view('search', ['stock' => $searchResult, 
+                               'user' => $this->user, 
+                               'error' => $this->quandlClient->getError() || []]);    
+    }
+    
+    // purchase
     public function store(Request $request) 
     {
         $this->validate($request, [
@@ -71,86 +114,73 @@ class StockController extends Controller
         ]);
         
         // Information about the user that is login
-        $stockSymbol = $request->stock;
-        
+        $symbol = $request->stock;
         // Get the api's uri and get the api's stock 
-        $uri = $this->stockAPI->getURL($stockSymbol);
-        $fetchStock = $this->stockAPI->getStock($stockSymbol);
+        $uri = $this->quandlClient->getURL($symbol);
+        $fetchStock = $this->quandlClient->getStock($symbol);
         
-        $stock = Stock::where('symbol', strtoupper($stockSymbol))->first();
-        $totalCost = $this->totalRevenue($request->quantity, $fetchStock['price']);
+        $stock = Stock::where('symbol', strtoupper($symbol))->first();
         
-        if ($this->hasEnough($this->user->cash, $totalCost)) {
-            // if stock exist, don't create it else create a new stock
-            if (!$this->doesExist($stock)) {
-                $stock = new Stock(['name' => $fetchStock['name'], 'symbol' => $stockSymbol, 'source' => $uri]); 
-            }
-            
-            $this->user->stocks()->save($stock, ['purchased_price' => $fetchStock['price'], 'quantity' => $request->quantity]);
-            $this->deductCash(($fetchStock['price'] * $request->quantity)); 
-        } else {
-            return redirect('test')->with('notEnoughCash', 'not enough cash!');
-        }
-    }
-    
-    // render list of stocks
-    public function displayUserStocks($id) 
-    {
-        if ((int)$id !== (int)$this->userId) {
-            abort(404);
+        
+        $expense = FinancialCalculator::expense($request->quantity, $fetchStock['price']);
+        // if you don't have enough money to purchase 
+        if (!$this->financialAccount->hasEnough($expense)) {
+            return false;
         }
         
-        return view('stocks', ['stocks' => $this->user->stocks]);
-    }
-    
-    public function remove($id) 
-    {
-        $this->user->stocks()->detach($id);
-    }
-    
-    private function deductCash($amount) 
-    {
-        $this->user->cash = $this->withdraw($this->user->cash, $amount); 
-        $this->user->save();
+        // if stock doesn't exist, create one
+        if ($stock == null) {
+            $stock = new Stock(['name' => $fetchStock['name'],
+                                'symbol' => $symbol, 
+                                'source' => $uri]);
+        }
         
-        return $this->user->cash;
-    }
-    
-    private function addCash($amount) 
-    {
-        $this->user->cash = $this->deposit($this->user->cash, $amount); 
-        $this->user->save(); 
+        $this->user->stocks()->save($stock, ['purchased_price' => $fetchStock['price'],
+                                             'quantity' => $request->quantity]);
         
-        return $this->user->cash;
+
+        $this->financialAccount->withdraw($expense);
+        
+        return true;  
     }
 
-    private function doesExist($stock) 
-    { 
-        return $stock !== null; 
+    
+    public function showPortfolioAfterPurchase(Request $request) 
+    {
+        $isPurchased = $this->store($request);
+        
+        if (!$isPurchased) {
+            // throw some error 
+            abort(500);
+        }
+        
+        return $this->showPortfolio(); 
     }
     
-    private function init() 
-    {
-        $this->stockAPI = new QuandlAPI();
-        $this->user =  Auth::user();
-        $this->userId = Auth::id();
-    }
-
-    public function getPortfolio() {
-        $data = [
-            'stocks' => $this->user->stocks, 
-            'user' => $this->user
-        ];
+    /**
+     * Show the user their portfolio after selling a stock
+     * 
+     * @param Request
+     * @return View 
+     */
+    public function showPortfolioAfterSale(Request $request) {
+        $hasSold = $this->sell($request);
         
+        if (!$hasSold) {
+            abort(500);
+        }
+        
+       return $this->showPortfolio();
+    }
+    
+    public function showPortfolio() {
         return view('app.portfolio', 
-            [
-                'stocks' => $data['stocks'],
-                'user' => $data['user']
-            ]
-        );
+            ['user' => $this->user, 
+             'stocks' => $this->user->stocks]);
     }
     
-    public function getUserStocks($id) {
+    // ?? 
+    public function showUserStocks($id) {
         $stock = $this->user->stocks()
                     ->wherePivot('id', '=', $id)
                     ->first();

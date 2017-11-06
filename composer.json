@@ -24,8 +24,6 @@
             "App\\": "app/"
         }, 
         "files": [
-            "app/Custom/FinanceOperations.php",
-            "app/Custom/QuandlApi.php"
         ]
     },
     "autoload-dev": {

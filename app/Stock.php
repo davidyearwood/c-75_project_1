@@ -2,8 +2,9 @@
 
 namespace App;
 
+use GuzzleHttp\Client;
+use App\HttpClient\QuandlClient;
 use Illuminate\Database\Eloquent\Model;
-use App\Custom\Quandl\QuandlApi;
 
 class Stock extends Model
 {
@@ -30,7 +31,7 @@ class Stock extends Model
      */
     public function getCurrentDataAttribute() 
     {
-        $quandlAPI = new QuandlAPI(); 
+        $quandlAPI = new QuandlClient(new Client()); 
         $stockFromQuandlAPI = $quandlAPI->getStock($this->symbol);
     
         return $stockFromQuandlAPI;

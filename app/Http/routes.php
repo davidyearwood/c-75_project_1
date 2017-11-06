@@ -17,25 +17,18 @@ Route::get('/', function () {
 
 Route::auth();
 
-Route::get('/home', 'HomeController@index');
-Route::post('/test', 'StockController@store');
-Route::get('/test', function() {
-    return view('test');
-});
-Route::get('/stocks', 'StockController@showUserStocks');
-Route::post('/purchase', 'StockController@sell');
-Route::get('users/{id}/stocks', 'StockController@displayUserStocks');
-Route::get('/cache', function() {
-   return view('cache'); 
-});
 
-Route::get('/components/sell', function() {
-    return view('components.sell-stock');
-});
 // Actual Routes that will be used in Production
-Route::get('/search', 'StockController@search');
-Route::get('/portfolio', 'StockController@getPortfolio');
-Route::get('/stocks/{id}', 'StockController@getUserStocks');
+Route::get('/portfolio/{id}', 'StockController@showUserStocks');
 
-Route::post('/portfolio', 'StockController@store');
-Route::post('/search', 'StockController@sell');
+// Get Requests
+// When I search for a stock
+// When I view my portfolio 
+Route::get('/search', 'StockController@showSearchResult');
+Route::get('/portfolio', 'StockController@showPortfolio');
+
+// Post requests 
+// When you sell a stock 
+// when you purhcase a stock 
+Route::post('/portfolio', 'StockController@showPortfolioAfterSale');
+Route::post('/search', 'StockController@showPortfolioAfterPurchase');
