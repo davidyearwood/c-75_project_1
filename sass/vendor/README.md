@@ -1,0 +1,3 @@
+# Vendor
+
+Holds vendor code.
