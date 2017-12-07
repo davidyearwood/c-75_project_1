@@ -1,103 +1,118 @@
+/*
+ * Typography 
+ *************************************/
+/*
+ * General Typography
+ *************************/
 html {
-  font-size: 16px; }
+  font-size: 1em; }
 
-h1, h2, h3, p, li, a, th, td {
-  color: #8C8C8C;
-  font-family: "Roboto", sans-serif; }
+body {
+  background-color: white;
+  font-family: 'Roboto', serif;
+  font-weight: 400;
+  line-height: 1.45;
+  color: #333; }
 
-.container {
-  width: 90%;
+p {
+  margin-bottom: 1.3em; }
+
+h1, h2, h3, h4 {
+  margin: 1.414em 0 0.5em;
+  font-weight: inherit;
+  line-height: 1.2; }
+
+h1 {
+  margin-top: 0;
+  font-size: 3.998em; }
+
+h2 {
+  font-size: 2.827em; }
+
+h3 {
+  font-size: 1.999em; }
+
+h4 {
+  font-size: 1.414em; }
+
+.small-font {
+  font-size: 0.707em; }
+
+.container--flex {
   max-width: 1200px;
-  margin-right: auto;
-  margin-left: auto; }
-  .container::after {
-    clear: both;
-    content: "";
+  margin: 0 auto;
+  width: 90%; }
+
+.navbar {
+  width: 100%;
+  background: #333333; }
+
+.container--flex {
+  display: flex;
+  justify-content: space-between; }
+
+ul.nav-links {
+  color: #ffffff;
+  list-style-type: none;
+  margin: 0;
+  padding-left: 0;
+  text-align: center; }
+  ul.nav-links li.username {
+    font-weight: 600;
+    text-transform: capitalize; }
+  ul.nav-links li {
+    display: inline-block;
+    margin-right: 16px; }
+
+a.nav-item {
+  color: #eee;
+  display: inline-block;
+  font-size: 0.707em;
+  padding: 0.707em;
+  text-align: center;
+  text-decoration: none; }
+  a.nav-item span, a.nav-item i {
+    display: block; }
+  a.nav-item__title {
+    text-transform: capitalize; }
+  a.nav-item:hover {
+    background: #404040;
+    border-radius: 3px; }
+
+/*
+ * Search Bar
+ *============================== */
+.logo {
+  display: inline-block;
+  color: #fff;
+  text-align: center;
+  padding: 0.707em; }
+  .logo a {
+    text-decoration: none;
+    color: inherit; }
+  .logo .logo__icon, .logo .logo__text {
     display: block; }
 
-.user-account {
-  width: calc(100% - 40px);
-  float: left;
-  margin-left: 20px; }
-  .user-account .user-account__links {
-    list-style-type: none;
-    padding-left: 0;
-    float: right; }
-  .user-account .user-account__links li {
-    display: inline-block;
-    margin-right: 7.5px; }
-  .user-account .user-account__links li:after {
-    content: "|";
-    margin-left: 7.5px; }
-  .user-account .user-account__links li:last-child:after {
-    content: none; }
-
-.tabs {
-  width: calc(100% - 40px);
-  float: left;
-  margin-left: 20px; }
-  .tabs .tabs__links {
-    padding-left: 0;
-    float: right;
-    font-size: 14px;
-    color: #4D4D4D; }
-  .tabs .tabs__links li {
-    list-style-type: none;
-    display: inline-block;
-    margin-right: 30px; }
-  .tabs .tabs__links li a {
-    text-decoration: none;
-    color: #4D4D4D; }
-  .tabs .tabs__links li a:hover {
-    color: black;
-    padding-bottom: 10px;
-    border-bottom: 3px solid black; }
-  .tabs .tabs__links li:last-child {
-    margin-right: 0; }
-
-.side {
-  width: calc(25% - 25px);
-  float: left;
-  margin-left: 20px; }
-
-.side--blue {
-  background: #aec6cf; }
-
-.side--green {
-  background: #8FDEAC; }
-
-.main-content {
-  width: calc(75% - 35px);
-  float: left;
-  margin-left: 20px; }
-  .main-content .main-content__title {
-    font-weight: 300;
-    color: #4D4D4D;
-    font-size: 1.999rem; }
-
-table.portfolio {
+.searchbar {
+  position: relative;
   width: 100%;
-  border-collapse: collapse; }
-
-.portfolio__header {
-  text-transform: uppercase;
-  font-size: .707rem; }
-  .portfolio__header tr th {
-    font-weight: 300;
-    letter-spacing: .5px;
-    text-align: left; }
-
-.portfolio__money {
-  font-family: 'Roboto Mono'; }
-
-.portfolio__body td,
-.portfolio__header th {
-  padding: 8px 4px; }
-
-.portfolio__body tr:nth-child(odd) {
-  background: #ccc; }
-
-ul.financial-info {
-  list-style-type: none; }
+  transform: translateY(50%);
+  width: 300px;
+  display: inline-block; }
+  .searchbar input[name="q"] {
+    border: none;
+    padding: 8px;
+    width: 100%;
+    height: 36px;
+    border-radius: 3px; }
+  .searchbar__btn {
+    border: none;
+    position: absolute;
+    top: 0;
+    right: 0;
+    height: 100%;
+    border-radius: 0 3px 3px 0;
+    width: 13%;
+    color: #0000EE; }
 
 /*# sourceMappingURL=main.css.map */

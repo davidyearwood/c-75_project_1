@@ -1,223 +1,41 @@
-/* ==========================================================================
-   Base Styles
-   ========================================================================== */
+/*
+ * Typography 
+ *************************************/
+/*
+ * General Typography
+ *************************/
 html {
-  font-size: 16px; }
+  font-size: 1em; }
 
 body {
-  background: #f4f8fb; }
-
-h1, h2, h3, p, li, a, th, td, label, button {
-  color: #8C8C8C;
-  font-family: "Roboto", "Helvetica Neue", Helvetica, Arial, sans-serif; }
-
-a {
-  color: #537293; }
-
-.sidebar-layout {
-  max-width: 1200px;
-  width: 100%;
-  margin-right: auto;
-  margin-left: auto;
   background-color: white;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24); }
-  .sidebar-layout::after {
-    clear: both;
-    content: "";
-    display: block; }
-  .sidebar-layout__header {
-    width: calc(100% - 40px);
-    float: left;
-    margin-left: 20px; }
-  .sidebar-layout__sidebar {
-    width: calc(25% - 25px);
-    float: left;
-    margin-left: 20px; }
-  .sidebar-layout__main {
-    width: calc(75% - 35px);
-    float: left;
-    margin-left: 20px; }
+  font-family: 'Roboto', serif;
+  font-weight: 400;
+  line-height: 1.45;
+  color: #333; }
 
-/**************************************************
-                    Modifiers
-***************************************************/
-.sidebar-layout--blue {
-  background: #6191b8; }
-.sidebar-layout--green {
-  background: #8FDEAC; }
+p {
+  margin-bottom: 1.3em; }
 
-/* ==========================================================================
-   User Account
-   ========================================================================== */
-/* 
-   User Account Elements 
-   ========================================================================== */
-.user-account__links {
-  float: right;
-  list-style-type: none;
-  padding-left: 0; }
-  .user-account__links li {
-    display: inline-block;
-    font-size: 16px;
-    margin-right: 7.5px; }
-  .user-account__links li:after {
-    content: "|";
-    margin-left: 7.5px; }
-  .user-account__links li:last-child:after {
-    content: none; }
+h1, h2, h3, h4 {
+  margin: 1.414em 0 0.5em;
+  font-weight: inherit;
+  line-height: 1.2; }
 
-/* ==========================================================================
-   Button Component
-   ========================================================================== */
-a.btn {
-  text-decoration: none; }
+h1 {
+  margin-top: 0;
+  font-size: 3.998em; }
 
-.btn {
-  color: #ffffff;
-  cursor: pointer;
-  border: none;
-  border-radius: 3px;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
-  margin-bottom: 16px;
-  padding: 8px 16px; }
-  .btn:hover {
-    box-shadow: 0 3px 3px 0 rgba(0, 0, 0, 0.14), 0 1px 7px 0 rgba(0, 0, 0, 0.12), 0 3px 1px -1px rgba(0, 0, 0, 0.2); }
+h2 {
+  font-size: 2.827em; }
 
-/* Button Elements
-   ========================================================================== */
-/* Button Modifiers
-   ========================================================================== */
-.btn--red,
-.btn--alert {
-  background-color: #F44336; }
+h3 {
+  font-size: 1.999em; }
 
-.btn--green,
-.btn--success {
-  background: #4da979; }
+h4 {
+  font-size: 1.414em; }
 
-/* ==========================================================================
-   Logo
-   ========================================================================== */
-.logo-container {
-  width: calc(33.3333333333% - 26.6666666667px);
-  float: left;
-  margin-left: 20px; }
-
-/* ==========================================================================
-   Logo Elements
-   ========================================================================== */
-/* ==========================================================================
-   Tabs
-   ========================================================================== */
-.tabs {
-  width: calc(66.6666666667% - 33.3333333333px);
-  float: left;
-  margin-left: 20px; }
-
-/* 
-   Tabs Elements 
-   ========================================================================== */
-.tabs__links {
-  color: #537293;
-  font-size: 16px;
-  padding-left: 0; }
-  .tabs__links li {
-    display: inline-block;
-    list-style-type: none; }
-  .tabs__links li:last-child {
-    margin-right: 0; }
-  .tabs__links li a {
-    color: #4d7ca8;
-    font-weight: bold;
-    margin-right: 32px;
-    text-decoration: none; }
-  .tabs__links li a:hover {
-    border-bottom: 2.5px solid #355575;
-    color: #355575;
-    padding-bottom: 10px; }
-
-.collapse {
-  margin-left: -20px;
-  margin-right: -20px;
-  width: calc(100% + 40px); }
-  .collapse::after {
-    clear: both;
-    content: "";
-    display: block; }
-
-table.portfolio {
-  width: 100%;
-  border-collapse: collapse; }
-
-.portfolio__header {
-  text-transform: uppercase;
-  font-size: 11px; }
-  .portfolio__header tr th {
-    font-weight: 700;
-    letter-spacing: .5px;
-    text-align: right; }
-  .portfolio__header tr th:first-child {
-    text-align: left; }
-
-.portfolio__body tr td {
-  text-align: right; }
-.portfolio__body tr td:first-child {
-  text-align: left; }
-
-.portfolio__money {
-  font-family: "Roboto Mono", Menlo, "Courier New", monospace; }
-
-.portfolio__body td,
-.portfolio__header th {
-  padding: 16px; }
-
-.portfolio__body tr:nth-child(odd) {
-  background: #FDFBFB; }
-
-ul.financial-info {
-  width: calc(100% - 40px);
-  float: left;
-  margin-left: 20px;
-  list-style-type: none; }
-  ul.financial-info li {
-    padding-top: 15px;
-    padding-bottom: 15px;
-    color: #fff; }
-
-ul.financial-info__header {
-  font-size: 23px;
-  font-weight: 700; }
-
-/* Selling Stock */
-.stock p,
-.stock h2,
-.stock h3,
-.stock h4,
-.stock ul {
-  margin: 0; }
-
-.stock__header {
-  border-bottom: 1px dotted #ccc;
-  padding-bottom: 8px;
-  margin-bottom: 16px; }
-  .stock__header h2 {
-    font-weight: 700;
-    font-size: 45px; }
-  .stock__header p {
-    font-weight: 500; }
-.stock__current-price {
-  margin-bottom: 16px;
-  padding-bottom: 8px;
-  border-bottom: 1px dotted #ccc; }
-  .stock__current-price h3 {
-    font-size: 32px;
-    color: green; }
-.stock__info {
-  margin-bottom: 32px; }
-  .stock__info ul {
-    list-style-type: none;
-    padding-left: 0; }
-    .stock__info ul li {
-      margin-bottom: 8px; }
+.small-font {
+  font-size: 0.707em; }
 
 /*# sourceMappingURL=stylesheet.css.map */

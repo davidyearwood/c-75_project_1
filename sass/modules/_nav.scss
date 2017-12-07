@@ -1,0 +1,52 @@
+// Nav
+.navbar {
+    width: 100%;
+    background: $navbar-color;
+}
+
+.container--flex{
+    @extend %container;
+    display: flex;
+    justify-content: space-between;
+}
+
+// Navigation Links
+ul.nav-links {
+    color: #ffffff;
+    list-style-type: none;
+    margin: 0;
+    padding-left: 0;
+    text-align: center;
+    
+    li.username {
+        font-weight: $font-weight-bold;
+        text-transform: capitalize;
+    }
+    
+    li {
+        display: inline-block;
+        margin-right: 16px;
+    }
+}
+
+// nav-item
+a.nav-item {
+    color: #eee;
+    display: inline-block;
+    font-size: $font-size-small;    
+    padding: $font-size-small;
+    text-align: center;
+    text-decoration: none;
+    
+    span, i {
+        display: block;
+    }
+    
+    &__title {
+        text-transform: capitalize;
+    }
+    &:hover {
+        background: #404040;
+        border-radius: 3px;
+    }
+}
