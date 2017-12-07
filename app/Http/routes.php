@@ -32,3 +32,9 @@ Route::get('/portfolio', 'StockController@showPortfolio');
 // when you purhcase a stock 
 Route::post('/portfolio', 'StockController@showPortfolioAfterSale');
 Route::post('/search', 'StockController@showPortfolioAfterPurchase');
+
+// Routes for testing design
+
+Route::get("/design", function() {
+   return view("modules/master-layout", ["user" => Auth::user()]); 
+});
