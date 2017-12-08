@@ -1,7 +1,23 @@
+/**
+ Vendor Components
+ ========================= */
 @import "vendor/bower_components/neat/core/neat";
+
+/**
+ Base Components
+ ========================= */
 @import "base/variables";
 @import "base/typography";
+@import "base/utils"; 
 
+/**
+ Layout Components
+ ========================= */
 @import "layout/grid";
+
+/**
+ Modules Components
+ ========================= */
 @import "modules/nav";
+@import "modules/card";
 @import "modules/searchbar";

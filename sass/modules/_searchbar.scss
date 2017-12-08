@@ -18,13 +18,13 @@
  .searchbar {
     position: relative; 
     width: 100%;
-    transform: translateY(50%);
+    // transform: translateY(50%);
     width: 300px;
     display: inline-block;
     
     input[name="q"] {
         border: none;
-        padding: 8px;
+        // padding: 8px;
         width: 100%;
         height: 36px;
         border-radius: 3px;
