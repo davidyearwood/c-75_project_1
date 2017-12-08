@@ -1,0 +1,45 @@
+/*
+ * General Typography
+ *************************/
+html { 
+    font-size: $font-size-base;
+}
+
+body {
+  background-color: white;
+  font-family: 'Roboto', sans-serif;
+  font-weight: $font-weight-regular;
+  line-height: $body-line-height;
+  color: #333;
+}
+
+p {
+    margin-bottom: 1.3em;
+}
+
+h1, h2, h3, h4 {
+  margin: 1.414em 0 0.5em;
+  font-weight: inherit;
+  line-height: $header-line-height;
+}
+
+h1 {
+  margin-top: 0;
+  font-size: $font-size-h1;
+}
+
+h2 {
+    font-size: $font-size-h2;
+}
+
+h3 {
+    font-size: $font-size-h3;
+}
+
+h4 {
+    font-size: $font-size-h4;
+}
+
+.small-font {
+    font-size: $font-size-small;
+}

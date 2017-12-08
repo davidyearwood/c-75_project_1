@@ -1,0 +1,18 @@
+$two-column-grid: (
+    columns: 12,
+    gutter: 16px, 
+    media: 1000px
+);
+
+.grid {
+    @extend %container;
+    @include grid-container; 
+    
+    aside {
+        @include grid-column(12);
+        
+        @include grid-media($two-column-grid) {
+            @include grid-column(3, $two-column-grid);
+        }
+    }
+}

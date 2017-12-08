@@ -1,0 +1,44 @@
+/**
+ Util Placeholders
+ =========================== */
+%container {
+    max-width: 1200px;
+    margin: 0 auto;
+    width: 90%;
+}
+
+%reset-margin-and-padding {
+    margin: 0;
+    padding: 0;
+}
+
+/**
+ Util Classes
+ =========================== */
+.h1-like {
+    font-size: $font-size-h1;
+}
+
+.h2-like {
+    font-size: $font-size-h2;
+}
+
+.h3-like {
+    font-size: $font-size-h3;
+}
+
+.h4-like {
+    font-size: $font-size-h4;
+}
+
+.p-like {
+    font-size: $font-size-base;
+}
+
+.text-align--right {
+    text-align: right;
+}
+
+.success {
+    color: $success-color;
+}

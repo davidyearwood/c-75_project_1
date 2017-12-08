@@ -36,5 +36,5 @@ Route::post('/search', 'StockController@showPortfolioAfterPurchase');
 // Routes for testing design
 
 Route::get("/design", function() {
-   return view("modules/master-layout", ["user" => Auth::user()]); 
+   return view("layouts/master", ["user" => Auth::user()]); 
 });
