@@ -121,21 +121,6 @@ ul.nav-links {
     display: inline-block;
     margin-right: 16px; }
 
-a.nav-item {
-  color: #eee;
-  display: inline-block;
-  font-size: 0.707em;
-  padding: 0.707em;
-  text-align: center;
-  text-decoration: none; }
-  a.nav-item span, a.nav-item i {
-    display: block; }
-  a.nav-item__title {
-    text-transform: capitalize; }
-  a.nav-item:hover {
-    background: #404040;
-    border-radius: 3px; }
-
 /*
  * Card - Block
  ===================== */
@@ -192,20 +177,58 @@ a.nav-item {
   position: relative;
   width: 100%;
   width: 300px;
-  display: inline-block; }
+  display: inline-block;
+  margin-left: 24px; }
   .searchbar input[name="q"] {
     border: none;
     width: 100%;
-    height: 36px;
-    border-radius: 3px; }
+    height: 28px;
+    border: 1px solid black;
+    padding-left: 40px; }
   .searchbar__btn {
     border: none;
     position: absolute;
     top: 0;
-    right: 0;
     height: 100%;
     border-radius: 0 3px 3px 0;
-    width: 13%;
-    color: #0000EE; }
+    color: #000;
+    background: transparent; }
+
+.nav-bar, .nav-bar--green {
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.1), 0 2px 3px rgba(0, 0, 0, 0.2);
+  width: 100%; }
+
+.nav-bar--blue {
+  background: #004b7c; }
+
+.nav-bar--green {
+  background: #007c31; }
+
+ul.nav-items {
+  list-style-type: none;
+  margin: 0;
+  padding-left: 0; }
+  ul.nav-items li {
+    display: inline-block;
+    vertical-align: middle; }
+
+a.nav-item {
+  color: #c7d1d8;
+  display: inline-block;
+  font-size: 0.707em;
+  padding: 1em 1.414em;
+  padding-bottom: 0;
+  text-align: center;
+  text-decoration: none; }
+  a.nav-item span, a.nav-item i {
+    display: block; }
+  a.nav-item__title {
+    text-transform: capitalize; }
+  a.nav-item:hover {
+    color: #ffffff; }
+
+.nav-item--current-link {
+  color: #ffffff !important;
+  border-bottom: 2px solid #fff; }
 
 /*# sourceMappingURL=main.css.map */
