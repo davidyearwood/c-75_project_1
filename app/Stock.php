@@ -17,7 +17,7 @@ class Stock extends Model
      *
      * @var array
      */
-    protected $appends = ['current_data'];
+    //protected $appends = ['current_data', 'last_trade_price'];
     
     public function users() 
     {
@@ -25,7 +25,7 @@ class Stock extends Model
     }
     
     /**
-     * Get the current price of the stock.
+     * Get the recent data of the stock.
      *
      * @return Float
      */
@@ -36,5 +36,17 @@ class Stock extends Model
     
         return $stockFromQuandlAPI;
     }
-    
+
+    /**
+     * Get the current price of the stock.
+     *
+     * @return Float
+     */ 
+    public function getLastTradePriceAttribute() 
+    {
+        $quandlAPI = new QuandlClient(new Client());
+        $lastTradeStock = $quandlAPI->getstock($this->symbol);
+        
+        return $lastTradeStock['price'];
+    }
 }

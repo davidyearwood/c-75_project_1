@@ -1,0 +1,20 @@
+.stock-certificate {
+    padding-bottom: $font-size-base;
+    
+    @include grid-container;
+    &__header {
+        @include grid-column(10);
+    }
+    
+    &__action {
+        @include grid-column(2);
+    }
+    
+}
+
+/*
+ * Stock Shares
+ ******************************/
+ .stock-shares {
+    text-align: right;
+ }

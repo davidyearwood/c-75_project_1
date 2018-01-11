@@ -74,34 +74,37 @@ class QuandlClient
      */ 
     public function getStock($symbol)
     {
-        try {
-            $response = $this->client->request('GET', $this->getURL($symbol));
+        $stock = Cache::remember($symbol, $this->expirationDateInMinutes, function() use($symbol){
             
-            print_r($response);
-        } catch (ClientException $e) {
-            $this->setError(['api_error' => $e->getMessage(), 
-                             'status_code' => 404, 
-                             'message' => 'Stock not found']);
-            return []; 
-        }
-        
-        if ($response->getStatusCode() == 200) {
-            $stockData = Cache::remember($symbol, $this->expirationDateInMinutes, function() use($response){
-                $httpBody = json_decode($response->getBody()->getContents());
-                $dataRetrieved = ['price' => $httpBody->dataset->data[0][4],
-                                  'name' => $httpBody->dataset->name,
-                                  'date' => $httpBody->dataset->data[0][0],
-                                  'open' => $httpBody->dataset->data[0][1],
-                                  'high' => $httpBody->dataset->data[0][2],
-                                  'low' => $httpBody->dataset->data[0][3],
-                                  'close' => $httpBody->dataset->data[0][4],
-                                  'volume' => $httpBody->dataset->data[0][5]];
+            try {
+                $request = $this->client->request('GET', $this->getURL($symbol));
+            } catch (ClientException $e) {
+                echo 'Caught exception: ',  $e->getMessage(), "\n"; // FOR DEV ENV ONLY
+                // LOG ERROR
+                // Internal server error redirect
+            }
+            
+            if ($request->getStatusCode() === 200) {
+                $body = json_decode($request->getBody()->getContents());
+                $cachedData = [
+                    'price' => $body->dataset->data[0][4],
+                    'name' => $body->dataset->name,
+                    'date' => $body->dataset->data[0][0],
+                    'open' => $body->dataset->data[0][1],
+                    'high' => $body->dataset->data[0][2],
+                    'low' => $body->dataset->data[0][3],
+                    'close' => $body->dataset->data[0][4],
+                    'volume' => $body->dataset->data[0][5]
+                ];
+            } else {
+                throw new Exception($request->getStatusCode()); 
+            }
+            
+            return $cachedData;
                 
-                return $dataRetrieved; 
-            });
-        }
+        });
         
-        return $stockData; 
+        return $stock; 
     }
     
     /**

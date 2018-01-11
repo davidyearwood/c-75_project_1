@@ -1,0 +1,113 @@
+
+// Block Element
+.table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+div.table {
+    display: table;
+}
+
+div.table__header {
+    display: table-header-group;
+}
+form.table__row {
+    display: table-row;
+}
+
+span.table__data {
+    display: table-cell;
+}
+
+// Element 
+.table__title {
+    @extend .h3-like;
+    padding-left: 12px / 869px * 100%;
+    padding-right: 12px / 869px * 100%;
+    padding-top: 16px;
+    padding-bottom: 16px;
+    
+    h2 {
+        @extend %reset-margin-and-padding;
+        font-size: inherit;
+    }
+}
+
+.table__header {
+    color: lighten(#000, 54%);
+}
+
+.table__body {
+    color: #000;
+}
+
+.table__header,
+.table__body {
+    font-family: $font-stack-sans;
+    font-weight: $font-weight-regular;
+}
+
+.table__row {
+    th, 
+    td {
+        border-bottom: 1px solid $gallery-grey;
+        padding-top: 12px;
+        padding-bottom: 12px;
+        color: inherit;
+        font-weight: inherit;
+        padding-left: 12px / 869px * 100%;
+        text-align: right;
+        padding-right: 12px / 869px * 100%;  
+    } 
+    
+    th:first-child,
+    td:first-child {
+        text-align: left;
+    }
+}
+
+.mobile-header:before {
+    content: "GOOG";
+    text-align: left;
+}
+
+@media (max-width: 687px) {
+    .table__row {
+        background: #fff;
+        border-radius: 3px;
+        box-shadow: 0 0 0 1px rgba(0,0,0,.1), 0 2px 3px rgba(0,0,0,.2);
+        display: block;
+        width: 100%;
+        
+        td:first-child {
+            text-align: right;
+        }
+    }
+}
+
+@media (max-width: 687px) { 
+    .table__header {
+        display: none;
+    }
+    .table__body tr {
+        margin-top: 16px;
+    }
+    .table, 
+    .table__body,
+    .table__body tr,
+    .table__body tr td {
+        display: block;
+    }
+}
+
+$table-headers: ("symbol", "purchased date", "purchased price", "current price", "quantity");
+
+@mixin mobile-table-title($title) {
+    .table-title--title {
+        content: "{#$title}";
+        font-weight: $font-weight-bold;
+        position: absolute;
+        left: 5px;
+    }
+}

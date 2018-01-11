@@ -11,30 +11,16 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
+/**
+ *  Authentication Routes
+ *****************************/
 Route::auth();
 
-
-// Actual Routes that will be used in Production
-Route::get('/portfolio/{id}', 'StockController@showUserStocks');
-
-// Get Requests
-// When I search for a stock
-// When I view my portfolio 
-Route::get('/search', 'StockController@showSearchResult');
-Route::get('/portfolio', 'StockController@showPortfolio');
-
-// Post requests 
-// When you sell a stock 
-// when you purhcase a stock 
-Route::post('/portfolio', 'StockController@showPortfolioAfterSale');
-Route::post('/search', 'StockController@showPortfolioAfterPurchase');
-
-// Routes for testing design
-
-Route::get("/design", function() {
-   return view("layouts/master", ["user" => Auth::user()]); 
-});
+/**
+ *  GET REQUESTS
+ * **************************/
+Route::get('/', 'StockController@renderPortfolio');
+Route::get('/search', 'StockController@renderSearchResult');
+Route::get('/portfolio', 'StockController@renderPortfolio'); 
+Route::post('/search', 'StockController@buyStockAndRenderPortfolio');
+Route::post('/portfolio', 'StockController@sellStockAndRenderPortfolio');

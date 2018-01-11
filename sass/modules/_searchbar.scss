@@ -42,3 +42,41 @@
     }
  }
  
+ .searchbar--mobile {
+    @extend .searchbar;
+    margin-left: 0;
+    width: 100%;
+    display: none;
+ }
+ 
+ 
+ .searchbar--active {
+    display: block;
+ }
+ 
+
+ 
+ /*
+  * Search Bar - Desktop View
+  **************************/
+   .searchbar-container {
+        display: none;
+        @include grid-column(12);
+        @media (min-width: 900px) {
+            display: block;
+        }
+    }
+    
+    .vertical-space--block {
+        margin-top: $font-size-h2;
+    }
+    
+    .searchbar--extended {
+        border: none;
+        box-shadow: 0 2px 2px 0 rgba(0,0,0,0.16), 0 0 0 1px rgba(0,0,0,0.08);
+        height: 40px;
+        max-width: 900px;
+        width: 70%;
+        padding-left: $font-size-base;
+    }
+    

@@ -2,6 +2,7 @@
 
 use App\Stock;
 use App\Http\Requests;
+use App\Finance\Portfolio;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use App\HttpClient\QuandlClient; 
@@ -11,9 +12,19 @@ use Illuminate\Support\Facades\Auth;
 
 class StockController extends Controller 
 {
+    /*
+    *--------------------------------------------------
+    * Stock Controller
+    *--------------------------------------------------
+    * 
+    * This controller performs CRUD operations 
+    *
+    *
+    */ 
     protected $quandlClient; 
     protected $user; 
     protected $financialAccount;
+    protected $portfolio; 
     
     public function __construct(FinancialAccount $account, QuandlClient $client)
     {
@@ -23,10 +34,11 @@ class StockController extends Controller
         $this->quandlClient = $client;
         $this->user = Auth::user();
         $this->financialAccount = $account;
+        $this->portfolio = new Portfolio($this->user);
     }
     
     /**
-     * Get the search result for the requested  
+     * Returns the search result for the requested  
      * stock.
      * 
      * @param Request $request
@@ -90,22 +102,12 @@ class StockController extends Controller
     }
     
     /**
-     * Renders the view for the search result. 
+     * Stores the request in the db  
      * 
-     * @param Request
-     * @return View
+     * 
+     * @param Request $request
+     * @return boolean
      */
-    public function showSearchResult(Request $request) 
-    {
-        $searchResult = $this->search($request);
-        
-        print_r($searchResult);
-        return view('search', ['stock' => $searchResult, 
-                               'user' => $this->user, 
-                               'error' => $this->quandlClient->getError() || []]);    
-    }
-    
-    // purchase
     public function store(Request $request) 
     {
         $this->validate($request, [
@@ -117,6 +119,7 @@ class StockController extends Controller
         $symbol = $request->stock;
         // Get the api's uri and get the api's stock 
         $uri = $this->quandlClient->getURL($symbol);
+        
         $fetchStock = $this->quandlClient->getStock($symbol);
         
         $stock = Stock::where('symbol', strtoupper($symbol))->first();
@@ -143,19 +146,6 @@ class StockController extends Controller
         
         return true;  
     }
-
-    
-    public function showPortfolioAfterPurchase(Request $request) 
-    {
-        $isPurchased = $this->store($request);
-        
-        if (!$isPurchased) {
-            // throw some error 
-            abort(500);
-        }
-        
-        return $this->showPortfolio(); 
-    }
     
     /**
      * Show the user their portfolio after selling a stock
@@ -170,24 +160,88 @@ class StockController extends Controller
             abort(500);
         }
         
-       return $this->showPortfolio();
+       return view();
     }
     
-    public function showPortfolio() {
-        return view('app.portfolio', 
-            ['user' => $this->user, 
-             'stocks' => $this->user->stocks]);
+    /**
+     * Renders portfolio.  
+     * 
+     * @return View
+     */ 
+    public function renderPortfolio() 
+    {
+        $pData = [
+            'user' => $this->user, 
+            'stocks' => $this->user->stocks, 
+            'netValue' => $this->portfolio->totalNetValue(),
+            'totalAsset' => $this->portfolio->totalAsset()
+        ];
+        
+        return view('pages.portfolio', $pData); 
     }
     
-    // ?? 
-    public function showUserStocks($id) {
+    /**
+     * Renders Stock.  
+     * 
+     * @param INT $id
+     * @return View
+     */
+    public function renderStock($id) {
         $stock = $this->user->stocks()
                     ->wherePivot('id', '=', $id)
                     ->first();
                     
-        return view('user-stocks', [
+        return view('pages/stock', [
             'stock' => $stock,  
             'user' => $this->user
             ]); 
+    }  
+    
+    /**
+     * Renders the view for the search result. 
+     * 
+     * @param Request
+     * @return View
+     */
+    public function renderSearchResult(Request $request) 
+    {
+        $searchResult = $this->search($request);
+        
+        $data = [
+            'user' => $this->user, 
+            'stock' => $searchResult, 
+            'netValue' => $this->portfolio->totalNetValue(),
+            'totalAsset' => $this->portfolio->totalAsset()
+        ];
+        
+        return view('pages.search', $data);
+    }
+
+    /**
+     * Stores the request into the db and redirect them 
+     * to the portfolio page after.
+     * 
+     * @param Request
+     * @return View
+     */ 
+    public function buyStockAndRenderPortfolio(Request $request) 
+    {
+        if (!$this->store($request)) {
+            abort(500);
+        } 
+        
+        return redirect('portfolio')->with('success', 'Items were successfully purchased!');
+    }
+    
+    public function sellStockAndRenderPortfolio(Request $request) 
+    {
+        $sold = $this->sell($request); 
+        
+        if (!$sold) {
+            abort(500);
+        }
+        
+        return redirect('portfolio')->with('success', 'Items were sold!');
     }
 }
+

@@ -1,59 +1,87 @@
-%reset {
-    margin: 0;
-    padding: 0;
-}
-
 /*
  * Card - Block
  ===================== */
 .card {
     width: 100%;
     border-radius: 4px;
-    box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+    box-shadow: 0 0 0 1px rgba(0,0,0,.1), 0 2px 3px rgba(0,0,0,.2);
+    background: #fff;
     
     &__header {
         border-bottom: 1px solid #ccc;
     }
-    &__header, 
+    
+    &__header,
     &__body {
         padding: $font-size-small;
     }
     
     &__title {
-        @extend %reset-margin-and-padding;
-        font-size: $font-size-h4;
+        @extend %reset-margin-and-padding;;
     }
     
-    &__body {
+    &__section {
+        border-bottom: 1px solid #eee;
         position: relative;
-        min-height: 50px;
+        padding-top: $font-size-small;
+        padding-bottom: $font-size-small;
+    }
+    
+    &__section:last-child {
+        border-bottom: none;
     }
 }
 
 /* 
  * Card Element
  =================== */
-
 .card__body-text {
     @extend %reset-margin-and-padding;
     font-size: $font-size-base;
 }
 
+.card__title,
+.card__sub-title {
+    margin: 0;
+}
+
+.card__section .card__sub-title {
+    color: gray;
+}
+.card__header .card__title {
+    font-weight: $font-weight-bold;
+    text-transform: capitalize;
+    margin-top: 16px;
+}
+
 /*
- * Card Modifier
- ===================== */
+    Modifiers
+*/
+
 .card__body-text--bottom-right {
     @extend .card__body-text;
-    
     position: absolute;
     bottom: 0;
     right: $font-size-small;
 }
 
-/**
- * User Cash 
- ================ */
-.user-cash {
-    display: block;
-    font-weight: bold;
+.card--center-text {
+    text-align: center;
+}
+
+// Background-image
+.background-image--light-circles {
+    background-image: url("https://www.toptal.com/designers/subtlepatterns/patterns/circles-light.png");
+}
+
+.card--table {
+    @extend .card; 
+    
+    @media (max-width: 687px) {
+        border-radius: none;
+        box-shadow: none;
+        margin-top: none;
+        background: transparent;
+        
+    }
 }

@@ -1,0 +1,34 @@
+/* Hamburger */
+.hamburger {
+    cursor: pointer;
+    display: inline-block;
+    transition: transform 300ms, opacity 300ms;
+    
+    &__line {
+        display: block;
+        background: #c7d1d8;
+        width: 18px;
+        margin-top: 5px;
+        height: 3px;
+        transition: transform 600ms, transition 600ms;
+    }
+}
+
+.bg--white {
+    background: #ffffff !important;
+}
+
+.hamburger--active {
+    .hamburger__line:nth-child(1) {
+        transform: translateY(8px) rotate(-45deg);
+        transition: transform 300ms;
+    }
+    .hamburger__line:nth-child(2) {
+        opacity: 0;
+        transition: opacity 300ms;
+    }
+    .hamburger__line:nth-child(3) {
+        transform: translateY(-8px) rotate(45deg);
+        transition: transform 600ms;
+    }
+}

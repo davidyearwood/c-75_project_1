@@ -42,7 +42,8 @@ class AuthController extends Controller
 
     /**
      * Get a validator for an incoming registration request.
-     *
+     * 
+     * Special Credit: Regex Pattern - https://stackoverflow.com/questions/19605150/regex-for-password-must-contain-at-least-eight-characters-at-least-one-number-a
      * @param  array  $data
      * @return \Illuminate\Contracts\Validation\Validator
      */
@@ -52,7 +53,7 @@ class AuthController extends Controller
             'firstName' => 'required|max:255',
             'lastName' => 'required|max:255',
             'email' => 'required|email|max:255|unique:users',
-            'password' => 'required|min:6|confirmed', // regex needs to be revisit
+            'password' => 'required|regex:/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,}$/|confirmed',
         ]);
     }
 
