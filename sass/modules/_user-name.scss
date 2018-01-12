@@ -1,0 +1,21 @@
+a.user-name {
+    text-decoration: none;
+    color: white;
+}
+
+.user-name {
+    @extend .base-like; 
+    &__text {
+        display: inline;
+        font-size: inherit;
+        color: inherit;
+        text-transform: capitalize;
+        font-weight: $font-weight-bold;
+        margin-right: 5px;
+    }
+    
+    &__icon {
+        display: inline;
+        vertical-align: middle;
+    }
+}

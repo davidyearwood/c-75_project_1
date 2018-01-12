@@ -32,10 +32,10 @@
                             <span class="logo__text">CS75 Finance</span>
                         </h1>
                     </a>
-                    <section class="user-account">
-                        <span class="nav-item__title">{{ $user->firstName }} {{ $user->lastName }}</span>
-                        <i class="fa fa-user-circle-o fa-2x" aria-hidden="true"></i>
-                    </section>
+                    <a href="#" class="user-name">
+                        <span class="user-name__text">{{ $user->firstName }} {{ $user->lastName }}</span>
+                        <i class="fa fa-user-circle-o fa-2x user-name__icon" aria-hidden="true"></i>
+                    </a>
                 </section>
                 <section class="financial-information">
                     <h2 class="page-title">@yield('page-title')</h2>

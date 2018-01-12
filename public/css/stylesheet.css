@@ -52,7 +52,7 @@ h4 {
 /**
  Util Classes
  =========================== */
-.base-like {
+.base-like, .user-name {
   font-size: 1em; }
 
 .h1-like {
@@ -136,5 +136,20 @@ header.global--blue-grey {
 a.logo {
   text-decoration: none;
   color: white; }
+
+a.user-name {
+  text-decoration: none;
+  color: white; }
+
+.user-name__text {
+  display: inline;
+  font-size: inherit;
+  color: inherit;
+  text-transform: capitalize;
+  font-weight: 600;
+  margin-right: 5px; }
+.user-name__icon {
+  display: inline;
+  vertical-align: middle; }
 
 /*# sourceMappingURL=stylesheet.css.map */
