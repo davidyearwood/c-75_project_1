@@ -7,11 +7,12 @@
         <title>CS75 Finance | @yield('title')</title>
         <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,700" rel="stylesheet">
         <link rel="stylesheet" href="/css/normalize.css">
+        <link rel="stylesheet" href="/css/stylesheet.css">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     </head>
     <body>
         
-        <header class="bg--primary-theme">
+        <header class="bg--primary-theme global-header">
             <div class="container">
                 <section class="utility">
                     <!-- Revist to make this more accessible -->
@@ -25,9 +26,12 @@
                     <!--    </a>-->
                     <!--</div>-->
                     <!-- Revist to make this more accessible -->
-                    <div class="logo">
-                        <h1><i class="fa fa-line-chart fa-2x" aria-hidden="true"></i> CS75 Finance</h1>
-                    </div>
+                    <a href="/" class="logo">
+                        <h1>
+                            <i class="fa fa-line-chart fa-2x logo__icon" aria-hidden="true"></i> 
+                            <span class="logo__text">CS75 Finance</span>
+                        </h1>
+                    </a>
                     <section class="user-account">
                         <span class="nav-item__title">{{ $user->firstName }} {{ $user->lastName }}</span>
                         <i class="fa fa-user-circle-o fa-2x" aria-hidden="true"></i>

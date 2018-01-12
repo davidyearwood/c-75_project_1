@@ -15,30 +15,31 @@
 /**
  Util Classes
  =========================== */
-.h1-like {
-    font-size: $font-size-h1;
+@each $key, $value in $font-sizes {
+    .#{$key}-like {
+        font-size: $value;
+    }
 }
-
-.h2-like {
-    font-size: $font-size-h2;
-}
-
-.h3-like {
-    font-size: $font-size-h3;
-}
-
-.h4-like {
-    font-size: $font-size-h4;
-}
-
-.p-like {
-    font-size: $font-size-base;
-}
-
-.text-align--right {
+ 
+ .text-align--right {
     text-align: right;
 }
+/**
+ Generates classes that modifies, 
+ the color property when used. 
+ ========================================= */
+@each $key, $value in $colors {
+    .color--#{$key} {
+        color: $value;
+    }
+}
 
-.success {
-    color: $success-color;
+/**
+ Generates classes that modifies, 
+ the background-color property when used. 
+ ========================================== */
+@each $key, $value in $colors {
+    .bg--#{$key} {
+        background-color: $value;
+    }
 }

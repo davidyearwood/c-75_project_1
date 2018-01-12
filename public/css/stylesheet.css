@@ -1,3 +1,6 @@
+/**
+ Base Components
+ ========================= */
 /*
  * Typography 
  *************************************/
@@ -9,7 +12,7 @@ html {
 
 body {
   background-color: white;
-  font-family: 'Roboto', serif;
+  font-family: "Roboto", Helvetica, Arial, sans-serif;
   font-weight: 400;
   line-height: 1.45;
   color: #333; }
@@ -24,18 +27,114 @@ h1, h2, h3, h4 {
 
 h1 {
   margin-top: 0;
-  font-size: 3.998em; }
+  font-size: 2.441em; }
 
 h2 {
-  font-size: 2.827em; }
+  font-size: 1.953em; }
 
 h3 {
-  font-size: 1.999em; }
+  font-size: 1.563em; }
 
 h4 {
-  font-size: 1.414em; }
+  font-size: 1.25em; }
 
 .small-font {
-  font-size: 0.707em; }
+  font-size: 0.8em; }
+
+/**
+ Util Placeholders
+ =========================== */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  width: 90%; }
+
+/**
+ Util Classes
+ =========================== */
+.base-like {
+  font-size: 1em; }
+
+.h1-like {
+  font-size: 2.441em; }
+
+.h2-like {
+  font-size: 1.953em; }
+
+.h3-like, .logo {
+  font-size: 1.563em; }
+
+.h4-like {
+  font-size: 1.25em; }
+
+.p-like {
+  font-size: 1em; }
+
+.small-like {
+  font-size: 0.8em; }
+
+.text-align--right {
+  text-align: right; }
+
+/**
+ Generates classes that modifies, 
+ the color property when used. 
+ ========================================= */
+.color--primary-theme {
+  color: #2196F3; }
+
+.color--warning {
+  color: #F44336; }
+
+.color--success {
+  color: #4CAF50; }
+
+/**
+ Generates classes that modifies, 
+ the background-color property when used. 
+ ========================================== */
+.bg--primary-theme {
+  background-color: #2196F3; }
+
+.bg--warning {
+  background-color: #F44336; }
+
+.bg--success {
+  background-color: #4CAF50; }
+
+/**
+ Layout Components
+ ========================= */
+header.global--blue-grey {
+  background: #607D8B; }
+
+.financial-information,
+.utility {
+  display: flex;
+  width: 100%;
+  justify-content: space-between; }
+
+/**
+ Module Components
+ ========================= */
+.global-header {
+  color: #ffffff; }
+
+.logo {
+  color: white;
+  width: 20%; }
+  .logo h1 {
+    font-size: inherit; }
+  .logo__text {
+    font-size: inherit;
+    color: inherit;
+    font-weight: 300; }
+  .logo__icon {
+    vertical-align: middle;
+    margin-right: 4.1666666667%; }
+
+a.logo {
+  text-decoration: none;
+  color: white; }
 
 /*# sourceMappingURL=stylesheet.css.map */

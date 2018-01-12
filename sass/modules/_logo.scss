@@ -1,0 +1,25 @@
+.logo {
+    @extend .h3-like;
+    color: white;
+    width: 20%;
+    
+    h1 {
+        font-size: inherit;
+    }
+    
+    &__text {
+        font-size: inherit;
+        color: inherit;
+        font-weight: $font-weight-light;
+    }
+    
+    &__icon {
+        vertical-align: middle;
+        margin-right: (10px / 240px) * 100%;
+    }
+}
+
+a.logo {
+    text-decoration: none;
+    color: white;
+}
