@@ -24,3 +24,7 @@ Route::get('/search', 'StockController@renderSearchResult');
 Route::get('/portfolio', 'StockController@renderPortfolio'); 
 Route::post('/search', 'StockController@buyStockAndRenderPortfolio');
 Route::post('/portfolio', 'StockController@sellStockAndRenderPortfolio');
+
+// This route is for testing purposes only. 
+// Must be removed in production.
+Route::get('/material', 'StockController@material');

@@ -216,6 +216,12 @@ class StockController extends Controller
         
         return view('pages.search', $data);
     }
+    
+    public function material() {
+        
+        return view('layouts.material', 
+        ['user' => $this->user, 'totalAsset' => $this->portfolio->totalAsset(), 'netValue' => $this->portfolio->totalNetValue()]);
+    }
 
     /**
      * Stores the request into the db and redirect them 

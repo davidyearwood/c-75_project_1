@@ -11,19 +11,19 @@
     </head>
     <body>
         
-        <header class="global--blue-grey">
-            <div class="flex-container">
+        <header class="bg--primary-theme">
+            <div class="container">
                 <section class="utility">
                     <!-- Revist to make this more accessible -->
-                    <div id="js-hover-effect" class="inactive">
-                        <a href="#" class="nav-item">
-                            <div class="hamburger" id="js-hamburger">
-                                <span class="hamburger__line"></span>
-                                <span class="hamburger__line"></span>
-                                <span class="hamburger__line"></span>
-                            </div>
-                        </a>
-                    </div>
+                    <!--<div id="js-hover-effect" class="inactive">-->
+                    <!--    <a href="#" class="nav-item">-->
+                    <!--        <div class="hamburger" id="js-hamburger">-->
+                    <!--            <span class="hamburger__line"></span>-->
+                    <!--            <span class="hamburger__line"></span>-->
+                    <!--            <span class="hamburger__line"></span>-->
+                    <!--        </div>-->
+                    <!--    </a>-->
+                    <!--</div>-->
                     <!-- Revist to make this more accessible -->
                     <div class="logo">
                         <h1><i class="fa fa-line-chart fa-2x" aria-hidden="true"></i> CS75 Finance</h1>
