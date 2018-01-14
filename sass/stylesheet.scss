@@ -1,19 +1,17 @@
-/**
- Base Components
- ========================= */
+//== Base
 @import "base/variables";
 @import "base/typography";
 @import "base/utils"; 
 
-/**
- Layout Components
- ========================= */
+//== Layout 
+@import "layout/container";
 @import "layout/header";
 
-
-/**
- Module Components
- ========================= */
+//== Modules
 @import "modules/global-header";
 @import "modules/logo";
 @import "modules/user-name";
+@import "modules/page-title";
+@import "modules/finance-info";
+@import "modules/user-information";
+@import "modules/nav";

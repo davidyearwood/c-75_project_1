@@ -1,43 +1,57 @@
-/**
- Util Placeholders
- =========================== */
+//== Placeholders 
+
+//= Layout
 %container {
-    max-width: 1200px;
+    max-width: $container-width;
     margin: 0 auto;
-    width: 90%;
+    width: 100%;
 }
 
+//= Generics
 %reset-margin-and-padding {
     margin: 0;
     padding: 0;
 }
 
-/**
- Util Classes
- =========================== */
+//== Typography
+
+//= Font Sizes Example: .h1-like
 @each $key, $value in $font-sizes {
     .#{$key}-like {
         font-size: $value;
     }
 }
- 
- .text-align--right {
+
+//= Font Sizes Example: .font-size--h1
+@each $key, $value in $font-sizes {
+    .font-size--#{$key} {
+        font-size: $value;
+    }
+}
+//= Text alignment
+.text-align--right {
     text-align: right;
 }
-/**
- Generates classes that modifies, 
- the color property when used. 
- ========================================= */
+
+.text-align--left {
+    text-align: left;
+}
+
+.text-align--center {
+    text-align: center;
+}
+
+//== Colors 
+
+//= Text color (.color--primary-theme)
 @each $key, $value in $colors {
     .color--#{$key} {
         color: $value;
     }
 }
 
-/**
- Generates classes that modifies, 
- the background-color property when used. 
- ========================================== */
+
+//= Background color (.bg--primary-theme)
 @each $key, $value in $colors {
     .bg--#{$key} {
         background-color: $value;

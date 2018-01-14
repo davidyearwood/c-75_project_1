@@ -1,12 +1,4 @@
-header.global--blue-grey {
-    background: #607D8B;
-}
-.container {
-    @extend %container;
-}
-
-
-.financial-information,
+.user-information,
 .utility {
     display: flex;
     width: 100%;

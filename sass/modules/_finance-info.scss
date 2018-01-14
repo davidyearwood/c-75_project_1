@@ -1,0 +1,33 @@
+ul.finance-info {
+  list-style-type: none;
+  
+  li {
+    display: inline-block;
+    font-size: $font-size-base;
+    margin-right: $font-size-h3;
+  }
+  
+}
+
+.finance-info {
+    align-self: flex-start;
+    margin-top: 0;
+    &__cash, 
+    &__text {
+        display: block;
+        text-align: right;
+    }
+    
+    &__text {
+        margin-top: 2.5px;
+        text-transform: uppercase;
+        font-size: 0.66em;
+        font-weight: $font-weight-bold;
+        color: #BBDEFB;
+    }
+    
+    &__cash {
+        font-size: $font-size-h2;
+        font-weight: $font-weight-regular;
+    }
+}

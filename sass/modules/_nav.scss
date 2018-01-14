@@ -1,30 +1,35 @@
-// Nav
-.navbar {
-    width: 100%;
-    background: $navbar-color;
+//== Nav 
+nav {
+    background: white;
+    box-shadow: 0 4px 5px 0 rgba(0,0,0,0.14), 0 1px 10px 0 rgba(0,0,0,0.12), 0 2px 4px -1px rgba(0,0,0,0.3);
 }
 
-.container--flex{
-    @extend %container;
-    display: flex;
-    justify-content: space-between;
-}
-
-// Navigation Links
+//== Navigation Links
 ul.nav-links {
-    color: #ffffff;
-    list-style-type: none;
-    margin: 0;
     padding-left: 0;
+}
+
+.nav-links__item {
+    display: inline-block;
+    padding-left: 16px;
+    padding-right: 16px;
+}
+
+.nav-links__item a {
+    display: block;
+    color: $silver-chalice;
     text-align: center;
-    
-    li.username {
-        font-weight: $font-weight-bold;
-        text-transform: capitalize;
-    }
-    
-    li {
-        display: inline-block;
-        margin-right: 24px;
-    }
+    text-decoration: none;
+    width: 100%;
+    padding-top: 16px;
+    padding-bottom: 13px;
+    border-bottom: 3px solid white;
+}
+
+.nav-links__item a:hover {
+    border-color: $pomegranate;
+}
+
+.nav-links__item--active {
+    border-color: $pomegranate;
 }
