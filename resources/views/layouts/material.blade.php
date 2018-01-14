@@ -10,7 +10,7 @@
         <link rel="stylesheet" href="/css/stylesheet.css">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     </head>
-    <body>
+    <body class="bg--wallpaper">
         
         <header class="bg--primary-theme global-header">
             <div class="container">
@@ -37,24 +37,34 @@
                         <i class="fa fa-user-circle-o fa-2x user-name__icon" aria-hidden="true"></i>
                     </a>
                 </section>
-                <section class="financial-information">
-                    <h2 class="page-title">@yield('page-title')</h2>
-                    <ul class="networth">
-                        <li>${{ number_format($user->cash, 2) }}<br>Cash Available</li>
-                        <li>${{ number_format($totalAsset, 2) }}<br>Portfolio Value</li>
-                        <li>${{ number_format($netValue , 2) }}<br>Total Net Worth</li>
+                <section class="user-information">
+                    <h2 class="page-title"><!--@yield('page-title')--> Portfolio</h2>
+                    <ul class="finance-info">
+                        <li>
+                            <span class="finance-info__cash">${{ number_format($user->cash, 2) }}</span>
+                            <span class="finance-info__text">Cash Available</span>
+                        </li>
+                        <li>
+                            <span class="finance-info__cash">${{ number_format($totalAsset, 2) }}</span>
+                            <span class="finance-info__text">Portfolio Value</span>
+                        </li>
+                        <li>
+                            <span class="finance-info__cash">${{ number_format($netValue , 2) }}</span>
+                            <span class="finance-info__text">Total Net Worth</span>
+                        </li>
                     </ul>
                 </section>
             </div>
+            <nav>
+                <div class="container">
+                    <ul class="nav-links">
+                        <li class="nav-links__item"><a href="#">Home</a></li>
+                        <li class="nav-links__item"><a href="#">Trade</a></li>
+                        <li class="nav-links__item"><a href="#">Buy</a></li>
+                    </ul>
+                </div>
+            </nav>
         </header>
-        
-        <nav class="">
-            <ul class="nav-links">
-                <li><a href="#">Home</a></li>
-                <li><a href="#">Trade</a></li>
-                <li><a href="#">Buy</a></li>
-            </ul>
-        </nav>
         
         <main>
             @include('partials/flash-message')

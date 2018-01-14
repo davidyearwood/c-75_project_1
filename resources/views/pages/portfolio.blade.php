@@ -1,11 +1,9 @@
-@extends('layouts.master')
+@extends('layouts.material')
 
 @section('title', 'Portfolio')
 
-@section('additional-nav-items')
-    @include('partials.nav-search-bar')
-@endsection
-
 @section('main-section')
+    <div class="container">
     @include('partials.portfolio-table')
+    </div>
 @endsection
