@@ -28,6 +28,11 @@
         font-size: $value;
     }
 }
+
+// Font Family 
+.font-family--mono {
+    font-family: $font-stack-mono;
+}
 //= Text alignment
 .text-align--right {
     text-align: right;
@@ -56,4 +61,17 @@
     .bg--#{$key} {
         background-color: $value;
     }
+}
+
+
+// Material Design Container
+%material-container {
+    width: 100%;
+    box-shadow: 0 0 0 1px rgba(0,0,0,.1), 0 2px 3px rgba(0,0,0,.2);
+    background: #fff;
+    border-radius: 5px;
+}
+
+@function calc-percent($target, $container) {
+  @return ($target / $container) * 100%;
 }

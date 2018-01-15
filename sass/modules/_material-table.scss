@@ -1,0 +1,120 @@
+.material-table {
+    @extend %material-container;
+    border-collapse: collapse;
+    table-layout: fixed;
+    width: 100%;
+    
+    caption {
+        font-size: $font-size-h2;
+        text-align: left;
+        margin-top: 32px;
+        margin-bottom: 16px;
+    }
+}
+
+.material-table thead {
+    tr {
+        border-bottom: 1px solid #ccc;
+    }
+    
+    tr th {
+        color: #333;
+        letter-spacing: .5px;
+        text-align: right;
+        font-size: $font-size-small;
+        font-weight: $font-weight-bold;
+        padding: $font-size-base $font-size-h3;
+    }
+    
+    tr th:first-child {
+        text-align: left;
+    }
+}
+
+.material-table tbody {
+    tr:nth-child(odd) {
+        background: $black-squeeze;
+    }
+    
+    tr td {
+        text-align: right;
+        padding: $font-size-small / 1.125 $font-size-h3;
+    }
+    
+    tr td:first-child {
+        text-align: left;
+    }
+    
+}
+
+//== Mobile View 
+@media (max-width: 760px) {
+    .material-table {
+        box-shadow: none;
+        background: transparent;
+    }
+    
+    .material-table tbody tr{
+        background: white;
+    }
+    .material-table, 
+    .material-table tbody, 
+    .material-table thead,
+    .material-table th,
+    .material-table tr,
+    .material-table td,
+    .material-table caption {
+        display: block;
+    }
+    
+    .material-table tbody tr td:first-child {
+        text-align: right;
+    }
+    
+    .material-table thead tr {
+        position: absolute;
+        top: -9999px;
+        left: -9999px;
+    }
+    
+    .material-table tr {
+        border: 1px solid #cccccc;        
+        margin-top: 10px;
+    }
+    
+    .material-table td {
+        border: none;
+        border-bottom: 1px solid #eee;
+        position: relative;
+        padding-left: 50%;
+    }
+    
+    .material-table td:before {
+        position: absolute;
+        top: $font-size-small / 1.125;
+        left: $font-size-h3;
+        padding-right: 10px;
+        white-space: nowrap;
+        font-weight: $font-weight-bold;
+    }
+    
+    .material-table tbody td:nth-of-type(1):before {
+        content: "Symbol";
+    }
+    
+    .material-table tbody td:nth-of-type(2):before {
+        content: "Purchased Date";
+    }
+    
+    .material-table tbody td:nth-of-type(3):before {
+        content: "Purchased Price";
+    }
+
+    .material-table tbody td:nth-of-type(4):before {
+        content: "Last Trade Cost";
+    }
+
+    .material-table td:nth-of-type(5):before {
+        content: "Shares";
+    }
+}

@@ -3,15 +3,17 @@
 //== Typography
 
 //= Font Family 
-$font-stack-sans:               'Roboto', Helvetica, Arial, sans-serif;
+$font-stack-sans:               'Lato', Helvetica, Arial, sans-serif;
+$font-stack-mono:                'Roboto Mono', monospace;
 
 //= Font Sizes
 $font-size-base:                1em;
-$font-size-h1:                  1.602em;
-$font-size-h2:                  1.424em;
-$font-size-h3:                  1.266em;
-$font-size-h4:                  1.124em;
-$font-size-small:               0.889em;
+$font-size-h1:                  2.074em;
+$font-size-h2:                  1.728em;
+$font-size-h3:                  1.44em;
+$font-size-h4:                  1.2em;
+$font-size-small:               0.8833em;
+$font-size-xs:                  0.694em;
 
 $font-sizes: (
     base: $font-size-base, 
@@ -22,6 +24,8 @@ $font-sizes: (
     p: $font-size-base,
     small: $font-size-small
 ); 
+
+//== Spacing
 
 //= Font Weights
 $font-weight-thin:              100;
@@ -48,12 +52,16 @@ $fruit-salad:                   #4CAF50;
 $dodger-blue:                   #2196F3; 
 $silver-chalice:                #9E9E9E;
 $athens-gray:                   #ECEFF2; 
+$table-row-color:               #CCCCCC;
+$black-squeeze:                 #EFF5FA; 
 
 $colors: (
     primary-theme: $dodger-blue,
     warning: $pomegranate, 
     success: $fruit-salad, 
-    wallpaper: $athens-gray
+    wallpaper: $athens-gray,
+    table-row: $table-row-color,
+    zebra-stripe: $black-squeeze
 ); 
 
 //== Layout 

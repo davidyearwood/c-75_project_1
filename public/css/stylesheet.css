@@ -3,7 +3,7 @@ html {
 
 body {
   background-color: white;
-  font-family: "Roboto", Helvetica, Arial, sans-serif;
+  font-family: "Lato", Helvetica, Arial, sans-serif;
   font-weight: 400;
   line-height: 1.45;
   color: #333; }
@@ -18,19 +18,19 @@ h1, h2, h3, h4 {
 
 h1 {
   margin-top: 0;
-  font-size: 1.602em; }
+  font-size: 2.074em; }
 
 h2 {
-  font-size: 1.424em; }
+  font-size: 1.728em; }
 
 h3 {
-  font-size: 1.266em; }
+  font-size: 1.44em; }
 
 h4 {
-  font-size: 1.124em; }
+  font-size: 1.2em; }
 
 .small-font {
-  font-size: 0.889em; }
+  font-size: 0.8833em; }
 
 .container {
   max-width: 1200px;
@@ -41,43 +41,46 @@ h4 {
   font-size: 1em; }
 
 .h1-like {
-  font-size: 1.602em; }
+  font-size: 2.074em; }
 
 .h2-like {
-  font-size: 1.424em; }
+  font-size: 1.728em; }
 
 .h3-like {
-  font-size: 1.266em; }
+  font-size: 1.44em; }
 
 .h4-like {
-  font-size: 1.124em; }
+  font-size: 1.2em; }
 
 .p-like {
   font-size: 1em; }
 
 .small-like {
-  font-size: 0.889em; }
+  font-size: 0.8833em; }
 
 .font-size--base {
   font-size: 1em; }
 
 .font-size--h1 {
-  font-size: 1.602em; }
+  font-size: 2.074em; }
 
 .font-size--h2 {
-  font-size: 1.424em; }
+  font-size: 1.728em; }
 
 .font-size--h3 {
-  font-size: 1.266em; }
+  font-size: 1.44em; }
 
 .font-size--h4 {
-  font-size: 1.124em; }
+  font-size: 1.2em; }
 
 .font-size--p {
   font-size: 1em; }
 
 .font-size--small {
-  font-size: 0.889em; }
+  font-size: 0.8833em; }
+
+.font-family--mono {
+  font-family: "Roboto Mono", monospace; }
 
 .text-align--right {
   text-align: right; }
@@ -100,6 +103,12 @@ h4 {
 .color--wallpaper {
   color: #ECEFF2; }
 
+.color--table-row {
+  color: #CCCCCC; }
+
+.color--zebra-stripe {
+  color: #EFF5FA; }
+
 .bg--primary-theme {
   background-color: #2196F3; }
 
@@ -112,6 +121,18 @@ h4 {
 .bg--wallpaper {
   background-color: #ECEFF2; }
 
+.bg--table-row {
+  background-color: #CCCCCC; }
+
+.bg--zebra-stripe {
+  background-color: #EFF5FA; }
+
+.material-table {
+  width: 100%;
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.1), 0 2px 3px rgba(0, 0, 0, 0.2);
+  background: #fff;
+  border-radius: 5px; }
+
 .user-information,
 .utility {
   display: flex;
@@ -123,7 +144,8 @@ h4 {
   padding-top: 0.6666666667%; }
 
 .logo {
-  font-size: 1.266em;
+  box-sizing: border-box;
+  font-size: 1.44em;
   color: white;
   width: 20%; }
   .logo h1 {
@@ -131,7 +153,7 @@ h4 {
   .logo__text {
     font-size: inherit;
     color: inherit;
-    font-weight: 300; }
+    font-weight: 400; }
   .logo__icon {
     vertical-align: middle;
     margin-right: 4.1666666667%; }
@@ -157,8 +179,8 @@ a.user-name {
 
 .page-title {
   align-self: center;
-  font-size: 1.602em;
-  font-weight: 300;
+  font-size: 2.074em;
+  font-weight: 400;
   margin-top: 0; }
 
 ul.finance-info {
@@ -166,7 +188,7 @@ ul.finance-info {
   ul.finance-info li {
     display: inline-block;
     font-size: 1em;
-    margin-right: 1.266em; }
+    margin-right: 1.44em; }
 
 .finance-info {
   align-self: flex-start;
@@ -181,12 +203,12 @@ ul.finance-info {
     font-weight: 600;
     color: #BBDEFB; }
   .finance-info__cash {
-    font-size: 1.424em;
+    font-size: 1.728em;
     font-weight: 400; }
 
 .user-information {
-  padding-top: 1.124em;
-  padding-bottom: 1.124em; }
+  padding-top: 1.2em;
+  padding-bottom: 1.2em; }
 
 nav {
   background: white;
@@ -196,6 +218,7 @@ ul.nav-links {
   padding-left: 0; }
 
 .nav-links__item {
+  font-size: 1.2em;
   display: inline-block;
   padding-left: 16px;
   padding-right: 16px; }
@@ -215,5 +238,93 @@ ul.nav-links {
 
 .nav-links__item--active {
   border-color: #F44336; }
+
+.material-table {
+  border-collapse: collapse;
+  table-layout: fixed;
+  width: 100%; }
+  .material-table caption {
+    font-size: 1.728em;
+    text-align: left;
+    margin-top: 32px;
+    margin-bottom: 16px; }
+
+.material-table thead tr {
+  border-bottom: 1px solid #ccc; }
+.material-table thead tr th {
+  color: #333;
+  letter-spacing: .5px;
+  text-align: right;
+  font-size: 0.8833em;
+  font-weight: 600;
+  padding: 1em 1.44em; }
+.material-table thead tr th:first-child {
+  text-align: left; }
+
+.material-table tbody tr:nth-child(odd) {
+  background: #EFF5FA; }
+.material-table tbody tr td {
+  text-align: right;
+  padding: 0.7851555556em 1.44em; }
+.material-table tbody tr td:first-child {
+  text-align: left; }
+
+@media (max-width: 760px) {
+  .material-table {
+    box-shadow: none;
+    background: transparent; }
+
+  .material-table tbody tr {
+    background: white; }
+
+  .material-table,
+  .material-table tbody,
+  .material-table thead,
+  .material-table th,
+  .material-table tr,
+  .material-table td,
+  .material-table caption {
+    display: block; }
+
+  .material-table tbody tr td:first-child {
+    text-align: right; }
+
+  .material-table thead tr {
+    position: absolute;
+    top: -9999px;
+    left: -9999px; }
+
+  .material-table tr {
+    border: 1px solid #cccccc;
+    margin-top: 10px; }
+
+  .material-table td {
+    border: none;
+    border-bottom: 1px solid #eee;
+    position: relative;
+    padding-left: 50%; }
+
+  .material-table td:before {
+    position: absolute;
+    top: 0.7851555556em;
+    left: 1.44em;
+    padding-right: 10px;
+    white-space: nowrap;
+    font-weight: 600; }
+
+  .material-table tbody td:nth-of-type(1):before {
+    content: "Symbol"; }
+
+  .material-table tbody td:nth-of-type(2):before {
+    content: "Purchased Date"; }
+
+  .material-table tbody td:nth-of-type(3):before {
+    content: "Purchased Price"; }
+
+  .material-table tbody td:nth-of-type(4):before {
+    content: "Last Trade Cost"; }
+
+  .material-table td:nth-of-type(5):before {
+    content: "Shares"; } }
 
 /*# sourceMappingURL=stylesheet.css.map */

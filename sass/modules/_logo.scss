@@ -1,4 +1,5 @@
 .logo {
+    box-sizing: border-box;
     font-size: $font-size-h3;
     color: white;
     width: 20%;
@@ -10,7 +11,7 @@
     &__text {
         font-size: inherit;
         color: inherit;
-        font-weight: $font-weight-light;
+        font-weight: $font-weight-regular;
     }
     
     &__icon {
