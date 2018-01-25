@@ -1,77 +1,128 @@
-//== Placeholders 
+/*! Helpful utility class nad placeholders that can be used throughout the project */
 
-//= Layout
-%container {
-    max-width: $container-width;
-    margin: 0 auto;
-    width: 100%;
-}
-
-//= Generics
-%reset-margin-and-padding {
-    margin: 0;
-    padding: 0;
-}
-
-//== Typography
-
-//= Font Sizes Example: .h1-like
-@each $key, $value in $font-sizes {
-    .#{$key}-like {
-        font-size: $value;
+/* Classes
+   ========================================================================== */
+   
+    .font-family--mono {
+        font-family: $font-stack-mono;
     }
-}
-
-//= Font Sizes Example: .font-size--h1
-@each $key, $value in $font-sizes {
-    .font-size--#{$key} {
-        font-size: $value;
+    
+    .text-align--right {
+        text-align: right;
     }
-}
-
-// Font Family 
-.font-family--mono {
-    font-family: $font-stack-mono;
-}
-//= Text alignment
-.text-align--right {
-    text-align: right;
-}
-
-.text-align--left {
-    text-align: left;
-}
-
-.text-align--center {
-    text-align: center;
-}
-
-//== Colors 
-
-//= Text color (.color--primary-theme)
-@each $key, $value in $colors {
-    .color--#{$key} {
-        color: $value;
+    
+    .text-align--left {
+        text-align: left;
     }
-}
-
-
-//= Background color (.bg--primary-theme)
-@each $key, $value in $colors {
-    .bg--#{$key} {
-        background-color: $value;
+    
+    .text-align--center {
+        text-align: center;
     }
-}
+
+/* Placeholders
+   ========================================================================== */
+   
+    /**
+     * Turns the element that is including this into a container.
+     */
+    %container {
+        max-width: $container-width;
+        margin: 0 auto;
+        width: 100%;
+    }
+    
+    /**
+     * Turns the element that is including this into a material design container.
+     */
+    %material-container {
+        box-shadow: 0 0 0 1px rgba(0,0,0,.1), 0 2px 3px rgba(0,0,0,.2);
+        background: #fff;
+        border-radius: 5px;
+        width: 100%;
+    }
+    
+    %card {
+        border-radius: 5px;   
+        box-shadow: 0 0 0 1px rgba(0, 0, 0, .1), 0 2px 3px rgba(0, 0, 0, .2);
+        width: 100%;
+    }
+    
+    /**
+     * Remove the margin and padding.
+     */
+    %reset-margin-and-padding,
+    %remove-margin-and-padding {
+        margin: 0;
+        padding: 0;
+    }
+    
+    /**
+     * Remove the margin. 
+     */
+    %remove-margin {
+        margin: 0;
+    }
+    
+    /**
+     * Remove the padding. 
+     */
+    %remove-padding {
+        padding: 0;
+    }
 
 
-// Material Design Container
-%material-container {
-    width: 100%;
-    box-shadow: 0 0 0 1px rgba(0,0,0,.1), 0 2px 3px rgba(0,0,0,.2);
-    background: #fff;
-    border-radius: 5px;
-}
+/* Directives
+   ========================================================================== */
 
-@function calc-percent($target, $container) {
-  @return ($target / $container) * 100%;
-}
+    /**
+     * Create classes that alters the font size. 
+     */
+    @each $key, $value in $font-sizes {
+        .#{$key}-like {
+            font-size: $value;
+        }
+    }
+    
+    /**
+     * Create classes that alters the font size. 
+     */
+    @each $key, $value in $font-sizes {
+        .font-size--#{$key} {
+            font-size: $value;
+        }
+    }
+    
+    /**
+     * Create classes that alters the text color. 
+     */
+    @each $key, $value in $colors {
+        .color--#{$key} {
+            color: $value;
+        }
+    }
+    
+    
+    /**
+     * Create classes that alters the bg color. 
+     */
+    @each $key, $value in $colors {
+        .bg--#{$key} {
+            background-color: $value;
+        }
+    }
+
+
+
+/* Functions
+   ========================================================================== */
+   
+   /**
+     * Convert the targeted pixel amout to a percentage.
+     */
+    @function calc-percent($target, $container) {
+      @return ($target / $container) * 100%;
+    }
+    
+
+/* Mixins
+   ========================================================================== */

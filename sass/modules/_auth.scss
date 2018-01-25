@@ -1,0 +1,61 @@
+/*! All Things that handles authentication styling. */
+
+/* Auth Card
+   ========================================================================== */
+   
+   .auth-card {
+       @extend %card;
+       
+        box-sizing: border-box;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-evenly;
+        height: 600px; // Fallback
+        height: 70vh;
+        margin-left: auto;
+        margin-right: auto;
+        margin-top: 0;
+        padding: $font-size-h2;
+        color: #ffffff;
+        background: lighten(map-get($colors, primary-theme), 5%);
+        width: 100%;
+        
+        @media (min-width: 500px) {
+            max-width: 320px;
+            margin-top: 20px;
+        }
+   }
+
+/* Auth Header
+   ========================================================================== */
+   
+  .auth-header {
+    text-align: center;
+
+    &__title {
+        font-size: $font-size-h2;
+        font-weight: $font-weight-bold;
+    }
+    
+    &__title, 
+    &__subtitle {
+        margin: 0;
+    }
+  }
+  
+/* Auth Form
+   ========================================================================== */
+   .auth-form {
+        display: block;
+        width: 100%;
+   }
+   
+/* Auth Link
+   ========================================================================== */
+   
+   a.auth-link {
+       font-size: $font-size-small;
+       font-weight: $font-weight-bold;
+       color: blue;
+       text-align: center;
+   }

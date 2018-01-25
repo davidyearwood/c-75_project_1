@@ -1,68 +1,76 @@
 //= Contains all the variables that are being used on this site.
 
-//== Typography
+/* Typography
+   ========================================================================== */
 
-//= Font Family 
-$font-stack-sans:               'Lato', Helvetica, Arial, sans-serif;
-$font-stack-mono:                'Roboto Mono', monospace;
+    //= Font Stack
+    $font-stack-sans:               'Lato', Helvetica, Arial, sans-serif;
+    $font-stack-mono:                'Roboto Mono', monospace;
 
-//= Font Sizes
-$font-size-base:                1em;
-$font-size-h1:                  2.074em;
-$font-size-h2:                  1.728em;
-$font-size-h3:                  1.44em;
-$font-size-h4:                  1.2em;
-$font-size-small:               0.8833em;
-$font-size-xs:                  0.694em;
-
-$font-sizes: (
-    base: $font-size-base, 
-    h1: $font-size-h1,
-    h2: $font-size-h2, 
-    h3: $font-size-h3,
-    h4: $font-size-h4,
-    p: $font-size-base,
-    small: $font-size-small
-); 
-
-//== Spacing
-
-//= Font Weights
-$font-weight-thin:              100;
-$font-weight-light:             300;
-$font-weight-regular:           400;
-$font-weight-semibold:          500;
-$font-weight-bold:              600;
-$font-weight-extrabold:         900;
-
-//= Line Height
-$header-line-height:            1.2;
-$body-line-height:              1.45;
+    //= Font Sizes
+    $font-size-base:                1em;
+    $font-size-h1:                  2.074em;
+    $font-size-h2:                  1.728em;
+    $font-size-h3:                  1.44em;
+    $font-size-h4:                  1.2em;
+    $font-size-small:               0.8833em;
+    $font-size-xs:                  0.694em;
+    
+    $font-sizes: (
+        base:                      $font-size-base, 
+        h1:                        $font-size-h1,
+        h2:                        $font-size-h2, 
+        h3:                        $font-size-h3,
+        h4:                        $font-size-h4,
+        p:                         $font-size-base,
+        small:                     $font-size-small
+    ); 
 
 
-//== Colors 
- 
-$gallery-grey:                  #EEEEEE; 
-$forest-green:                  #258E2F;
-$navbar-color:                  #333333;
-$success-color:                 $forest-green;
-$lynch:                         #607D8B;
-$pomegranate:                   #F44336; 
-$fruit-salad:                   #4CAF50;
-$dodger-blue:                   #2196F3; 
-$silver-chalice:                #9E9E9E;
-$athens-gray:                   #ECEFF2; 
-$table-row-color:               #CCCCCC;
-$black-squeeze:                 #EFF5FA; 
+    //= Font Weights
+    $font-weight-thin:              100;
+    $font-weight-light:             300;
+    $font-weight-regular:           400;
+    $font-weight-semibold:          500;
+    $font-weight-bold:              600;
+    $font-weight-extrabold:         900;
 
-$colors: (
-    primary-theme: $dodger-blue,
-    warning: $pomegranate, 
-    success: $fruit-salad, 
-    wallpaper: $athens-gray,
-    table-row: $table-row-color,
-    zebra-stripe: $black-squeeze
-); 
+    //= Line Height
+    $header-line-height:            1.2;
+    $body-line-height:              1.45;
+    
+    
+/* Color
+   ========================================================================== */
 
-//== Layout 
-$container-width:               1200px;
+    $gallery-grey:                  #EEEEEE; 
+    $forest-green:                  #258E2F;
+    $navbar-color:                  #333333;
+    $success-color:                 $forest-green;
+    $lynch:                         #607D8B;
+    $pomegranate:                   #F44336; 
+    $fruit-salad:                   #4CAF50;
+    $dodger-blue:                   #2196F3; 
+    $silver-chalice:                #9E9E9E;
+    $athens-gray:                   #ECEFF2; 
+    $table-row-color:               #CCCCCC;
+    $black-squeeze:                 #EFF5FA; 
+    
+    $colors: (
+        primary-theme:             #1d9d74,
+        warning:                   $pomegranate, 
+        success:                   $fruit-salad, 
+        wallpaper:                 $athens-gray,
+        table-row:                 $table-row-color,
+        zebra-stripe:              $black-squeeze,
+        default-btn:                       gray
+    ); 
+    
+    
+/* Layout
+   ========================================================================== */
+    $container-width:               1200px;
+    
+/* Layout
+   ========================================================================== */
+//   $break-point-lg:                 

@@ -1,3 +1,9 @@
-.container {
+.container,
+.login-container,
+.register-contaienr {
     @extend %container;
+}
+
+.login-container {
+    @extend %material-container;
 }

@@ -1,0 +1,17 @@
+/* Form Group
+   ========================================================================== */
+   .form-group {
+ 
+       label {
+        display: block;
+        font-weight: $font-weight-bold;
+       }
+    }
+    
+    .form-group + .form-group {
+        margin-top: calc-percent(16px, 320px);
+    }
+    
+    .form-group:last-of-type {
+        margin-bottom: calc-percent(32px, 320px);
+    }
