@@ -1,0 +1,23 @@
+.alert {
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    padding: 15px;
+    width: 100%;
+    
+    &--success {
+        background: lighten(map-get($colors, success), 75%);    
+    }
+    
+    &--danger {
+        background: map-get($colors, warning);
+    }
+    
+    &--info {
+        background: map-get($colors, info);
+    }
+    
+    &--block {
+        display: block;
+    }
+}

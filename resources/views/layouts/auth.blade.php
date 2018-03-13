@@ -13,7 +13,6 @@
     </head>
     <body class="bg--primary-theme">
         <main>
-            @include('partials/flash-message')
             @yield('main-section')
         </main>
     </body>

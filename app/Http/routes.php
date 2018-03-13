@@ -22,6 +22,11 @@ Route::auth();
 Route::get('/', 'StockController@renderPortfolio');
 Route::get('/search', 'StockController@renderSearchResult');
 Route::get('/portfolio', 'StockController@renderPortfolio'); 
+Route::get('/portfolio/{id}', 'StockController@renderStock');
+Route::get('/logout', function() {
+    Auth::logout(); 
+    return redirect('/');
+});
 Route::post('/search', 'StockController@buyStockAndRenderPortfolio');
 Route::post('/portfolio', 'StockController@sellStockAndRenderPortfolio');
 

@@ -167,6 +167,9 @@ h4 {
 .color--default-btn {
   color: gray; }
 
+.color--info {
+  color: #ADD8E6; }
+
 /**
  * Create classes that alters the bg color. 
  */
@@ -191,6 +194,9 @@ h4 {
 .bg--default-btn {
   background-color: gray; }
 
+.bg--info {
+  background-color: #ADD8E6; }
+
 /* Functions
    ========================================================================== */
 /**
@@ -209,6 +215,9 @@ input[type="password"] {
 
 /* Layout
    ========================================================================== */
+.shares-container {
+  margin-bottom: 3.260869565%; }
+
 .user-information,
 .utility {
   display: flex;
@@ -413,12 +422,12 @@ ul.nav-links {
   flex-direction: column;
   justify-content: space-evenly;
   height: 600px;
-  height: 70vh;
+  height: 85vh;
   margin-left: auto;
   margin-right: auto;
   margin-top: 0;
   padding: 1.728em;
-  color: #ffffff;
+  color: #fff;
   background: #21b384;
   width: 100%; }
   @media (min-width: 500px) {
@@ -445,9 +454,8 @@ ul.nav-links {
 /* Auth Link
    ========================================================================== */
 a.auth-link {
-  font-size: 0.8833em;
-  font-weight: 600;
-  color: blue;
+  font-size: 1em;
+  color: #0000B4;
   text-align: center; }
 
 /* Form Group
@@ -457,7 +465,7 @@ a.auth-link {
   font-weight: 600; }
 
 .form-group + .form-group {
-  margin-top: 5%; }
+  margin-top: 7.5%; }
 
 .form-group:last-of-type {
   margin-bottom: 10%; }
@@ -487,6 +495,103 @@ a.auth-link {
   transition: box-shadow 0.28s cubic-bezier(0.4, 0, 0.2, 1); }
   .btn--raised:active {
     box-shadow: 0 8px 10px 1px rgba(0, 0, 0, 0.14), 0 3px 14px 2px rgba(0, 0, 0, 0.12), 0 5px 5px -3px rgba(0, 0, 0, 0.4); }
+
+.btn--full-width {
+  width: 100%; }
+
+.btn--search {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  border: none;
+  color: #fff; }
+
+.btn--buy {
+  background: #f4d078;
+  border: 1px solid #4d3906;
+  color: #000; }
+
+.btn--buy:hover {
+  background: #f2c860; }
+
+/*! Helpful utility class nad placeholders that can be used throughout the project */
+/* Message Block
+   ========================================================================== */
+.msg-block {
+  box-sizing: border-box;
+  display: block;
+  width: 100%;
+  background: #691616;
+  padding: 4px 8px;
+  border-radius: 4px; }
+
+/* Messages
+   ========================================================================== */
+.msg--required {
+  font-weight: 600; }
+
+.searchbar-container {
+  position: relative;
+  height: 45px;
+  width: 90%;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 2.074em; }
+
+input.searchbar--extended {
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.1), 0 2px 3px rgba(0, 0, 0, 0.2);
+  border: none;
+  display: block;
+  height: 100%;
+  /* position: relative; */
+  padding-left: 80px; }
+
+.stock-certificate {
+  box-sizing: border-box;
+  width: 90%;
+  margin-right: auto;
+  margin-left: auto;
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.1), 0 2px 3px rgba(0, 0, 0, 0.2);
+  background: #fff;
+  margin-top: 4.16666667%;
+  border-radius: 3px; }
+  .stock-certificate__header {
+    margin-bottom: 1.728em;
+    border-bottom: 1px solid #ccc;
+    padding: 16px 24px; }
+  .stock-certificate__action {
+    padding-bottom: 16px;
+    padding-left: 24px;
+    padding-right: 24px; }
+  @media (min-width: 750px) {
+    .stock-certificate {
+      width: 50%; } }
+
+h2.stock-name,
+p.stock-name,
+p.stock-price {
+  margin: 0; }
+
+p.stock-price {
+  color: #ea1c0d;
+  font-weight: 600;
+  font-size: 1.2em; }
+
+.alert {
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+  padding: 15px;
+  width: 100%; }
+  .alert--success {
+    background: white; }
+  .alert--danger {
+    background: #F44336; }
+  .alert--info {
+    background: #ADD8E6; }
+  .alert--block {
+    display: block; }
 
 /* Hacks
    ========================================================================== */

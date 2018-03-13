@@ -1,13 +1,13 @@
-@extends('layouts.master')
+@extends('layouts.material')
 
 @section('title', 'Search')
 
-@section('optional-search')
-    @include('partials.search-bar')
-@endsection
-
 @section('main-section')
-    @if(isset($stock))
-        @include('partials.stock-certificate')
-    @endif 
-@endsection 
+    <div class="container">
+        @include('partials.search-bar')
+        
+        @if(isset($stock))
+            @include('partials.stock-certificate')
+        @endif 
+    </div>
+@endsection

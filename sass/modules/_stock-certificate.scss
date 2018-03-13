@@ -1,20 +1,37 @@
 .stock-certificate {
-    padding-bottom: $font-size-base;
-    
-    @include grid-container;
+    box-sizing: border-box;
+    width: 90%;
+    margin-right: auto;
+    margin-left: auto;
+    box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.1), 0 2px 3px rgba(0, 0, 0, 0.2);
+    background: #fff;
+    margin-top: 4.16666667%;
+    border-radius: 3px;
     &__header {
-        @include grid-column(10);
+        margin-bottom: 1.728em;
+        border-bottom: 1px solid #ccc;
+        padding: 16px 24px;
     }
     
     &__action {
-        @include grid-column(2);
+        padding-bottom: 16px;
+        padding-left: 24px;
+        padding-right: 24px;
     }
     
+    @media (min-width: 750px) {
+        width: 50%;    
+    }
 }
 
-/*
- * Stock Shares
- ******************************/
- .stock-shares {
-    text-align: right;
- }
+h2.stock-name, 
+p.stock-name,
+p.stock-price {
+    margin: 0;
+}
+
+p.stock-price {
+    color: darken(map-get($colors, warning), 10%);
+    font-weight: $font-weight-bold;
+    font-size: $font-size-h4;
+}

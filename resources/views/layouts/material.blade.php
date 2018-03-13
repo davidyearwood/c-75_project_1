@@ -16,17 +16,6 @@
         <header class="bg--primary-theme global-header">
             <div class="container">
                 <section class="utility">
-                    <!-- Revist to make this more accessible -->
-                    <!--<div id="js-hover-effect" class="inactive">-->
-                    <!--    <a href="#" class="nav-item">-->
-                    <!--        <div class="hamburger" id="js-hamburger">-->
-                    <!--            <span class="hamburger__line"></span>-->
-                    <!--            <span class="hamburger__line"></span>-->
-                    <!--            <span class="hamburger__line"></span>-->
-                    <!--        </div>-->
-                    <!--    </a>-->
-                    <!--</div>-->
-                    <!-- Revist to make this more accessible -->
                     <a href="/" class="logo">
                         <h1>
                             <i class="fa fa-line-chart fa-2x logo__icon" aria-hidden="true"></i> 
@@ -59,16 +48,17 @@
             <nav>
                 <div class="container">
                     <ul class="nav-links">
-                        <li class="nav-links__item"><a href="#">Home</a></li>
-                        <li class="nav-links__item"><a href="#">Trade</a></li>
-                        <li class="nav-links__item"><a href="#">Buy</a></li>
+                        <li class="nav-links__item"><a href="/">Portfolio</a></li>
+                        <li class="nav-links__item"><a href="/search">Search for a stock</a></li>
                     </ul>
                 </div>
             </nav>
         </header>
         
         <main>
-            @include('partials/flash-message')
+            <div id="js-alert-message">
+                @include('partials/flash-message')
+            </div>
             @yield('main-section')
         </main>
     </body>

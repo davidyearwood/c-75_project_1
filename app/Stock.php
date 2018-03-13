@@ -17,7 +17,8 @@ class Stock extends Model
      *
      * @var array
      */
-    //protected $appends = ['current_data', 'last_trade_price'];
+    
+    protected $appends = ['current_data', 'last_trade_price'];
     
     public function users() 
     {

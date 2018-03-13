@@ -4,6 +4,7 @@
     @import "base/typography";
     @import "base/utils"; 
     @import "base/input";
+    
 /* Layout
    ========================================================================== */
     @import "layout/container";
@@ -22,5 +23,10 @@
     @import "modules/auth";
     @import "modules/form-group";
     @import "modules/btn";
+    @import "modules/msg";
+    @import "modules/searchbar";
+    @import "modules/stock-certificate";
+    @import "modules/alert-msg";
+    
 /* Hacks
    ========================================================================== */

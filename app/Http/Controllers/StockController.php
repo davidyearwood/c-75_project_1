@@ -82,8 +82,9 @@ class StockController extends Controller
         $stock = [
             'db' => $this->user->stocks()->wherePivot('id', '=', $request->id),
         ];
-        
         $stock['quandl'] = $this->quandlClient->getStock($stock['db']->first()->symbol);
+        
+        $historicData = ['symbol' => $stock['db']->first()->symbol, 'quantity' => $request->quantity];
         
         $revenueEarned = FinancialCalculator::salesRevenue($request->quantity, $stock['quandl']['price']);
         $maxQuantity = $stock['db']->first()->pivot->quantity; 
@@ -91,11 +92,11 @@ class StockController extends Controller
         if ($request->quantity == $maxQuantity) {
             $this->financialAccount->deposit($revenueEarned);
             $stock['db']->detach(); // not sure this will work 
-            return true; 
+            return $historicData; 
         } elseif ($request->quantity <= $maxQuantity) {
             $this->financialAccount->deposit($revenueEarned);
             $stock['db']->updateExistingPivot($stock['db']->first()->id, ['quantity' => $stock['db']->first()->pivot->quantity - $request->quantity]);
-            return true;
+            return $historicData;
         } else {
             return false; 
         }
@@ -144,7 +145,7 @@ class StockController extends Controller
 
         $this->financialAccount->withdraw($expense);
         
-        return true;  
+        return ['quantity' => $request->quantity, 'symbol' => $symbol];  
     }
     
     /**
@@ -193,8 +194,10 @@ class StockController extends Controller
                     
         return view('pages/stock', [
             'stock' => $stock,  
-            'user' => $this->user
-            ]); 
+            'user' => $this->user,
+            'netValue' => $this->portfolio->totalNetValue(),
+            'totalAsset' => $this->portfolio->totalAsset()
+        ]); 
     }  
     
     /**
@@ -218,7 +221,6 @@ class StockController extends Controller
     }
     
     public function material() {
-        
         return view('layouts.material', 
         ['user' => $this->user, 'totalAsset' => $this->portfolio->totalAsset(), 'netValue' => $this->portfolio->totalNetValue()]);
     }
@@ -232,11 +234,14 @@ class StockController extends Controller
      */ 
     public function buyStockAndRenderPortfolio(Request $request) 
     {
-        if (!$this->store($request)) {
-            abort(500);
+        $purchased = $this->store($request);
+        
+        if (!$purchased) {
+            // send a log to me 
+            abort(500, "We were unable to purchase the requested stock. Try going back and purchasing the stocks.");
         } 
         
-        return redirect('portfolio')->with('success', 'Items were successfully purchased!');
+        return redirect('portfolio')->with('success', "You purchased {$purchased['quantity']} share(s) of {$purchased['symbol']}!");
     }
     
     public function sellStockAndRenderPortfolio(Request $request) 
@@ -244,10 +249,11 @@ class StockController extends Controller
         $sold = $this->sell($request); 
         
         if (!$sold) {
-            abort(500);
+            // send a log to me 
+            abort(500, "It looks like we were unable to sell your shares. Try going back to your portfolio and try again.");
         }
         
-        return redirect('portfolio')->with('success', 'Items were sold!');
+        return redirect('portfolio')->with('success', "You sold {$sold['quantity']} share(s) of {$sold['symbol']}!");
     }
 }
 

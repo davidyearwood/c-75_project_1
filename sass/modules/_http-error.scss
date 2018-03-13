@@ -1,0 +1,19 @@
+.http-error {
+    font-family: $font-stack-sans;
+    color: white;
+    width: 100%;
+    text-align: center;
+    
+    &__title {
+        font-size: map-get($font-sizes, h1) * 2;
+        font-weight: $font-weight-bold;
+        margin: 0;
+        margin-top: map-get($font-sizes, h1) * 2;
+    }
+    
+    &__msg {
+        font-weight: $font-weight-regular;
+        margin: 0;
+        margin-bottom: map-get($font-sizes, base);
+    }
+}

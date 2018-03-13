@@ -55,6 +55,7 @@
     $athens-gray:                   #ECEFF2; 
     $table-row-color:               #CCCCCC;
     $black-squeeze:                 #EFF5FA; 
+    $regent-blue:                   #ADD8E6;
     
     $colors: (
         primary-theme:             #1d9d74,
@@ -63,7 +64,8 @@
         wallpaper:                 $athens-gray,
         table-row:                 $table-row-color,
         zebra-stripe:              $black-squeeze,
-        default-btn:                       gray
+        default-btn:                       gray, 
+        info:                      $regent-blue, 
     ); 
     
     

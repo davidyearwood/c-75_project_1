@@ -1,0 +1,284 @@
+/* Base
+   ========================================================================== */
+/* Typography
+   ========================================================================== */
+/* Color
+   ========================================================================== */
+/* Layout
+   ========================================================================== */
+/* Layout
+   ========================================================================== */
+/*! Typography that is being used throughout the site.  */
+html {
+  font-size: 1em; }
+
+body {
+  background-color: white;
+  font-family: "Lato", Helvetica, Arial, sans-serif;
+  font-weight: 400;
+  line-height: 1.45;
+  color: #333; }
+
+p {
+  margin-bottom: 1.3em; }
+
+h1, h2, h3, h4 {
+  margin: 1.414em 0 0.5em;
+  font-weight: inherit;
+  line-height: 1.2; }
+
+h1 {
+  margin-top: 0;
+  font-size: 2.074em; }
+
+h2 {
+  font-size: 1.728em; }
+
+h3 {
+  font-size: 1.44em; }
+
+h4 {
+  font-size: 1.2em; }
+
+.small-font {
+  font-size: 0.8833em; }
+
+/*! Helpful utility class nad placeholders that can be used throughout the project */
+/* Classes
+   ========================================================================== */
+.font-family--mono {
+  font-family: "Roboto Mono", monospace; }
+
+.text-align--right {
+  text-align: right; }
+
+.text-align--left {
+  text-align: left; }
+
+.text-align--center {
+  text-align: center; }
+
+/* Placeholders
+   ========================================================================== */
+/**
+ * Turns the element that is including this into a container.
+ */
+.container,
+.login-container,
+.register-contaienr {
+  max-width: 1200px;
+  margin: 0 auto;
+  width: 100%; }
+
+/**
+ * Turns the element that is including this into a material design container.
+ */
+.login-container {
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.1), 0 2px 3px rgba(0, 0, 0, 0.2);
+  background: #fff;
+  border-radius: 5px;
+  width: 100%; }
+
+/**
+ * Remove the margin and padding.
+ */
+/**
+ * Remove the margin. 
+ */
+/**
+ * Remove the padding. 
+ */
+/* Directives
+   ========================================================================== */
+/**
+ * Create classes that alters the font size. 
+ */
+.base-like {
+  font-size: 1em; }
+
+.h1-like {
+  font-size: 2.074em; }
+
+.h2-like {
+  font-size: 1.728em; }
+
+.h3-like {
+  font-size: 1.44em; }
+
+.h4-like {
+  font-size: 1.2em; }
+
+.p-like {
+  font-size: 1em; }
+
+.small-like {
+  font-size: 0.8833em; }
+
+/**
+ * Create classes that alters the font size. 
+ */
+.font-size--base {
+  font-size: 1em; }
+
+.font-size--h1 {
+  font-size: 2.074em; }
+
+.font-size--h2 {
+  font-size: 1.728em; }
+
+.font-size--h3 {
+  font-size: 1.44em; }
+
+.font-size--h4 {
+  font-size: 1.2em; }
+
+.font-size--p {
+  font-size: 1em; }
+
+.font-size--small {
+  font-size: 0.8833em; }
+
+/**
+ * Create classes that alters the text color. 
+ */
+.color--primary-theme {
+  color: #1d9d74; }
+
+.color--warning {
+  color: #F44336; }
+
+.color--success {
+  color: #4CAF50; }
+
+.color--wallpaper {
+  color: #ECEFF2; }
+
+.color--table-row {
+  color: #CCCCCC; }
+
+.color--zebra-stripe {
+  color: #EFF5FA; }
+
+.color--default-btn {
+  color: gray; }
+
+.color--info {
+  color: #ADD8E6; }
+
+/**
+ * Create classes that alters the bg color. 
+ */
+.bg--primary-theme {
+  background-color: #1d9d74; }
+
+.bg--warning {
+  background-color: #F44336; }
+
+.bg--success {
+  background-color: #4CAF50; }
+
+.bg--wallpaper {
+  background-color: #ECEFF2; }
+
+.bg--table-row {
+  background-color: #CCCCCC; }
+
+.bg--zebra-stripe {
+  background-color: #EFF5FA; }
+
+.bg--default-btn {
+  background-color: gray; }
+
+.bg--info {
+  background-color: #ADD8E6; }
+
+/* Functions
+   ========================================================================== */
+/**
+  * Convert the targeted pixel amout to a percentage.
+  */
+/* Mixins
+   ========================================================================== */
+/* Input
+   ========================================================================== */
+input[type="text"],
+input[type="email"],
+input[type="password"] {
+  box-sizing: border-box;
+  width: 100%;
+  padding: 4px 8px; }
+
+/* Layout
+   ========================================================================== */
+.shares-container {
+  margin-bottom: 3.260869565%; }
+
+.user-information,
+.utility {
+  display: flex;
+  width: 100%;
+  justify-content: space-between; }
+
+/* Modules
+   ========================================================================== */
+.http-error {
+  font-family: "Lato", Helvetica, Arial, sans-serif;
+  color: white;
+  width: 100%;
+  text-align: center; }
+  .http-error__title {
+    font-size: 4.148em;
+    font-weight: 600;
+    margin: 0;
+    margin-top: 4.148em; }
+  .http-error__msg {
+    font-weight: 400;
+    margin: 0;
+    margin-bottom: 1em; }
+
+/* Button
+   ========================================================================== */
+.btn {
+  cursor: pointer;
+  border: 0;
+  box-sizing: border-box;
+  display: inline-block;
+  padding: 6px 16px;
+  line-height: 1.45;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: middle;
+  border-radius: 2px;
+  background: gray;
+  color: inherit;
+  outline: 0;
+  text-decoration: none; }
+  .btn:focus, .btn:hover {
+    background: #616161; }
+
+.btn--raised {
+  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12), 0 3px 1px -2px rgba(0, 0, 0, 0.2);
+  transition: box-shadow 0.28s cubic-bezier(0.4, 0, 0.2, 1); }
+  .btn--raised:active {
+    box-shadow: 0 8px 10px 1px rgba(0, 0, 0, 0.14), 0 3px 14px 2px rgba(0, 0, 0, 0.12), 0 5px 5px -3px rgba(0, 0, 0, 0.4); }
+
+.btn--full-width {
+  width: 100%; }
+
+.btn--search {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  border: none;
+  color: #fff; }
+
+.btn--buy {
+  background: #f4d078;
+  border: 1px solid #4d3906;
+  color: #000; }
+
+.btn--buy:hover {
+  background: #f2c860; }
+
+/*# sourceMappingURL=error.css.map */

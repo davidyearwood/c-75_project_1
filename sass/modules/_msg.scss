@@ -1,0 +1,23 @@
+/*! Helpful utility class nad placeholders that can be used throughout the project */
+
+
+/* Message Block
+   ========================================================================== */
+    
+    .msg-block {
+        box-sizing: border-box;
+        display: block;
+        width: 100%;
+        background: #691616;
+        padding: 4px 8px;
+        border-radius: 4px;
+    }
+    
+   
+/* Messages
+   ========================================================================== */
+   
+    .msg--required {
+        font-weight: $font-weight-bold;
+    }
+    

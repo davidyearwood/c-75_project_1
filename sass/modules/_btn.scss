@@ -36,3 +36,25 @@
       }
     }
     
+    .btn--full-width {
+        width: 100%;
+    }
+    
+    .btn--search {
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 100%;
+        border: none;
+        color: #fff;
+    }
+    
+    .btn--buy {
+        background: #f4d078;
+        border: 1px solid darken(#f4d078, 55%);
+        color: #000;
+    }
+    
+    .btn--buy:hover {
+        background: darken(#f4d078, 5%);
+    }

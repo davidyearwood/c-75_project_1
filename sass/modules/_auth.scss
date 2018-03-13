@@ -11,12 +11,12 @@
         flex-direction: column;
         justify-content: space-evenly;
         height: 600px; // Fallback
-        height: 70vh;
+        height: 85vh;
         margin-left: auto;
         margin-right: auto;
         margin-top: 0;
         padding: $font-size-h2;
-        color: #ffffff;
+        color: #fff;
         background: lighten(map-get($colors, primary-theme), 5%);
         width: 100%;
         
@@ -54,8 +54,7 @@
    ========================================================================== */
    
    a.auth-link {
-       font-size: $font-size-small;
-       font-weight: $font-weight-bold;
-       color: blue;
+       font-size: 1em;
+       color: #0000B4;
        text-align: center;
    }
